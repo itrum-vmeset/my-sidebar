@@ -1,0 +1,25 @@
+.table {
+    display: block;
+    width: 100%;
+    max-height: 500px;
+    overflow-y: scroll;
+    border: 1px solid black;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.tableHead {
+    background-color: #F8F8FA;
+}
+
+.tableHead th {
+    padding: 10px 8px;
+}
+
+.chb {
+    background-color: red;
+}
+
+.tableBody tr td {
+    height: 68px;
+}
