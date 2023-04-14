@@ -1,25 +1,79 @@
+.wrapper {
+    font-size: 14px;
+    line-height: 20px;
+    color: #434652;
+    flex-direction: column;
+    width: 100%;
+}
+
+.navi {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 8px;
+}
+
+.naviBtns {
+    margin-left: 16px;
+}
+
+.naviTool {
+    border: 1px solid #D0D3DA;
+    color: #414348;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 13px;
+    line-height: 20px;
+    padding: 6px 2px 7px 8px;
+}
+
+.naviInput {
+    width: 26px;
+    padding: 5px 0px 5px 14px;
+}
+
+.pageCount {
+    color: #BCBFCC;
+}
+
+.btnFullWidth {
+    width: 100%;
+    margin: 24px 0;
+}
+
 .table {
     display: block;
     width: 100%;
-    max-height: 500px;
+    max-height: 555px;
     overflow-y: scroll;
-    border: 1px solid black;
+    border: none;
     font-size: 14px;
     line-height: 24px;
+    border-collapse: collapse;
+    position: relative;
 }
 
 .tableHead {
     background-color: #F8F8FA;
+    color: #737680;
 }
 
 .tableHead th {
     padding: 10px 8px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
 }
 
-.chb {
-    background-color: red;
+.tableBody tr {
+    border-bottom: 1px solid #EBECEF;
 }
 
 .tableBody tr td {
     height: 68px;
+}
+
+.noGoods {
+    display: flex;
+    justify-content: center;
 }

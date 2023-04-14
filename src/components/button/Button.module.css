@@ -20,3 +20,18 @@
     color: black;
     border: 1px solid var(--transparent-border);
 }
+
+.grey {
+    background: #F8F8FA;
+    border-radius: 0px 4px 4px 0px;
+    border: 1px solid #D0D3DA;
+    padding: 6px 10px 0px;
+}
+
+.left {
+    border-radius: 4px 0px 0px 4px;
+}
+
+.left svg {
+    transform: rotate(180deg);
+}

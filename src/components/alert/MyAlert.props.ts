@@ -1,8 +1,8 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react';
 
-export interface ButtonProps extends 
+export interface MyAlertProps extends 
     DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-        apearance?: 'filled' | 'transparent' | 'grey',
-        children?: string
-    	arrow?: 'left' | 'right' | 'none'
+        alertVisible: boolean,
+        setAlertVisible: (e: boolean) => void,
+        children: ReactNode
 }
