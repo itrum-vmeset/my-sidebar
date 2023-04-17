@@ -17,16 +17,6 @@
     margin-left: 16px;
 }
 
-.naviTool {
-    border: 1px solid #D0D3DA;
-    color: #414348;
-    border-radius: 4px;
-    background-color: #fff;
-    font-size: 13px;
-    line-height: 20px;
-    padding: 6px 2px 7px 8px;
-}
-
 .naviInput {
     width: 26px;
     padding: 5px 0px 5px 14px;
@@ -71,6 +61,13 @@
 
 .tableBody tr td {
     height: 68px;
+}
+
+.chkBox {
+    accent-color: #C06ECC;
+    width: 16px;
+    height: 16px;
+    margin-top: 6px;
 }
 
 .noGoods {

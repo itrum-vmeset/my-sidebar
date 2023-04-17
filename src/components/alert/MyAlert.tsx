@@ -1,5 +1,4 @@
 import React from 'react';
-import cl from './MyAlert.module.css';
 import { MyAlertProps } from './MyAlert.props';
 import classNames from "classnames";
 import styles from './MyAlert.module.css'
@@ -11,7 +10,7 @@ const MyAlert = ({children, alertVisible, setAlertVisible}: MyAlertProps): JSX.E
         <div  className={classNames(styles.myAlert, {
             [styles.active]: alertVisible === true,
         })}>
-            <div className={cl.myAlertContent}>
+            <div className={styles.myAlertContent}>
                 {children}
                 <CloseIcon className={styles.closeIcon} onClick={() => setAlertVisible(false)} />
             </div>

@@ -1,32 +1,21 @@
-import axios from "axios";
 import classNames from "classnames";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useTable } from "react-table";
 import MyAlert from "../alert/MyAlert";
 import { Button } from "../button/Button";
 import styles from "./Table.module.css";
 import { ReactComponent as DeleteIcon } from "../../icons/del.svg";
+import MyModal from "../modal/MyModal";
+import Form from "../form/Form";
+import { Select } from "../select/Select";
 
-function Table({data, params, setParams}: any) {
+function Table({data, params, setParams, selectOptions}: any) {
+
   const [products, setProducts] = useState<any>([]);
   const [selectedRows, setSelected] = useState([]);
   const [selectedItems, setSelectedItems] = useState<any[]>([]);
   const [alertVisible, setAlertVisible] = useState(false);
-  // const [params, setParams] = useState({
-  //   page: 1,
-  //   limit: 10,
-  // });
-
-  // const fetchProducts = async () => {
-  //   const url = "https://jsonplaceholder.typicode.com/posts";
-  //   const response = await axios.get(url, {
-  //     params: {
-  //       _page: params.page,
-  //       _limit: params.limit,
-  //     },
-  //   });
-  //   setProducts(response.data);
-  // };
+  const [modalVisible, setModalVisible] = useState(false);
 
   const productsData = useMemo(() => [...data], [data]);
 
@@ -79,26 +68,22 @@ function Table({data, params, setParams}: any) {
     }
   };
 
-  // useEffect(() => {
-  //   fetchProducts();
-  // }, [params]);
-
   return (
     <div className={styles.wrapper}>
+      <MyModal modalVisible={modalVisible} setModalVisible={setModalVisible}>
+        <Form />
+      </MyModal>
+
+      {/* PAGINATION COMPONENT */}
+
       <div className={styles.navi}>
         <span>Показывать</span>
-        <select
-          className={styles.naviTool}
-          defaultValue={params.limit}
-          onChange={(e) =>
+        <Select value={params.limit}
+          changeVal={(e: any) =>
             setParams({ ...params, limit: Number(e.target.value) })
           }
-          name="select"
-        >
-          <option value="10">10</option>
-          <option value="25">25</option>
-          <option value="50">50</option>
-        </select>
+          options={selectOptions}
+        />
         <span>Страница</span>
         <input
           className={classNames(styles.naviTool, styles.naviInput)}
@@ -117,17 +102,20 @@ function Table({data, params, setParams}: any) {
         apearance="filled"
         arrow="none"
         className={styles.btnFullWidth}
-        onClick={() => setAlertVisible(true)}
+        onClick={() => setModalVisible(true)}
       >
         Добавить акцию
       </Button>
+
+      {/* TABLE COMPONENT */}
+
       {rows.length ? (
         <table className={styles.table}>
           <thead className={styles.tableHead}>
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 <th>
-                  <input type="checkbox" onChange={selectAll} />
+                  <input className={styles.chkBox} type="checkbox" onChange={selectAll} />
                 </th>
                 {headerGroup.headers.map((column) => (
                   <th {...column.getHeaderProps()} scope="col">
@@ -145,7 +133,7 @@ function Table({data, params, setParams}: any) {
                   <th>
                     <input
                       type="checkbox"
-                      // checked={(row as any).checked}
+                      className={styles.chkBox}
                       checked={row.values.checked}
                       onChange={() => selectItem(row)}
                     />

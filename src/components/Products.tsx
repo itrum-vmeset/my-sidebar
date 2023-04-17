@@ -1,13 +1,15 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import Table from './table/Table';
+import Table from './table/Table'
+import {selectOptions} from '../helpers/helpers'
 
 function Products() {
 
-    const [data, setData] = useState([])
+  const [data, setData] = useState([])
+  const [isLoading, setLoading] = useState(true);
   const [params, setParams] = useState({
     page: 1,
-    limit: 10
+    limit: selectOptions[0].value
   })
 
   const fetchProducts = async () => {
@@ -19,15 +21,21 @@ function Products() {
       },
     });
     setData(response.data);
+    setLoading(false);
   };
 
   useEffect(() => {
+    
     fetchProducts();
   }, [params]);
 
   return (
     <div>
-        <Table data={data} params={params} setParams={setParams}  />
+        {isLoading ? 
+          <h1>идет загрузка</h1> 
+          :
+          <Table data={data} params={params} setParams={setParams} selectOptions={selectOptions} />
+        }
     </div>
   )
 }

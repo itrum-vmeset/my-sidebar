@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { selectOptions } from '../helpers/helpers';
 import Table from './table/Table';
 
 function Orders() {
@@ -27,7 +28,7 @@ function Orders() {
 
   return (
     <div>
-        <Table data={data} params={params} setParams={setParams}  />
+        <Table data={data} params={params} setParams={setParams} selectOptions={selectOptions} />
     </div>
   )
 }
