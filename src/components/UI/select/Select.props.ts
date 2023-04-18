@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, SelectHTMLAttributes } from 'react';
 
-interface SelectOption {
+export interface SelectOption {
     value: string
     name: string
 }
@@ -10,5 +10,5 @@ export interface SelectProps extends
         options: SelectOption[]
         value: string
         defaultValue?: string
-        changeVal: (e: any) => void
+        changeVal: (e: React.ChangeEvent<HTMLSelectElement>) => void
 }

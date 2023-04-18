@@ -1,24 +1,16 @@
-import classNames from "classnames";
 import React, { useMemo, useState } from "react";
-import { useTable } from "react-table";
+import { Row, useTable } from "react-table";
 import MyAlert from "../alert/MyAlert";
-import { Button } from "../button/Button";
 import styles from "./Table.module.css";
 import { ReactComponent as DeleteIcon } from "../../icons/del.svg";
-import MyModal from "../modal/MyModal";
-import Form from "../form/Form";
-import { Select } from "../select/Select";
+import { TableProps } from "./Table.props";
 
-function Table({data, params, setParams, selectOptions}: any) {
+function Table({data}: TableProps): JSX.Element {
 
-  const [products, setProducts] = useState<any>([]);
-  const [selectedRows, setSelected] = useState([]);
-  const [selectedItems, setSelectedItems] = useState<any[]>([]);
+  const [selectedItems, setSelectedItems] = useState<Row[]>([]);
   const [alertVisible, setAlertVisible] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
 
   const productsData = useMemo(() => [...data], [data]);
-
   const productsColumns = useMemo(
     () =>
       data[0]
@@ -30,85 +22,45 @@ function Table({data, params, setParams, selectOptions}: any) {
   );
 
   const tableInstance = useTable({
-    // @ts-ignore
     columns: productsColumns,
     data: productsData,
   });
 
-  const { getTableBodyProps, headerGroups, rows, prepareRow, state } =
+  const { getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance;
 
-  const selectItem = (row: any) => {
-    let arrayka = []
+  const selectItem = (row: Row<any>) => {
+    let modifiedItems = []
     row.values.checked = !row.values.checked;
     if (!row.values.checked) {
       const filteredItems = selectedItems.filter((item) => item.values.checked);
-      arrayka = filteredItems
-      setSelectedItems(arrayka);
+      modifiedItems = filteredItems
+      setSelectedItems(modifiedItems);
     } else {
-      arrayka = [...selectedItems, row]
-      setSelectedItems(arrayka);
+      modifiedItems = [...selectedItems, row]
+      setSelectedItems(modifiedItems);
     }
-    arrayka.length ? setAlertVisible(true) : setAlertVisible(false);
+    modifiedItems.length ? setAlertVisible(true) : setAlertVisible(false);
   };
 
-  const selectAll = (e: any) => {
-    let arrayka = []
+  const selectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let modifiedItems = []
     const filteredItems = rows.map((row) => {
       row.values.checked = e.target.checked
       return row
     });
-    arrayka = filteredItems
+    modifiedItems = filteredItems
     if(e.target.checked) {
-      setSelectedItems(arrayka)
+      setSelectedItems(modifiedItems)
       setAlertVisible(true)
     } else {
       setSelectedItems([])
       setAlertVisible(false)
     }
-  };
+  }
 
   return (
     <div className={styles.wrapper}>
-      <MyModal modalVisible={modalVisible} setModalVisible={setModalVisible}>
-        <Form />
-      </MyModal>
-
-      {/* PAGINATION COMPONENT */}
-
-      <div className={styles.navi}>
-        <span>Показывать</span>
-        <Select value={params.limit}
-          changeVal={(e: any) =>
-            setParams({ ...params, limit: Number(e.target.value) })
-          }
-          options={selectOptions}
-        />
-        <span>Страница</span>
-        <input
-          className={classNames(styles.naviTool, styles.naviInput)}
-          value={params.page}
-          onChange={(e) =>
-            setParams({ ...params, page: Number(e.target.value) })
-          }
-        />
-        <span className={styles.pageCount}>из 1</span>
-        <div className={styles.naviBtns}>
-          <Button apearance="grey" arrow="left" />
-          <Button apearance="grey" arrow="right" />
-        </div>
-      </div>
-      <Button
-        apearance="filled"
-        arrow="none"
-        className={styles.btnFullWidth}
-        onClick={() => setModalVisible(true)}
-      >
-        Добавить акцию
-      </Button>
-
-      {/* TABLE COMPONENT */}
-
       {rows.length ? (
         <table className={styles.table}>
           <thead className={styles.tableHead}>

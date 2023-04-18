@@ -14,11 +14,11 @@ export const Button = ({apearance, children, arrow, className, ...props}: Button
             {...props}
         >
             {children}
-            {arrow !== 'none' && <span className={classNames(styles.arrow, {
+            {/* {arrow !== 'none' && <span className={classNames(styles.arrow, {
 				[styles.left]: arrow === 'left'
 			})}>
 				<ArrowIcon />
-			</span>}
+			</span>} */}
         </button>
     )
 }

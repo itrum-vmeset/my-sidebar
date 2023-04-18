@@ -1,40 +1,37 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import Table from './table/Table'
 import {selectOptions} from '../helpers/helpers'
+import { getPageCount } from '../helpers/pages';
+import { useFetching } from '../hooks/useFetching';
+import { IParam } from '../models/IResponse';
+import ProductService from '../service/ProductService';
+import Content from './content/Content';
 
 function Products() {
 
   const [data, setData] = useState([])
-  const [isLoading, setLoading] = useState(true);
-  const [params, setParams] = useState({
+  const [totalPages, setTotalPages] = useState(0);
+  const [params, setParams] = useState<IParam>({
     page: 1,
-    limit: selectOptions[0].value
+    limit: 10
   })
 
-  const fetchProducts = async () => {
-    const url = "https://jsonplaceholder.typicode.com/posts";
-    const response = await axios.get(url, {
-      params: {
-        _page: params.page,
-        _limit: params.limit,
-      },
-    });
+  const [fetchProducts, isLoading, error] = useFetching(async () => {
+    const response = await ProductService.getAll(params)
     setData(response.data);
-    setLoading(false);
-  };
+    const totalCount = response.headers['x-total-count']
+    setTotalPages(getPageCount(totalCount, params.limit));
+  })
 
   useEffect(() => {
-    
-    fetchProducts();
+    fetchProducts()
   }, [params]);
 
   return (
     <div>
         {isLoading ? 
-          <h1>идет загрузка</h1> 
+          <h4>идет загрузка</h4>
           :
-          <Table data={data} params={params} setParams={setParams} selectOptions={selectOptions} />
+          <Content data={data} params={params} setParams={setParams} selectOptions={selectOptions} totalPages={totalPages} />
         }
     </div>
   )

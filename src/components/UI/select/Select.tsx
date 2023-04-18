@@ -3,12 +3,11 @@ import classNames from 'classnames'
 import { SelectProps } from './Select.props'
 
 export const Select = ({changeVal, defaultValue, value, options, className, ...props}: SelectProps): JSX.Element => {
-    
     return (
         <select
             className={classNames(styles.select, className)}
             value={value}
-            onChange={(e: any) => changeVal(e)}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => changeVal(e)}
             {...props}
         >
             {defaultValue && <option disabled value="">{defaultValue}</option>}

@@ -7,10 +7,6 @@ function AppRouter() {
 
   return (
     <Routes>
-      {/* {authStore.isAuth &&
-        authRoutes.map(({ path, Component }) => (
-          <Route key={path} element={<Component />} path={path} />
-        ))} */}
       {publicRoutes.map(({ path, Component }) => (
         <Route key={path} path={path} element={<Component />} />
       ))}

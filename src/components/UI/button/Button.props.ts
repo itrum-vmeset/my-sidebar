@@ -1,8 +1,8 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react';
 
-export interface MyModalProps extends 
+export interface ButtonProps extends 
     DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-        modalVisible: boolean,
-        setModalVisible: (e: boolean) => void,
-        children: ReactNode
+        apearance?: 'filled' | 'transparent' | 'grey',
+        children?: ReactNode
+    	arrow?: 'left' | 'right' | 'none'
 }
