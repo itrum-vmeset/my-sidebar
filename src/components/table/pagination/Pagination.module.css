@@ -1,19 +1,19 @@
 .pagination {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
 }
 
 .btnsBlock {
-    margin-left: 16px;
+  margin-left: 16px;
 }
 
 .naviInput {
-    width: 26px;
-    padding: 5px 0px 5px 14px;
+  width: 26px;
+  padding: 5px 0px 5px 14px;
 }
 
 .pageCount {
-    color: #BCBFCC;
+  color: #bcbfcc;
 }

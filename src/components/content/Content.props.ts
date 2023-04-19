@@ -1,11 +1,10 @@
-import { DetailedHTMLProps, Dispatch, HTMLAttributes, SetStateAction } from 'react';
-import { IParam } from '../../models/IResponse';
-import { SelectOption } from '../UI/select/Select.props';
+import { DetailedHTMLProps, HTMLAttributes } from "react";
 
-export interface ContentProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-    data: any
-    params: IParam
-    setParams: Dispatch<SetStateAction<IParam>>
-    selectOptions: SelectOption[]
-    totalPages: number
+import { IParam } from "../../models/IResponse";
+
+export interface ContentProps
+  extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+  service: {
+    getAll: (params: IParam) => Promise<any>;
+  };
 }

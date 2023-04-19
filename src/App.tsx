@@ -1,11 +1,12 @@
-import React from 'react';
-import Sidebar from './components/sidebar/Sidebar';
-import {menuItems} from './helpers/helpers'
-import styles from './App.module.css'
-import AppRouter from './components/AppRouter';
+import React from "react";
 
-function App() {
-  
+import AppRouter from "./components/AppRouter";
+import Sidebar from "./components/sidebar/Sidebar";
+import { menuItems } from "./helpers/helpers";
+
+import styles from "./App.module.css";
+
+function App(): JSX.Element {
   return (
     <div className={styles.wrapper}>
       <Sidebar menuItems={menuItems} />

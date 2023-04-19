@@ -1,13 +1,20 @@
-import classNames from "classnames";
 import React from "react";
+import classNames from "classnames";
+
 import { Button } from "../../UI/button/Button";
 import { Select } from "../../UI/select/Select";
-import styles from './Pagination.module.css'
+
+import { ReactComponent as ArrowIcon } from "./arrowRight.svg";
 import { PaginationProps } from "./Pagination.props";
-import { ReactComponent as ArrowIcon } from "./arrowRight.svg"
 
-function Pagination({params, setParams, selectOptions, totalPages}: PaginationProps): JSX.Element {
+import styles from "./Pagination.module.css";
 
+function Pagination({
+  params,
+  setParams,
+  selectOptions,
+  totalPages,
+}: PaginationProps): JSX.Element {
   return (
     <div className={styles.pagination}>
       <span>Показывать</span>
@@ -26,19 +33,24 @@ function Pagination({params, setParams, selectOptions, totalPages}: PaginationPr
       />
       <span className={styles.pageCount}>из {totalPages}</span>
       <div className={styles.btnsBlock}>
-        <Button apearance="grey" arrow="left" onClick={() => setParams({...params, page: params.page - 1})}
+        <Button
+          appearance="grey"
+          arrow="left"
+          onClick={() => setParams({ ...params, page: params.page - 1 })}
           disabled={params.page <= 1}
         >
           <ArrowIcon />
         </Button>
-        <Button apearance="grey" onClick={() => setParams({...params, page: params.page + 1})}
+        <Button
+          appearance="grey"
+          onClick={() => setParams({ ...params, page: params.page + 1 })}
           disabled={params.page === totalPages}
         >
           <ArrowIcon />
         </Button>
       </div>
     </div>
-  )
+  );
 }
 
-export default Pagination
+export default Pagination;
