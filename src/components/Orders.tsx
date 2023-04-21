@@ -1,35 +1,17 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import Table from './table/Table';
+import { orderAPI } from "../service/OrderService";
 
-function Orders() {
+import Content from "./content/Content";
 
-    const [data, setData] = useState([])
-    const [params, setParams] = useState({
-        page: 1,
-        limit: 10
-    })
-
-  const fetchProducts = async () => {
-    const url = "https://jsonplaceholder.typicode.com/comments";
-    const response = await axios.get(url, {
-      params: {
-        _page: params.page,
-        _limit: params.limit,
-      },
-    });
-    setData(response.data);
-  };
-
-  useEffect(() => {
-    fetchProducts();
-  }, [params]);
-
+function Orders(): JSX.Element {
   return (
     <div>
-        <Table data={data} params={params} setParams={setParams}  />
+      <Content
+        service={orderAPI.useFetchAllOrdersQuery}
+        deleteProduct={() => ({})}
+        updateProduct={() => ({})}
+      />
     </div>
-  )
+  );
 }
 
-export default Orders
+export default Orders;

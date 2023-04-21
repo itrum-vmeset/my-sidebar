@@ -1,135 +1,128 @@
-import axios from "axios";
-import classNames from "classnames";
-import React, { useEffect, useMemo, useState } from "react";
-import { useTable } from "react-table";
-import MyAlert from "../alert/MyAlert";
-import { Button } from "../button/Button";
-import styles from "./Table.module.css";
+import React, { useMemo, useState } from "react";
+import { Row, useTable } from "react-table";
+
 import { ReactComponent as DeleteIcon } from "../../icons/del.svg";
+import MyAlert from "../alert/MyAlert";
+import Form from "../UI/form/Form";
+import MyModal from "../UI/modal/MyModal";
 
-function Table({data, params, setParams}: any) {
-  const [products, setProducts] = useState<any>([]);
-  const [selectedRows, setSelected] = useState([]);
-  const [selectedItems, setSelectedItems] = useState<any[]>([]);
+import { TableProps } from "./Table.props";
+
+import styles from "./Table.module.css";
+
+function Table({
+  data,
+  removeProduct,
+  editProduct,
+  modalVisible,
+  setModalVisible,
+}: TableProps): JSX.Element {
+  const [selectedItems, setSelectedItems] = useState<Row[]>([]);
   const [alertVisible, setAlertVisible] = useState(false);
-  // const [params, setParams] = useState({
-  //   page: 1,
-  //   limit: 10,
-  // });
-
-  // const fetchProducts = async () => {
-  //   const url = "https://jsonplaceholder.typicode.com/posts";
-  //   const response = await axios.get(url, {
-  //     params: {
-  //       _page: params.page,
-  //       _limit: params.limit,
-  //     },
-  //   });
-  //   setProducts(response.data);
-  // };
+  const [activeElement, setActiveElement] = useState({});
 
   const productsData = useMemo(() => [...data], [data]);
-
   const productsColumns = useMemo(
     () =>
       data[0]
-        ? Object.keys(data[0]).map((key) => {
-            return { Header: key, accessor: key };
-          })
+        ? Object.keys(data[0])
+            .filter((key) => !key.includes("is"))
+            .map((key) => {
+              if (key === "brand")
+                return {
+                  Header: key,
+                  accessor: key,
+                  Cell: ({ value }: any) => {
+                    return <span>{value?.name || ""}</span>;
+                  },
+                  maxWidth: 70,
+                };
+
+              return { Header: key, accessor: key };
+            })
         : [],
     [data]
   );
 
+  const initialState = { hiddenColumns: ["id"] };
+
   const tableInstance = useTable({
-    // @ts-ignore
     columns: productsColumns,
     data: productsData,
+    // initialState,
   });
 
-  const { getTableBodyProps, headerGroups, rows, prepareRow, state } =
-    tableInstance;
+  const { getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
 
-  const selectItem = (row: any) => {
-    let arrayka = []
+  const selectItem = (row: Row<any>): void => {
+    let modifiedItems = [];
     row.values.checked = !row.values.checked;
     if (!row.values.checked) {
       const filteredItems = selectedItems.filter((item) => item.values.checked);
-      arrayka = filteredItems
-      setSelectedItems(arrayka);
+      modifiedItems = filteredItems;
+      setSelectedItems(modifiedItems);
     } else {
-      arrayka = [...selectedItems, row]
-      setSelectedItems(arrayka);
+      modifiedItems = [...selectedItems, row];
+      setSelectedItems(modifiedItems);
     }
-    arrayka.length ? setAlertVisible(true) : setAlertVisible(false);
+    modifiedItems.length ? setAlertVisible(true) : setAlertVisible(false);
   };
 
-  const selectAll = (e: any) => {
-    let arrayka = []
+  const selectAll = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    let modifiedItems = [];
     const filteredItems = rows.map((row) => {
-      row.values.checked = e.target.checked
-      return row
+      row.values.checked = e.target.checked;
+      return row;
     });
-    arrayka = filteredItems
-    if(e.target.checked) {
-      setSelectedItems(arrayka)
-      setAlertVisible(true)
+    modifiedItems = filteredItems;
+    if (e.target.checked) {
+      setSelectedItems(modifiedItems);
+      setAlertVisible(true);
     } else {
-      setSelectedItems([])
-      setAlertVisible(false)
+      setSelectedItems([]);
+      setAlertVisible(false);
     }
   };
 
-  // useEffect(() => {
-  //   fetchProducts();
-  // }, [params]);
+  const deleteItems = (): void => {
+    const selectedId = selectedItems.map((item: any) => item.original.id);
+    removeProduct(selectedId);
+    setSelectedItems([]);
+    setAlertVisible(false);
+  };
+
+  const handleClick = (row: Row<any>): void => {
+    setActiveElement(row.cells);
+    setModalVisible(true);
+  };
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.navi}>
-        <span>Показывать</span>
-        <select
-          className={styles.naviTool}
-          defaultValue={params.limit}
-          onChange={(e) =>
-            setParams({ ...params, limit: Number(e.target.value) })
-          }
-          name="select"
-        >
-          <option value="10">10</option>
-          <option value="25">25</option>
-          <option value="50">50</option>
-        </select>
-        <span>Страница</span>
-        <input
-          className={classNames(styles.naviTool, styles.naviInput)}
-          value={params.page}
-          onChange={(e) =>
-            setParams({ ...params, page: Number(e.target.value) })
-          }
+      <MyModal modalVisible={modalVisible} setModalVisible={setModalVisible}>
+        <Form
+          editProduct={editProduct}
+          setModalVisible={setModalVisible}
+          headers={headerGroups}
+          activeElement={activeElement}
+          removeProduct={removeProduct}
         />
-        <span className={styles.pageCount}>из 1</span>
-        <div className={styles.naviBtns}>
-          <Button apearance="grey" arrow="left" />
-          <Button apearance="grey" arrow="right" />
-        </div>
-      </div>
-      <Button
-        apearance="filled"
-        arrow="none"
-        className={styles.btnFullWidth}
-        onClick={() => setAlertVisible(true)}
-      >
-        Добавить акцию
-      </Button>
+      </MyModal>
       {rows.length ? (
         <table className={styles.table}>
           <thead className={styles.tableHead}>
             {headerGroups.map((headerGroup) => (
+              // eslint-disable-next-line react/jsx-key
               <tr {...headerGroup.getHeaderGroupProps()}>
                 <th>
-                  <input type="checkbox" onChange={selectAll} />
+                  <input
+                    className={styles.chkBox}
+                    type="checkbox"
+                    onChange={selectAll}
+                    checked={selectedItems.length === rows.length}
+                  />
                 </th>
                 {headerGroup.headers.map((column) => (
+                  // eslint-disable-next-line react/jsx-key
                   <th {...column.getHeaderProps()} scope="col">
                     {column.render("Header")}
                   </th>
@@ -141,18 +134,20 @@ function Table({data, params, setParams}: any) {
             {rows.map((row) => {
               prepareRow(row);
               return (
-                <tr {...row.getRowProps()}>
-                  <th>
+                // eslint-disable-next-line react/jsx-key
+                <tr {...row.getRowProps()} onClick={() => handleClick(row)}>
+                  <th onClick={(e) => e.stopPropagation()}>
                     <input
                       type="checkbox"
-                      // checked={(row as any).checked}
+                      className={styles.chkBox}
                       checked={row.values.checked}
-                      onChange={() => selectItem(row)}
+                      onChange={(e) => selectItem(row)}
                     />
                   </th>
                   {row.cells.map((cell) => {
                     return (
-                      <td {...cell.getCellProps()} onClick={() => console.log(row.id)}>{cell.render("Cell")}</td>
+                      // eslint-disable-next-line react/jsx-key
+                      <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                     );
                   })}
                 </tr>
@@ -163,13 +158,17 @@ function Table({data, params, setParams}: any) {
       ) : (
         <div className={styles.noGoods}>Здесь пока нет товаров</div>
       )}
-      <MyAlert alertVisible={alertVisible} setAlertVisible={setAlertVisible}>
+      <MyAlert
+        alertVisible={alertVisible}
+        setAlertVisible={setAlertVisible}
+        removeProduct={removeProduct}
+      >
         <div>
           Количество выбранных позиций:{" "}
           {selectedItems.length && selectedItems.length}
         </div>
-        <div>
-          <DeleteIcon style={{ marginRight: "10px" }} onClick={() => console.log(selectedItems)} />
+        <div onClick={deleteItems} style={{ cursor: "pointer" }}>
+          <DeleteIcon style={{ marginRight: "10px" }} />
           Удалить
         </div>
       </MyAlert>

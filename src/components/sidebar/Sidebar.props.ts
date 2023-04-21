@@ -1,7 +1,8 @@
-import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
-import { IMenu } from '../../models/IMenu';
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from "react";
 
-export interface SidebarProps extends 
-    DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
-        menuItems: IMenu[]
+import { IMenu } from "../../models/IMenu";
+
+export interface SidebarProps
+  extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
+  menuItems: IMenu[];
 }

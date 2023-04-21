@@ -1,19 +1,16 @@
-import axios from 'axios';
-import React, { useEffect, useMemo, useState } from 'react';
-import Sidebar from './components/sidebar/Sidebar';
-import Table from './components/table/Table';
-import {menuItems} from './helpers/helpers'
-import styles from './App.module.css'
-import AppRouter from './components/AppRouter';
+import React from "react";
 
-function App() {
-  
+import AppRouter from "./components/AppRouter";
+import Sidebar from "./components/sidebar/Sidebar";
+import { menuItems } from "./helpers/helpers";
 
+import styles from "./App.module.css";
+
+function App(): JSX.Element {
   return (
     <div className={styles.wrapper}>
       <Sidebar menuItems={menuItems} />
       <AppRouter />
-      
     </div>
   );
 }

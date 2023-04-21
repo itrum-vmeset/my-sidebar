@@ -25,12 +25,12 @@
 
 .selectedMenuItem,
 .menuItem:hover {
-  background: #C06ECC;
+  background: #c06ecc;
   border-radius: 8px;
   color: #fff;
 }
 
 .menuItem:hover svg path,
-.selectedMenuItem svg path{
+.selectedMenuItem svg path {
   fill: #fff;
 }
