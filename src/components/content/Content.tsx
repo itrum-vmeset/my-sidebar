@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import { selectOptions } from "../../helpers/helpers";
 import { getPageCount } from "../../helpers/pages";
-import { useFetching } from "../../hooks/useFetching";
 import { IParam } from "../../models/IResponse";
 import Pagination from "../table/pagination/Pagination";
 import Table from "../table/Table";
@@ -16,43 +16,61 @@ import { ContentProps } from "./Content.props";
 
 import styles from "./Content.module.css";
 
-function Content({ service }: ContentProps): JSX.Element {
+function Content({
+  service,
+  updateProduct,
+  deleteProduct,
+}: ContentProps): JSX.Element {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const [data, setData] = useState<any>([]);
+  const [items, setItems] = useState<any>([]);
   const [totalPages, setTotalPages] = useState(0);
+  const location = useLocation();
   const [params, setParams] = useState<IParam>({
     page: 1,
-    limit: 5,
+    limit: 10,
   });
 
-  const [fetchProducts, isLoading, error] = useFetching(async () => {
-    const response = await service.getAll(params);
-    setData(response.data);
-    const totalCount = response.headers["x-total-count"];
-    setTotalPages(getPageCount(totalCount, params.limit));
-  });
-
-  const removeProduct = (items: any): void => {
-    const arrayka = data.filter((element: any) =>
-      items.find((item: any) => item.id === element.id)
-    );
-    setData(arrayka);
-  };
-
-  const addProduct = (item: any): void => {
-    // setData([...data, item]);
-    console.log(item);
-  };
+  const { data, isLoading: isGoodsLoading, error } = service(params);
 
   useEffect(() => {
-    fetchProducts();
-  }, [params]);
+    !isGoodsLoading && setTotalPages(getPageCount(data.count, params.limit));
+  }, [isGoodsLoading]);
+
+  useEffect(() => {
+    !isGoodsLoading && setItems(data.data);
+  }, [isGoodsLoading, params, data]);
+
+  const removeProduct = (selectedItems: any): void => {
+    if (location.pathname === "/orders") {
+      const modifiedItems = items.filter((item: any) => {
+        if (selectedItems.find((element: any) => item.id === element)) {
+          return;
+        }
+        return item;
+      });
+      setItems(modifiedItems);
+    } else {
+      selectedItems.forEach((item: any) => deleteProduct(item));
+    }
+  };
+
+  const editProduct = (product: any): void => {
+    if (location.pathname === "/orders") {
+      setItems((prevState: any) =>
+        prevState.map((item: any) =>
+          item.id === product.id ? { ...product } : item
+        )
+      );
+    } else {
+      updateProduct(product);
+    }
+  };
 
   return (
     <div className={styles.wrapper}>
       <MyModal modalVisible={modalVisible} setModalVisible={setModalVisible}>
-        <Form addProduct={addProduct} />
+        <Form addProduct={editProduct} />
       </MyModal>
       <Pagination
         params={params}
@@ -60,22 +78,17 @@ function Content({ service }: ContentProps): JSX.Element {
         selectOptions={selectOptions}
         totalPages={totalPages}
       />
-      <Button
-        appearance="filled"
-        arrow="none"
-        className={styles.btnFullWidth}
-        onClick={() => setModalVisible(true)}
-      >
+      <Button appearance="filled" arrow="none" className={styles.btnFullWidth}>
         Добавить акцию
       </Button>
       {error && <Typography>Произошла ошибка ${error}</Typography>}
-      {isLoading ? (
+      {isGoodsLoading ? (
         <Loader />
       ) : (
         <Table
-          data={data}
+          data={items}
           removeProduct={removeProduct}
-          addProduct={addProduct}
+          editProduct={editProduct}
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
         />

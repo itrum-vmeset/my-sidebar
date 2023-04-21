@@ -13,27 +13,43 @@ import styles from "./Table.module.css";
 function Table({
   data,
   removeProduct,
-  addProduct,
+  editProduct,
   modalVisible,
   setModalVisible,
 }: TableProps): JSX.Element {
   const [selectedItems, setSelectedItems] = useState<Row[]>([]);
   const [alertVisible, setAlertVisible] = useState(false);
+  const [activeElement, setActiveElement] = useState({});
 
   const productsData = useMemo(() => [...data], [data]);
   const productsColumns = useMemo(
     () =>
       data[0]
-        ? Object.keys(data[0]).map((key) => {
-            return { Header: key, accessor: key };
-          })
+        ? Object.keys(data[0])
+            .filter((key) => !key.includes("is"))
+            .map((key) => {
+              if (key === "brand")
+                return {
+                  Header: key,
+                  accessor: key,
+                  Cell: ({ value }: any) => {
+                    return <span>{value?.name || ""}</span>;
+                  },
+                  maxWidth: 70,
+                };
+
+              return { Header: key, accessor: key };
+            })
         : [],
     [data]
   );
 
+  const initialState = { hiddenColumns: ["id"] };
+
   const tableInstance = useTable({
     columns: productsColumns,
     data: productsData,
+    // initialState,
   });
 
   const { getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
@@ -75,13 +91,20 @@ function Table({
     setAlertVisible(false);
   };
 
+  const handleClick = (row: Row<any>): void => {
+    setActiveElement(row.cells);
+    setModalVisible(true);
+  };
+
   return (
     <div className={styles.wrapper}>
       <MyModal modalVisible={modalVisible} setModalVisible={setModalVisible}>
         <Form
-          addProduct={addProduct}
+          editProduct={editProduct}
           setModalVisible={setModalVisible}
           headers={headerGroups}
+          activeElement={activeElement}
+          removeProduct={removeProduct}
         />
       </MyModal>
       {rows.length ? (
@@ -112,13 +135,13 @@ function Table({
               prepareRow(row);
               return (
                 // eslint-disable-next-line react/jsx-key
-                <tr {...row.getRowProps()}>
-                  <th>
+                <tr {...row.getRowProps()} onClick={() => handleClick(row)}>
+                  <th onClick={(e) => e.stopPropagation()}>
                     <input
                       type="checkbox"
                       className={styles.chkBox}
                       checked={row.values.checked}
-                      onChange={() => selectItem(row)}
+                      onChange={(e) => selectItem(row)}
                     />
                   </th>
                   {row.cells.map((cell) => {

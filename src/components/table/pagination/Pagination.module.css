@@ -16,4 +16,6 @@
 
 .pageCount {
   color: #bcbfcc;
+  display: block;
+  width: 40px;
 }
