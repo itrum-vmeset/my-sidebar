@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
-import { IBrand } from "../models/IResponse";
+import { IBrand, IResponse } from "../models/IResponse";
 
 const baseUrl = "http://localhost:5000";
 
@@ -9,12 +9,12 @@ export const brandAPI = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
   tagTypes: ["Brand"],
   endpoints: (build) => ({
-    fetchAllBrands: build.query<any, null>({
+    fetchAllBrands: build.query<IResponse<IBrand>, null>({
       query: () => ({
         url: "/brands",
       }),
       providesTags: (result) => ["Brand"],
-      transformResponse: (data: any) => {
+      transformResponse: (data: IBrand[]) => {
         const count = data.length;
         return {
           data,

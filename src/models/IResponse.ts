@@ -18,13 +18,8 @@ export interface IProduct {
   volume: string;
   isReady: boolean;
   isRetailAllowed: boolean;
-  brand: IBrand;
+  brand?: IBrand;
   images?: null[] | null;
-}
-
-export interface IProductResponse<T> {
-  data: T[];
-  count: number;
 }
 
 export interface IComment {
@@ -35,6 +30,6 @@ export interface IComment {
   body: string;
 }
 
-export interface ICommentResponse<T> {
+export interface IResponse<T> {
   data: T[];
 }

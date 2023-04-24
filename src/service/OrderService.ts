@@ -2,9 +2,8 @@ import axios from "axios";
 
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
-import { IComment, ICommentResponse, IParam } from "../models/IResponse";
+import { IComment, IParam, IResponse } from "../models/IResponse";
 
-// const baseUrl = "http://localhost:5000";
 const baseUrl = "https://jsonplaceholder.typicode.com";
 
 export default class OrderService {
@@ -19,13 +18,12 @@ export default class OrderService {
     return response;
   }
 }
-// { comments: IComment[]; totalCount: number },
 
 export const orderAPI = createApi({
   reducerPath: "orderAPI",
   baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
   endpoints: (build) => ({
-    fetchAllOrders: build.query<{ data: IComment[]; count: number }, IParam>({
+    fetchAllOrders: build.query<IResponse<IComment>, IParam>({
       query: (params) => ({
         url: "/comments",
         params: {
@@ -33,10 +31,10 @@ export const orderAPI = createApi({
           _limit: params.limit,
         },
       }),
-      transformResponse: (data: IComment[], meta: any) => {
+      transformResponse: (data: IComment[], meta) => {
         return {
           data,
-          count: Number(meta.response.headers.get("X-Total-Count")),
+          count: Number(meta?.response?.headers.get("X-Total-Count")),
         };
       },
     }),

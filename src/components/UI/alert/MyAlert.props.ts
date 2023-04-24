@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from "react";
+import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 
 export interface MyAlertProps
   extends DetailedHTMLProps<
@@ -7,6 +7,7 @@ export interface MyAlertProps
   > {
   alertVisible: boolean;
   setAlertVisible: (e: boolean) => void;
-  children: ReactNode;
   removeProduct: (items: any) => void;
+  selectedItems: any;
+  setSelectedItems: any;
 }

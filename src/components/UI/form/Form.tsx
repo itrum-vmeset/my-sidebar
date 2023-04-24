@@ -68,12 +68,14 @@ function Form({
                 <Select
                   name={key}
                   defaultValue="Название категории"
-                  changeVal={(e: { target: HTMLSelectElement }) =>
-                    // setNewItem({ ...newItem, [key]: e.target.value })
-                    console.log(e)
-                  }
-                  value={value}
-                  options={brands.data}
+                  onChange={(e) => {
+                    setNewItem({
+                      ...newItem,
+                      brand: { ...value, name: e.target.value },
+                    });
+                  }}
+                  value={value.name}
+                  options={brands?.data}
                   className={styles.fullWidth}
                 />
               ) : (
