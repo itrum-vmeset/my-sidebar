@@ -3,8 +3,6 @@ import { productAPI } from "../service/ProductService";
 import Content from "./content/Content";
 
 function Products(): JSX.Element {
-  // const { data } = productAPI.useFetchAllProductsQuery(null);
-
   const [updateProduct] = productAPI.useUpdateProductMutation();
   const [deleteProduct] = productAPI.useDeleteProductMutation();
 

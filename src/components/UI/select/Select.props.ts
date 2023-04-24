@@ -1,5 +1,7 @@
 import { DetailedHTMLProps, SelectHTMLAttributes } from "react";
 
+import { IBrand } from "../../../models/IResponse";
+
 export interface SelectOption {
   value: string;
   name: string;
@@ -10,8 +12,7 @@ export interface SelectProps
     SelectHTMLAttributes<HTMLSelectElement>,
     HTMLSelectElement
   > {
-  options: SelectOption[];
+  options: any;
   value: string;
   defaultValue?: string;
-  changeVal: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }

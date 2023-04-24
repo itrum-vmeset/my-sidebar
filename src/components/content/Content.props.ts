@@ -1,7 +1,5 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 
-import { IParam, IProduct } from "../../models/IResponse";
-
 export interface ContentProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   // service: {

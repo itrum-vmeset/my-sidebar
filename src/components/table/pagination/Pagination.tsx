@@ -20,7 +20,7 @@ function Pagination({
       <span>Показывать</span>
       <Select
         value={params.limit.toString()}
-        changeVal={(e: React.ChangeEvent<HTMLSelectElement>) =>
+        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
           setParams({ ...params, limit: Number(e.target.value) })
         }
         options={selectOptions}

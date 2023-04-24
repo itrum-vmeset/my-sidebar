@@ -6,6 +6,7 @@ import { getPageCount } from "../../helpers/pages";
 import { IParam } from "../../models/IResponse";
 import Pagination from "../table/pagination/Pagination";
 import Table from "../table/Table";
+import MyAlert from "../UI/alert/MyAlert";
 import { Button } from "../UI/button/Button";
 import Form from "../UI/form/Form";
 import Loader from "../UI/loader/Loader";
@@ -21,7 +22,11 @@ function Content({
   updateProduct,
   deleteProduct,
 }: ContentProps): JSX.Element {
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [selectedItems, setSelectedItems] = useState([]);
+
   const [modalVisible, setModalVisible] = useState(false);
+  const [activeElement, setActiveElement] = useState({});
 
   const [items, setItems] = useState<any>([]);
   const [totalPages, setTotalPages] = useState(0);
@@ -41,17 +46,17 @@ function Content({
     !isGoodsLoading && setItems(data.data);
   }, [isGoodsLoading, params, data]);
 
-  const removeProduct = (selectedItems: any): void => {
+  const removeProduct = (selectedId: any): void => {
     if (location.pathname === "/orders") {
       const modifiedItems = items.filter((item: any) => {
-        if (selectedItems.find((element: any) => item.id === element)) {
+        if (selectedId.find((element: any) => item.id === element)) {
           return;
         }
         return item;
       });
       setItems(modifiedItems);
     } else {
-      selectedItems.forEach((item: any) => deleteProduct(item));
+      selectedId.forEach((item: any) => deleteProduct(item));
     }
   };
 
@@ -67,10 +72,22 @@ function Content({
     }
   };
 
+  // const deleteItems = (): void => {
+  //   const selectedId = selectedItems.map((item: any) => item.original.id);
+  //   removeProduct(selectedId);
+  //   setSelectedItems([]);
+  //   setAlertVisible(false);
+  // };
+
   return (
     <div className={styles.wrapper}>
       <MyModal modalVisible={modalVisible} setModalVisible={setModalVisible}>
-        <Form addProduct={editProduct} />
+        <Form
+          editProduct={editProduct}
+          setModalVisible={setModalVisible}
+          activeElement={activeElement}
+          removeProduct={removeProduct}
+        />
       </MyModal>
       <Pagination
         params={params}
@@ -87,12 +104,20 @@ function Content({
       ) : (
         <Table
           data={items}
-          removeProduct={removeProduct}
-          editProduct={editProduct}
-          modalVisible={modalVisible}
           setModalVisible={setModalVisible}
+          setActiveElement={setActiveElement}
+          setAlertVisible={setAlertVisible}
+          selectedItems={selectedItems}
+          setSelectedItems={setSelectedItems}
         />
       )}
+      <MyAlert
+        alertVisible={alertVisible}
+        setAlertVisible={setAlertVisible}
+        removeProduct={removeProduct}
+        selectedItems={selectedItems}
+        setSelectedItems={setSelectedItems}
+      />
     </div>
   );
 }

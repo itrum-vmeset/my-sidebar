@@ -5,5 +5,4 @@ export interface MyModalProps
   modalVisible: boolean;
   setModalVisible: (e: boolean) => void;
   children: ReactNode;
-  // addProduct: (item: any) => void;
 }

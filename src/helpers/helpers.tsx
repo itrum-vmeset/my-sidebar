@@ -1,13 +1,13 @@
-import { ReactComponent as BannersIcon } from "../icons/banners.svg";
-import { ReactComponent as BrandsIcon } from "../icons/brands.svg";
-import { ReactComponent as CategoriesIcon } from "../icons/categories.svg";
-import { ReactComponent as CitiesIcon } from "../icons/cities.svg";
-import { ReactComponent as OrderIcon } from "../icons/orders.svg";
-import { ReactComponent as ProductIcon } from "../icons/products.svg";
-import { ReactComponent as PromocodeIcon } from "../icons/promocode.svg";
-import { ReactComponent as ProtocolsIcon } from "../icons/protocols.svg";
-import { ReactComponent as SeminarsIcon } from "../icons/seminars.svg";
-import { ReactComponent as ClientsIcon } from "../icons/users.svg";
+import { ReactComponent as BannersIcon } from "../assets/icons/banners.svg";
+import { ReactComponent as BrandsIcon } from "../assets/icons/brands.svg";
+import { ReactComponent as CategoriesIcon } from "../assets/icons/categories.svg";
+import { ReactComponent as CitiesIcon } from "../assets/icons/cities.svg";
+import { ReactComponent as OrderIcon } from "../assets/icons/orders.svg";
+import { ReactComponent as ProductIcon } from "../assets/icons/products.svg";
+import { ReactComponent as PromocodeIcon } from "../assets/icons/promocode.svg";
+import { ReactComponent as ProtocolsIcon } from "../assets/icons/protocols.svg";
+import { ReactComponent as SeminarsIcon } from "../assets/icons/seminars.svg";
+import { ReactComponent as ClientsIcon } from "../assets/icons/users.svg";
 import { IMenu } from "../models/IMenu";
 
 // import { IBrand, ICategory, IProduct, ISubCategory } from "../models/ITable";
