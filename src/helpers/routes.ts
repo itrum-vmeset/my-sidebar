@@ -1,8 +1,15 @@
-import Brands from "../components/Brand";
-import Orders from "../components/Orders";
-import Products from "../components/Products";
+import Auth from "../pages/auth/Auth";
+import Brands from "../pages/brands/Brands";
+import Orders from "../pages/orders/Orders";
+import Products from "../pages/products/Products";
 
-import { BRANDS_ROUTE, ORDERS_ROUTE, PRODUCTS_ROUTE } from "./consts";
+import {
+  BRANDS_ROUTE,
+  LOGIN_ROUTE,
+  ORDERS_ROUTE,
+  PRODUCTS_ROUTE,
+  REGISTER_ROUTE,
+} from "./consts";
 
 export const publicRoutes = [
   {
@@ -16,6 +23,14 @@ export const publicRoutes = [
   {
     Component: Brands,
     path: BRANDS_ROUTE,
+  },
+  {
+    Component: Auth,
+    path: LOGIN_ROUTE,
+  },
+  {
+    Component: Auth,
+    path: REGISTER_ROUTE,
   },
 ];
 

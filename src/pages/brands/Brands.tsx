@@ -1,6 +1,6 @@
-import { brandAPI } from "../service/BrandService";
-
-import Content from "./content/Content";
+import Content from "../../components/content/Content";
+import { withLayout } from "../../components/layout/Layout";
+import { brandAPI } from "../../service/BrandService";
 
 function Brands(): JSX.Element {
   const [updateProduct] = brandAPI.useUpdateBrandMutation();
@@ -17,4 +17,4 @@ function Brands(): JSX.Element {
   );
 }
 
-export default Brands;
+export default withLayout(Brands);

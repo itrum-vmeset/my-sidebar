@@ -1,6 +1,6 @@
-import { orderAPI } from "../service/OrderService";
-
-import Content from "./content/Content";
+import Content from "../../components/content/Content";
+import { withLayout } from "../../components/layout/Layout";
+import { orderAPI } from "../../service/OrderService";
 
 function Orders(): JSX.Element {
   return (
@@ -14,4 +14,4 @@ function Orders(): JSX.Element {
   );
 }
 
-export default Orders;
+export default withLayout(Orders);
