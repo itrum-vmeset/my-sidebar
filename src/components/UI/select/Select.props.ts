@@ -1,7 +1,5 @@
 import { DetailedHTMLProps, SelectHTMLAttributes } from "react";
 
-import { IBrand } from "../../../models/IResponse";
-
 export interface SelectOption {
   value: string;
   name: string;

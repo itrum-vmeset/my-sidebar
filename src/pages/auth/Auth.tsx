@@ -1,11 +1,18 @@
-import React, { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 import { ReactComponent as EyeIcon } from "../../assets/icons/eye.svg";
 import { Button } from "../../components/UI/button/Button";
 import { Input } from "../../components/UI/input/Input";
+import Loader from "../../components/UI/loader/Loader";
 import { Typography } from "../../components/UI/typography/Typography";
-import { LOGIN_ROUTE, REGISTER_ROUTE } from "../../helpers/consts";
+import {
+  LOGIN_ROUTE,
+  PRODUCTS_ROUTE,
+  REGISTER_ROUTE,
+} from "../../helpers/consts";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import { loginAC, registerAC } from "../../store/reducers/ActionCreators";
 
 import styles from "./Auth.module.css";
 
@@ -14,15 +21,42 @@ function Auth(): JSX.Element {
   const [password, setPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useAppDispatch();
+  const { isLoading, error } = useAppSelector((state) => state.authReducer);
+
+  const navigate = useNavigate();
 
   const location = useLocation();
   const isLogin = location.pathname === LOGIN_ROUTE;
 
   const handleClickShowPassword = (): void => setShowPassword(!showPassword);
 
+  const handleClickAuth = (): void => {
+    if (isLogin) {
+      dispatch(loginAC(email, password));
+      setEmail("");
+      setPassword("");
+      navigate(PRODUCTS_ROUTE);
+    } else {
+      if (password === checkPassword) {
+        dispatch(registerAC(email, password));
+        navigate(PRODUCTS_ROUTE);
+      } else {
+        alert("пароли не совпадают!");
+      }
+    }
+    setEmail("");
+    setPassword("");
+    setCheckPassword("");
+  };
+
+  if (isLoading) {
+    return <Loader className={styles.loader} />;
+  }
+
   return (
     <div className={styles.wrapper}>
-      <form action="" className={styles.form}>
+      <div className={styles.form}>
         {isLogin ? (
           <h2>Вход в учётную запись</h2>
         ) : (
@@ -69,8 +103,12 @@ function Auth(): JSX.Element {
             />
           </div>
         )}
-        <Button appearance="filled" className={styles.button}>
-          Войти
+        <Button
+          appearance="filled"
+          className={styles.button}
+          onClick={handleClickAuth}
+        >
+          {isLogin ? <span>Войти</span> : <span>Регистрация</span>}
         </Button>
         <Typography className={styles.links}>
           {isLogin ? (
@@ -79,7 +117,8 @@ function Auth(): JSX.Element {
             <NavLink to={LOGIN_ROUTE}>{"У меня уже есть аккаунт"}</NavLink>
           )}
         </Typography>
-      </form>
+        <Typography className={styles.error}>{error}</Typography>
+      </div>
     </div>
   );
 }

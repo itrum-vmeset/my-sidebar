@@ -13,6 +13,17 @@ import {
 
 export const publicRoutes = [
   {
+    Component: Auth,
+    path: LOGIN_ROUTE,
+  },
+  {
+    Component: Auth,
+    path: REGISTER_ROUTE,
+  },
+];
+
+export const authRoutes = [
+  {
     Component: Orders,
     path: ORDERS_ROUTE,
   },
@@ -24,14 +35,4 @@ export const publicRoutes = [
     Component: Brands,
     path: BRANDS_ROUTE,
   },
-  {
-    Component: Auth,
-    path: LOGIN_ROUTE,
-  },
-  {
-    Component: Auth,
-    path: REGISTER_ROUTE,
-  },
 ];
-
-export const authRoutes = [];
