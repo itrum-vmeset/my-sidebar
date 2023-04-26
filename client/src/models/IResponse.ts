@@ -35,9 +35,13 @@ export interface IResponse<T> {
 }
 
 export interface IUser {
-  username: string;
-  _id: string;
-  role: string;
-  iat: number;
-  exp: number;
+  email: string;
+  id: string;
+  isActivated: boolean;
+}
+
+export interface AuthResponse {
+  accessToken: string;
+  refreshToken: string;
+  user: IUser;
 }

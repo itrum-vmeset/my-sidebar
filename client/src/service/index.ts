@@ -1,12 +1,9 @@
 import axios from "axios";
 
-export const API_URL = `https://myshop-api.onrender.com/api`;
-
-const $host = axios.create({
-  baseURL: API_URL,
-});
+export const API_URL = `http://localhost:5000/api`;
 
 const $authHost = axios.create({
+  withCredentials: true,
   baseURL: API_URL,
 });
 
@@ -17,4 +14,4 @@ const authInterceptor = (config: any): any => {
 
 $authHost.interceptors.request.use(authInterceptor);
 
-export { $host, $authHost };
+export { $authHost };

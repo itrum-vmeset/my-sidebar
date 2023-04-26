@@ -12,7 +12,9 @@ function App(): JSX.Element {
   const { isLoading } = useAppSelector((state) => state.authReducer);
 
   useEffect(() => {
-    dispatch(checkAC());
+    if (localStorage.getItem("accessToken")) {
+      dispatch(checkAC());
+    }
   }, []);
 
   if (isLoading) {

@@ -4,7 +4,6 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { ReactComponent as EyeIcon } from "../../assets/icons/eye.svg";
 import { Button } from "../../components/UI/button/Button";
 import { Input } from "../../components/UI/input/Input";
-import Loader from "../../components/UI/loader/Loader";
 import { Typography } from "../../components/UI/typography/Typography";
 import {
   LOGIN_ROUTE,
@@ -22,7 +21,9 @@ function Auth(): JSX.Element {
   const [checkPassword, setCheckPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAppDispatch();
-  const { isLoading, error } = useAppSelector((state) => state.authReducer);
+  const { isLoading, error, isAuth, user } = useAppSelector(
+    (state) => state.authReducer
+  );
 
   const navigate = useNavigate();
 
@@ -31,7 +32,7 @@ function Auth(): JSX.Element {
 
   const handleClickShowPassword = (): void => setShowPassword(!showPassword);
 
-  const handleClickAuth = (): void => {
+  const handleClickAuth = async () => {
     if (isLogin) {
       dispatch(loginAC(email, password));
       navigate(PRODUCTS_ROUTE);
@@ -48,10 +49,6 @@ function Auth(): JSX.Element {
     setCheckPassword("");
   };
 
-  if (isLoading) {
-    return <Loader className={styles.loader} />;
-  }
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.form}>
@@ -60,7 +57,6 @@ function Auth(): JSX.Element {
         ) : (
           <h2>Создание учетной записи</h2>
         )}
-
         <Typography>E-mail</Typography>
         <Input
           value={email}

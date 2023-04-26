@@ -10,3 +10,4 @@ export const PROTOCOLS_ROUTE = "/protocols";
 export const BANNERS_ROUTE = "/banners";
 export const SEMINARS_ROUTE = "/seminars";
 export const PROMOCODE_ROUTE = "/promocode";
+export const CLIENTS_ROUTE = "/clients";

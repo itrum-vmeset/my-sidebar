@@ -1,30 +1,38 @@
-import { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 
-import { $authHost, $host } from ".";
+import { AuthResponse, IUser } from "../models/IResponse";
 
-interface AuthResponse {
-  token: string;
-}
+import { $authHost, API_URL } from ".";
 
 export default class AuthService {
   static async login(
-    username: string,
+    email: string,
     password: string
   ): Promise<AxiosResponse<AuthResponse>> {
-    return $host.post<AuthResponse>("/user/login", { username, password });
+    return $authHost.post<AuthResponse>("/auth/login", { email, password });
   }
 
   static async registration(
-    username: string,
+    email: string,
     password: string
   ): Promise<AxiosResponse<AuthResponse>> {
-    return $host.post<AuthResponse>("/user/registration", {
-      username,
+    return $authHost.post<AuthResponse>("/auth/register", {
+      email,
       password,
     });
   }
 
+  static async logout(): Promise<void> {
+    return $authHost.post("/auth/logout");
+  }
+
   static async checkAuth(): Promise<AxiosResponse<AuthResponse>> {
-    return $authHost.get("/user/check");
+    return axios.get<AuthResponse>(`${API_URL}/auth/refresh`, {
+      withCredentials: true,
+    });
+  }
+
+  static async fetchUsers(): Promise<AxiosResponse<IUser[]>> {
+    return $authHost.get<IUser[]>("/auth/fetch");
   }
 }

@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
 import { IProduct, IResponse } from "../models/IResponse";
 
-const baseUrl = "http://localhost:5000";
+const baseUrl = "http://localhost:5005";
 
 export const productAPI = createApi({
   reducerPath: "productAPI",

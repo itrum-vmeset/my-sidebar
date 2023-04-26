@@ -7,27 +7,29 @@ interface AuthState {
   isAuth: boolean;
   isLoading: boolean;
   error: string;
+  clients: IUser[];
 }
 
 const initialState: AuthState = {
   user: {} as IUser,
   isAuth: false,
-  isLoading: true,
+  isLoading: false,
   error: "",
+  clients: [],
 };
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    login(state) {
+    setIsLoading(state) {
       state.isLoading = true;
     },
     loginSuccess(state, action: PayloadAction<IUser>) {
-      state.isLoading = false;
       state.error = "";
       state.user = action.payload;
       state.isAuth = true;
+      state.isLoading = false;
     },
     loginError(state, action: PayloadAction<string>) {
       state.isLoading = false;
@@ -37,6 +39,12 @@ export const authSlice = createSlice({
       state.error = "";
       state.user = {} as IUser;
       state.isAuth = false;
+    },
+    setClients(state, action: PayloadAction<IUser[]>) {
+      state.error = "";
+      state.clients = action.payload;
+      state.isAuth = true;
+      state.isLoading = false;
     },
   },
 });
