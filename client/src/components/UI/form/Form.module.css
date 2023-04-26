@@ -1,0 +1,24 @@
+.formWrapper {
+}
+
+.formBtns {
+  display: flex;
+  justify-content: center;
+  padding: 26px 0;
+  border-bottom: 1px solid #d0d3da;
+  gap: 16px;
+}
+
+.btn {
+  width: 270px;
+  border-radius: 4px;
+}
+
+.formInpts {
+  padding: 16px 40px;
+}
+
+.formInpts select,
+.formInpts input {
+  width: 100%;
+}

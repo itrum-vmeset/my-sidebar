@@ -1,0 +1,56 @@
+.wrapper {
+  font-size: 14px;
+  line-height: 20px;
+  color: #434652;
+  flex-direction: column;
+  width: 1000px;
+}
+
+.btnFullWidth {
+  width: 100%;
+  margin: 24px 0;
+}
+
+.table {
+  display: block;
+  width: 100%;
+  max-height: 555px;
+  overflow-y: scroll;
+  border: none;
+  font-size: 14px;
+  line-height: 24px;
+  border-collapse: collapse;
+  position: relative;
+}
+
+.tableHead {
+  background-color: #f8f8fa;
+  color: #737680;
+}
+
+.tableHead th {
+  padding: 10px 8px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.tableBody tr {
+  border-bottom: 1px solid #ebecef;
+}
+
+.tableBody tr td {
+  height: 68px;
+}
+
+.chkBox {
+  accent-color: #c06ecc;
+  width: 16px;
+  height: 16px;
+  margin-top: 6px;
+}
+
+.noGoods {
+  display: flex;
+  justify-content: center;
+}
