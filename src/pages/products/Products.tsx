@@ -1,6 +1,6 @@
-import { productAPI } from "../service/ProductService";
-
-import Content from "./content/Content";
+import Content from "../../components/content/Content";
+import { withLayout } from "../../components/layout/Layout";
+import { productAPI } from "../../service/ProductService";
 
 function Products(): JSX.Element {
   const [updateProduct] = productAPI.useUpdateProductMutation();
@@ -17,4 +17,4 @@ function Products(): JSX.Element {
   );
 }
 
-export default Products;
+export default withLayout(Products);

@@ -48,11 +48,9 @@
       "codeFrom1C": "УТ000001038",
       "price": 2590,
       "volume": "2,2 мл",
-      "isReady": true,
-      "isRetailAllowed": false,
       "brand": {
         "id": "",
-        "name": "",
+        "name": "Laboratory Cytolife",
         "icon": ""
       }
     },

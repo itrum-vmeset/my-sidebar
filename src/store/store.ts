@@ -4,10 +4,13 @@ import { brandAPI } from "../service/BrandService";
 import { orderAPI } from "../service/OrderService";
 import { productAPI } from "../service/ProductService";
 
+import authReducer from "./reducers/AuthSlice";
+
 const rootReducer = combineReducers({
   [productAPI.reducerPath]: productAPI.reducer,
   [orderAPI.reducerPath]: orderAPI.reducer,
   [brandAPI.reducerPath]: brandAPI.reducer,
+  authReducer,
 });
 
 export const setupStore = () => {
