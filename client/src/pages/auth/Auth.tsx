@@ -21,9 +21,7 @@ function Auth(): JSX.Element {
   const [checkPassword, setCheckPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAppDispatch();
-  const { isLoading, error, isAuth, user } = useAppSelector(
-    (state) => state.authReducer
-  );
+  const { error, isAuth } = useAppSelector((state) => state.authReducer);
 
   const navigate = useNavigate();
 

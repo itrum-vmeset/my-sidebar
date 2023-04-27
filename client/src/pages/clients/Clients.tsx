@@ -14,10 +14,11 @@ function Clients(): JSX.Element {
 
   return (
     <div>
-      clients
-      {clients.map((cl) => (
-        <div key={cl.id}>{cl.email}</div>
-      ))}
+      <button onClick={() => dispatch(fetchAC())}>fetch them!</button>
+      <button onClick={() => console.log(clients)}>console them!</button>
+
+      {clients.length &&
+        clients.map((cl) => <div key={cl.email}>{cl.email}</div>)}
     </div>
   );
 }

@@ -6,7 +6,7 @@ import { authSlice } from "./AuthSlice";
 export const loginAC =
   (email: string, password: string) => async (dispatch: AppDispatch) => {
     try {
-      dispatch(authSlice.actions.setIsLoading());
+      dispatch(authSlice.actions.setIsLoading(true));
       const response = await AuthService.login(email, password);
       localStorage.setItem("accessToken", response.data.accessToken);
       dispatch(authSlice.actions.loginSuccess(response.data.user));
@@ -17,7 +17,7 @@ export const loginAC =
 
 export const checkAC = () => async (dispatch: AppDispatch) => {
   try {
-    dispatch(authSlice.actions.setIsLoading());
+    dispatch(authSlice.actions.setIsLoading(true));
     const response = await AuthService.checkAuth();
     localStorage.setItem("accessToken", response.data.accessToken);
     dispatch(authSlice.actions.loginSuccess(response.data.user));
@@ -38,7 +38,7 @@ export const logoutAC = () => (dispatch: AppDispatch) => {
 export const registerAC =
   (email: string, password: string) => async (dispatch: AppDispatch) => {
     try {
-      dispatch(authSlice.actions.setIsLoading());
+      dispatch(authSlice.actions.setIsLoading(true));
       const response = await AuthService.registration(email, password);
       localStorage.setItem("accessToken", response.data.accessToken);
       dispatch(authSlice.actions.loginSuccess(response.data.user));
@@ -49,7 +49,7 @@ export const registerAC =
 
 export const fetchAC = () => async (dispatch: AppDispatch) => {
   try {
-    dispatch(authSlice.actions.setIsLoading());
+    // dispatch(authSlice.actions.setIsLoading(true));
     const response = await AuthService.fetchUsers();
     dispatch(authSlice.actions.setClients(response.data));
   } catch (e: any) {

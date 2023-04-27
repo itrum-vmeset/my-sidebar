@@ -4,6 +4,7 @@ import AppRouter from "./components/AppRouter";
 import Loader from "./components/UI/loader/Loader";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
 import { checkAC } from "./store/reducers/ActionCreators";
+import { authSlice } from "./store/reducers/AuthSlice";
 
 import styles from "./App.module.css";
 
@@ -14,6 +15,8 @@ function App(): JSX.Element {
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
       dispatch(checkAC());
+    } else {
+      dispatch(authSlice.actions.setIsLoading(false));
     }
   }, []);
 

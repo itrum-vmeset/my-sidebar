@@ -1,5 +1,6 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
+import { LOGIN_ROUTE, PRODUCTS_ROUTE } from "../helpers/consts";
 import { authRoutes, publicRoutes } from "../helpers/routes";
 import { useAppSelector } from "../hooks/reduxHooks";
 
@@ -15,7 +16,7 @@ function AppRouter(): JSX.Element {
         authRoutes.map(({ path, Component }) => (
           <Route key={path} element={<Component />} path={path} />
         ))}
-      {/* <Route
+      <Route
         path="*"
         element={
           isAuth ? (
@@ -24,7 +25,7 @@ function AppRouter(): JSX.Element {
             <Navigate to={LOGIN_ROUTE} />
           )
         }
-      /> */}
+      />
     </Routes>
   );
 }
