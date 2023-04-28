@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
+import { ORDERS_ROUTE } from "../../helpers/consts";
 import { selectOptions } from "../../helpers/helpers";
 import { getPageCount } from "../../helpers/pages";
 import { IParam } from "../../models/IResponse";
@@ -8,6 +9,8 @@ import Pagination from "../table/pagination/Pagination";
 import Table from "../table/Table";
 import MyAlert from "../UI/alert/MyAlert";
 import { Button } from "../UI/button/Button";
+import DumbForm from "../UI/dumbForm/DumbForm";
+import DumbModal from "../UI/dumbModal/DumbModal";
 import Form from "../UI/form/Form";
 import Loader from "../UI/loader/Loader";
 import MyModal from "../UI/modal/MyModal";
@@ -28,6 +31,8 @@ function Content({
   const [modalVisible, setModalVisible] = useState(false);
   const [activeElement, setActiveElement] = useState({});
 
+  const [dumbModalVisible, setDumbModalVisible] = useState(false);
+
   const [items, setItems] = useState<any>([]);
   const [totalPages, setTotalPages] = useState(0);
   const location = useLocation();
@@ -47,7 +52,7 @@ function Content({
   }, [isGoodsLoading, params, data]);
 
   const removeProduct = (selectedId: any): void => {
-    if (location.pathname === "/orders") {
+    if (location.pathname === ORDERS_ROUTE) {
       const modifiedItems = items.filter((item: any) => {
         if (selectedId.find((element: any) => item.id === element)) {
           return;
@@ -61,7 +66,7 @@ function Content({
   };
 
   const editProduct = (product: any): void => {
-    if (location.pathname === "/orders") {
+    if (location.pathname === ORDERS_ROUTE) {
       setItems((prevState: any) =>
         prevState.map((item: any) =>
           item.id === product.id ? { ...product } : item
@@ -89,13 +94,29 @@ function Content({
           removeProduct={removeProduct}
         />
       </MyModal>
+      <DumbModal
+        dumbModalVisible={dumbModalVisible}
+        setDumbModalVisible={setDumbModalVisible}
+      >
+        <DumbForm
+          editProduct={editProduct}
+          setDumbModalVisible={setDumbModalVisible}
+          activeElement={activeElement}
+          removeProduct={removeProduct}
+        />
+      </DumbModal>
       <Pagination
         params={params}
         setParams={setParams}
         selectOptions={selectOptions}
         totalPages={totalPages}
       />
-      <Button appearance="filled" arrow="none" className={styles.btnFullWidth}>
+      <Button
+        appearance="filled"
+        arrow="none"
+        className={styles.btnFullWidth}
+        onClick={() => setDumbModalVisible(true)}
+      >
         Добавить акцию
       </Button>
       {error && <Typography>Произошла ошибка ${error}</Typography>}
