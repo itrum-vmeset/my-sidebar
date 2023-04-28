@@ -26,9 +26,10 @@ export const checkAC = () => async (dispatch: AppDispatch) => {
   }
 };
 
-export const logoutAC = () => (dispatch: AppDispatch) => {
+export const logoutAC = () => async (dispatch: AppDispatch) => {
   try {
     localStorage.removeItem("accessToken");
+    await AuthService.logout();
     dispatch(authSlice.actions.logout());
   } catch (e: any) {
     dispatch(authSlice.actions.loginError(e.response?.data?.message));

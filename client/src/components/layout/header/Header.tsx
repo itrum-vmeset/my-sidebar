@@ -30,7 +30,10 @@ function Header({ className, ...props }: HeaderProps): JSX.Element {
           <Button color="inherit" onClick={logout} appearance="filled">
             LOGOUT
           </Button>
-          <Typography className={styles.username}>{user.email}</Typography>
+          <Typography className={styles.username}>
+            {user.email}{" "}
+            {user.isActivated ? <></> : <span>(не активирован)</span>}
+          </Typography>
         </>
       ) : (
         <Button color="inherit" onClick={() => navigate(LOGIN_ROUTE)}>
