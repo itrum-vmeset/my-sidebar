@@ -39,3 +39,38 @@
   resize: none;
   margin-bottom: 30px;
 }
+
+.images {
+  position: relative;
+}
+
+.inputFile {
+  position: relative;
+  bottom: 30px;
+  left: 510px;
+  cursor: pointer;
+}
+
+.priceBlock {
+  margin: 32px 0;
+}
+
+.categorySection {
+  display: flex;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.categoryBlock {
+  width: 100%;
+}
+
+.volumeSection {
+}
+
+.formButton {
+  border: none;
+  background: none;
+  padding-left: 0;
+  color: #c06ecc;
+}

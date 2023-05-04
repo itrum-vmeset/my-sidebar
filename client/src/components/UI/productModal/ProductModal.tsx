@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
 import classNames from "classnames";
 
-import { DumbModalProps } from "./DumbModal.props";
+import { ProductModalProps } from "./ProductModal.props";
 
-import styles from "./DumbModal.module.css";
+import styles from "./ProductModal.module.css";
 
-const DumbModal = ({
+const ProductModal = ({
   children,
-  dumbModalVisible,
-  setDumbModalVisible,
-}: DumbModalProps): JSX.Element => {
+  productModalVisible,
+  setProductModalVisible,
+}: ProductModalProps): JSX.Element => {
   useEffect(() => {
     const close = (e: KeyboardEvent): void => {
       if (e.key === "Escape") {
-        setDumbModalVisible(false);
+        setProductModalVisible(false);
       }
     };
     window.addEventListener("keydown", close);
@@ -23,9 +23,9 @@ const DumbModal = ({
   return (
     <div
       className={classNames(styles.myModal, {
-        [styles.active]: dumbModalVisible === true,
+        [styles.active]: productModalVisible === true,
       })}
-      onClick={() => setDumbModalVisible(false)}
+      onClick={() => setProductModalVisible(false)}
     >
       <div
         className={styles.myModalContent}
@@ -37,4 +37,4 @@ const DumbModal = ({
   );
 };
 
-export default DumbModal;
+export default ProductModal;

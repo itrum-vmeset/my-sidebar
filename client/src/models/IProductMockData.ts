@@ -1,4 +1,4 @@
-export interface IProduct {
+export interface IProductMock {
   id: string;
   name: string;
   description: string;
@@ -20,7 +20,7 @@ export interface IProduct {
   productRatings: any[];
   estimationCount: number;
   images: string[];
-  variations: any[];
+  variations: Variations[];
   similars: any[];
   protocols: any[];
   protocol_categories: any[];
@@ -45,21 +45,29 @@ export interface SubCatalogProduct {
   id: string;
   name: string;
   position: number;
+  catalog_product: "";
 }
 
 export interface CatalogProduct {
   id: string;
   name: string;
   position: number;
+  _id: string;
 }
 
 export interface Characteristic {
-  id: string;
+  id: string | number;
   key: string;
   value: string;
 }
 
+export interface Variations {
+  id: string | number;
+  value: string;
+  code: string;
+}
+
 export interface Tag {
-  id: string;
+  id: string | number;
   name: string;
 }

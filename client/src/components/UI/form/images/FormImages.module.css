@@ -1,0 +1,10 @@
+.images {
+  position: relative;
+}
+
+.inputFile {
+  position: relative;
+  bottom: 30px;
+  left: 510px;
+  cursor: pointer;
+}

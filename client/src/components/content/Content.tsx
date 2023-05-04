@@ -9,11 +9,12 @@ import Pagination from "../table/pagination/Pagination";
 import Table from "../table/Table";
 import MyAlert from "../UI/alert/MyAlert";
 import { Button } from "../UI/button/Button";
-import DumbForm from "../UI/dumbForm/DumbForm";
-import DumbModal from "../UI/dumbModal/DumbModal";
 import Form from "../UI/form/Form";
+import FormCopy from "../UI/form/FormCopy";
 import Loader from "../UI/loader/Loader";
 import MyModal from "../UI/modal/MyModal";
+import ProductForm from "../UI/productForm/ProductForm";
+import ProductModal from "../UI/productModal/ProductModal";
 import { Typography } from "../UI/typography/Typography";
 
 import { ContentProps } from "./Content.props";
@@ -31,7 +32,8 @@ function Content({
   const [modalVisible, setModalVisible] = useState(false);
   const [activeElement, setActiveElement] = useState({});
 
-  const [dumbModalVisible, setDumbModalVisible] = useState(false);
+  const [productModalVisible, setProductModalVisible] = useState(true);
+  // const [productModalVisible, setProductModalVisible] = useState(false);
 
   const [items, setItems] = useState<any>([]);
   const [totalPages, setTotalPages] = useState(0);
@@ -77,13 +79,6 @@ function Content({
     }
   };
 
-  // const deleteItems = (): void => {
-  //   const selectedId = selectedItems.map((item: any) => item.original.id);
-  //   removeProduct(selectedId);
-  //   setSelectedItems([]);
-  //   setAlertVisible(false);
-  // };
-
   return (
     <div className={styles.wrapper}>
       <MyModal modalVisible={modalVisible} setModalVisible={setModalVisible}>
@@ -94,17 +89,14 @@ function Content({
           removeProduct={removeProduct}
         />
       </MyModal>
-      <DumbModal
-        dumbModalVisible={dumbModalVisible}
-        setDumbModalVisible={setDumbModalVisible}
+      <ProductModal
+        productModalVisible={productModalVisible}
+        setProductModalVisible={setProductModalVisible}
       >
-        <DumbForm
-          editProduct={editProduct}
-          setDumbModalVisible={setDumbModalVisible}
-          activeElement={activeElement}
-          removeProduct={removeProduct}
-        />
-      </DumbModal>
+        {/* <ProductForm /> */}
+        {/* <ProductFormCopy /> */}
+        <FormCopy />
+      </ProductModal>
       <Pagination
         params={params}
         setParams={setParams}
@@ -115,7 +107,7 @@ function Content({
         appearance="filled"
         arrow="none"
         className={styles.btnFullWidth}
-        onClick={() => setDumbModalVisible(true)}
+        onClick={() => setProductModalVisible(true)}
       >
         Добавить акцию
       </Button>

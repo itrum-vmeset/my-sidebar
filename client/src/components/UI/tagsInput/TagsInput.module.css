@@ -1,0 +1,57 @@
+.tagsInput {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 6px 12px 0;
+  border: 1px solid #d0d3da;
+  border-radius: 8px;
+}
+
+.input {
+  flex: 1;
+  border: none;
+  height: 36px;
+}
+
+.input:focus {
+  outline: transparent;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+}
+
+.tag {
+  width: auto;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #37393d;
+  padding: 4px 12px;
+  font-size: 14px;
+  list-style: none;
+  border-radius: 6px;
+  margin-right: 8px;
+  margin-bottom: 4px;
+  background: #f7ecf8;
+}
+
+.tagTitle {
+  margin-top: 3px;
+}
+.tagCloseIcon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  font-size: 14px;
+  margin-left: 8px;
+  color: #37393d;
+  cursor: pointer;
+}

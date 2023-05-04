@@ -14,6 +14,10 @@
   padding: 5px 0px 5px 14px;
 }
 
+.naviSelect {
+  width: 50px;
+}
+
 .pageCount {
   color: #bcbfcc;
   display: block;
