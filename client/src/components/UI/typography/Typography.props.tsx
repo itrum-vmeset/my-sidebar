@@ -6,4 +6,5 @@ export interface TypographyProps
     HTMLParagraphElement
   > {
   children: ReactNode;
+  sizer?: "s";
 }

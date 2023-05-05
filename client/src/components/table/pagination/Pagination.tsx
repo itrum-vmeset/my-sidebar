@@ -24,6 +24,7 @@ function Pagination({
           setParams({ ...params, limit: Number(e.target.value) })
         }
         options={selectOptions}
+        className={styles.naviSelect}
       />
       <span>Страница</span>
       <input

@@ -13,10 +13,11 @@ class subCategoryController {
 
   async getAll(req, res, next) {
       try {
-          const subCategories = await subCategoryService.getAll()
-          return res.json(subCategories)
+        const {catalog_product} = req.query
+        const subCategories = await subCategoryService.getAll(catalog_product)
+        return res.json(subCategories)
       } catch (e) {
-          next(e)
+        next(e)
       }
   }
 }

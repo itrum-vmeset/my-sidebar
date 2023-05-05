@@ -1,0 +1,9 @@
+.categorySection {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.categoryBlock {
+  width: 100%;
+}

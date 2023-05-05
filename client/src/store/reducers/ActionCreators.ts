@@ -50,7 +50,7 @@ export const registerAC =
 
 export const fetchAC = () => async (dispatch: AppDispatch) => {
   try {
-    // dispatch(authSlice.actions.setIsLoading(true));
+    dispatch(authSlice.actions.setIsLoading(true));
     const response = await AuthService.fetchUsers();
     dispatch(authSlice.actions.setClients(response.data));
   } catch (e: any) {

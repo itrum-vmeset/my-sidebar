@@ -1,0 +1,27 @@
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.row svg {
+  width: 40px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.row svg path {
+  fill: black;
+}
+
+.imgBlock {
+  padding: 30px;
+  background: #fafafa;
+}
+
+.link {
+  flex-grow: 1;
+}

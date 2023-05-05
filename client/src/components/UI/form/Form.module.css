@@ -15,10 +15,27 @@
 }
 
 .formInpts {
+  display: flex;
+  flex-direction: column;
   padding: 16px 40px;
+  overflow-y: scroll;
+  height: 85vh;
+  gap: 4px;
 }
 
 .formInpts select,
 .formInpts input {
   width: 100%;
+}
+
+.description {
+  box-sizing: border-box;
+  padding: 8px 12px 32px;
+  border: 1px solid #d0d3da;
+  border-radius: 8px;
+  width: 100%;
+  min-height: 60px;
+  overflow-y: scroll;
+  resize: none;
+  margin-bottom: 30px;
 }

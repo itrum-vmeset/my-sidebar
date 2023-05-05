@@ -9,7 +9,21 @@ export interface IBrand {
   icon: string;
 }
 
-export interface IProduct {
+export interface ICategory {
+  id: string;
+  name: string;
+  position: number;
+  _id: string;
+}
+
+export interface ISubCategory {
+  id: string;
+  name: string;
+  position: number;
+  catalog_product: string;
+}
+
+export interface IProductFromApi {
   id: string;
   name: string;
   nameFrom1C: string;
@@ -44,4 +58,13 @@ export interface AuthResponse {
   accessToken: string;
   refreshToken: string;
   user: IUser;
+}
+
+export interface IClientFromJSONServer {
+  email: string | null;
+  phone: string | null;
+  name: string | null;
+  lastName: string | null;
+  firmName: string | null;
+  role: string | null;
 }

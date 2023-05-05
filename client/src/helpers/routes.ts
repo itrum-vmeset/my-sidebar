@@ -1,11 +1,13 @@
 import Auth from "../pages/auth/Auth";
 import Brands from "../pages/brands/Brands";
+import Categories from "../pages/categories/Categories";
 import Clients from "../pages/clients/Clients";
 import Orders from "../pages/orders/Orders";
 import Products from "../pages/products/Products";
 
 import {
   BRANDS_ROUTE,
+  CATEGORIES_ROUTE,
   CLIENTS_ROUTE,
   LOGIN_ROUTE,
   ORDERS_ROUTE,
@@ -40,5 +42,9 @@ export const authRoutes = [
   {
     Component: Clients,
     path: CLIENTS_ROUTE,
+  },
+  {
+    Component: Categories,
+    path: CATEGORIES_ROUTE,
   },
 ];

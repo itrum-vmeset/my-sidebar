@@ -13,7 +13,6 @@
 
 .table {
   display: block;
-  width: 100%;
   max-height: 555px;
   overflow-y: scroll;
   border: none;
@@ -21,6 +20,10 @@
   line-height: 24px;
   border-collapse: collapse;
   position: relative;
+}
+
+.noScroll {
+  overflow-y: hidden;
 }
 
 .tableHead {
@@ -33,6 +36,7 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
+  text-align: left;
 }
 
 .tableBody tr {

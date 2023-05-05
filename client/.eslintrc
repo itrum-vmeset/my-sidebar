@@ -106,5 +106,6 @@
         "no-empty-function": "warn",
         "no-useless-return": "warn",
         "@typescript-eslint/no-unused-vars": "warn",
+        "@typescript-eslint/ban-types": "off"
     }
 }

@@ -4,8 +4,14 @@ const CategoryDto = require('../dto/categoryDto')
 const ApiError = require('../error/ApiError')
 class SubCategoryService {
 
-  async getAll() {
-    const subCategories = await subCategoryModel.find()
+  async getAll(catalog_product) {
+    let subCategories    
+    if(!catalog_product) {
+      subCategories = await subCategoryModel.find()
+    }
+    if(catalog_product) {
+      subCategories = await subCategoryModel.find({catalog_product})
+    }
     return subCategories
   }
 

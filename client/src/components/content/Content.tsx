@@ -1,19 +1,27 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import { ORDERS_ROUTE } from "../../helpers/consts";
+import { ReactComponent as CloseIcon } from "../../assets/icons/close.svg";
+import { ReactComponent as SearchIcon } from "../../assets/icons/search.svg";
+import {
+  CLIENTS_ROUTE,
+  ORDERS_ROUTE,
+  PRODUCTS_ROUTE,
+} from "../../helpers/consts";
 import { selectOptions } from "../../helpers/helpers";
 import { getPageCount } from "../../helpers/pages";
+import { useClients } from "../../hooks/useClients";
 import { IParam } from "../../models/IResponse";
 import Pagination from "../table/pagination/Pagination";
 import Table from "../table/Table";
 import MyAlert from "../UI/alert/MyAlert";
 import { Button } from "../UI/button/Button";
-import DumbForm from "../UI/dumbForm/DumbForm";
-import DumbModal from "../UI/dumbModal/DumbModal";
 import Form from "../UI/form/Form";
+import FormCopy from "../UI/form/FormCopy";
+import { Input } from "../UI/input/Input";
 import Loader from "../UI/loader/Loader";
 import MyModal from "../UI/modal/MyModal";
+import ProductModal from "../UI/productModal/ProductModal";
 import { Typography } from "../UI/typography/Typography";
 
 import { ContentProps } from "./Content.props";
@@ -31,9 +39,11 @@ function Content({
   const [modalVisible, setModalVisible] = useState(false);
   const [activeElement, setActiveElement] = useState({});
 
-  const [dumbModalVisible, setDumbModalVisible] = useState(false);
+  const [productModalVisible, setProductModalVisible] = useState(false);
 
   const [items, setItems] = useState<any>([]);
+  const [query, setQuery] = useState("");
+  const searchedClients = useClients(items, query);
   const [totalPages, setTotalPages] = useState(0);
   const location = useLocation();
   const [params, setParams] = useState<IParam>({
@@ -48,8 +58,20 @@ function Content({
   }, [isGoodsLoading]);
 
   useEffect(() => {
-    !isGoodsLoading && setItems(data.data);
-  }, [isGoodsLoading, params, data]);
+    if (location.pathname === CLIENTS_ROUTE) {
+      const newData =
+        data?.data?.map((item: any) => {
+          const { lastName, name, ...dataItem } = item;
+          return {
+            ...dataItem,
+            fullName: name + " " + lastName,
+          };
+        }) || [];
+      !isGoodsLoading && setItems(newData);
+    } else {
+      !isGoodsLoading && setItems(data.data);
+    }
+  }, [isGoodsLoading, params, data, query]);
 
   const removeProduct = (selectedId: any): void => {
     if (location.pathname === ORDERS_ROUTE) {
@@ -77,13 +99,6 @@ function Content({
     }
   };
 
-  // const deleteItems = (): void => {
-  //   const selectedId = selectedItems.map((item: any) => item.original.id);
-  //   removeProduct(selectedId);
-  //   setSelectedItems([]);
-  //   setAlertVisible(false);
-  // };
-
   return (
     <div className={styles.wrapper}>
       <MyModal modalVisible={modalVisible} setModalVisible={setModalVisible}>
@@ -93,18 +108,26 @@ function Content({
           activeElement={activeElement}
           removeProduct={removeProduct}
         />
-      </MyModal>
-      <DumbModal
-        dumbModalVisible={dumbModalVisible}
-        setDumbModalVisible={setDumbModalVisible}
+      </MyModal> 
+      
+      <ProductModal
+        productModalVisible={productModalVisible}
+        setProductModalVisible={setProductModalVisible}
       >
-        <DumbForm
-          editProduct={editProduct}
-          setDumbModalVisible={setDumbModalVisible}
-          activeElement={activeElement}
-          removeProduct={removeProduct}
-        />
-      </DumbModal>
+        <FormCopy />
+      </ProductModal>
+      {location.pathname === CLIENTS_ROUTE && (
+        <div className={styles.search}>
+          <SearchIcon className={styles.searchIcon} />
+          <CloseIcon className={styles.closeIcon} />
+          <Input
+            placeholder="Поиск"
+            className={styles.searchInput}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </div>
+      )}
       <Pagination
         params={params}
         setParams={setParams}
@@ -115,7 +138,11 @@ function Content({
         appearance="filled"
         arrow="none"
         className={styles.btnFullWidth}
-        onClick={() => setDumbModalVisible(true)}
+        onClick={
+          location.pathname === PRODUCTS_ROUTE
+            ? () => setProductModalVisible(true)
+            : () => setModalVisible(true)
+        }
       >
         Добавить акцию
       </Button>
@@ -124,7 +151,11 @@ function Content({
         <Loader />
       ) : (
         <Table
-          data={items}
+          data={
+            location.pathname === CLIENTS_ROUTE && query
+              ? searchedClients
+              : items
+          }
           setModalVisible={setModalVisible}
           setActiveElement={setActiveElement}
           setAlertVisible={setAlertVisible}

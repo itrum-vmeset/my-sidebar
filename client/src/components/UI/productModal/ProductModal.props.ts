@@ -1,8 +1,8 @@
 import { DetailedHTMLProps, HTMLAttributes, ReactNode } from "react";
 
-export interface DumbModalProps
+export interface ProductModalProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  dumbModalVisible: boolean;
-  setDumbModalVisible: (e: boolean) => void;
+  productModalVisible: boolean;
+  setProductModalVisible: (e: boolean) => void;
   children: ReactNode;
 }

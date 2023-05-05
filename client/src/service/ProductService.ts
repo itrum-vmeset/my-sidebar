@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
-import { IProduct, IResponse } from "../models/IResponse";
+import { IProductFromApi, IResponse } from "../models/IResponse";
 
 const baseUrl = "http://localhost:5005";
 
@@ -9,12 +9,12 @@ export const productAPI = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
   tagTypes: ["Product"],
   endpoints: (build) => ({
-    fetchAllProducts: build.query<IResponse<IProduct>, null>({
+    fetchAllProducts: build.query<IResponse<IProductFromApi>, null>({
       query: () => ({
         url: "/products",
       }),
       providesTags: (result) => ["Product"],
-      transformResponse: (data: IProduct[]) => {
+      transformResponse: (data: IProductFromApi[]) => {
         const count = data.length;
         return {
           data,
@@ -22,7 +22,7 @@ export const productAPI = createApi({
         };
       },
     }),
-    updateProduct: build.mutation<IProduct, IProduct>({
+    updateProduct: build.mutation<IProductFromApi, IProductFromApi>({
       query: (product) => ({
         url: `/products/${product.id}`,
         method: "PUT",
@@ -30,7 +30,7 @@ export const productAPI = createApi({
       }),
       invalidatesTags: ["Product"],
     }),
-    deleteProduct: build.mutation<IProduct, IProduct>({
+    deleteProduct: build.mutation<IProductFromApi, IProductFromApi>({
       query: (product) => ({
         url: `/products/${product}`,
         method: "DELETE",
