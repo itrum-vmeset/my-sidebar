@@ -1,7 +1,7 @@
 .categorySection {
   display: flex;
   justify-content: space-between;
-  gap: 28px;
+  gap: 16px;
 }
 
 .categoryBlock {

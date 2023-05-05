@@ -59,3 +59,12 @@ export interface AuthResponse {
   refreshToken: string;
   user: IUser;
 }
+
+export interface IClientFromJSONServer {
+  email: string | null;
+  phone: string | null;
+  name: string | null;
+  lastName: string | null;
+  firmName: string | null;
+  role: string | null;
+}

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { modalData } from "../../../helpers/helpers";
+import { translator } from "../../../helpers/translator";
 import { IProductMock } from "../../../models/IProductMockData";
 import { brandAPI } from "../../../service/BrandService";
 import { Button } from "../button/Button";
 import { Input } from "../input/Input";
-import ImgLinkRow from "../productForm/imgLinkRow/ImgLinkRow";
 import { Select } from "../select/Select";
 import TagsInput from "../tagsInput/TagsInput";
 import { Textarea } from "../textarea/Textarea";
@@ -32,54 +32,6 @@ function FormCopy({
   const onRemove = (): void => {
     removeProduct([data?.id]);
     setModalVisible(false);
-  };
-
-  const slovarik = (key: any) => {
-    switch (key) {
-      case "name":
-        return "Название*";
-        break;
-
-      case "value2":
-        return "Название 1C";
-        break;
-
-      case "brand":
-        return "Бренд*";
-        break;
-      case "codeFrom1C":
-        return "Артикул";
-        break;
-      case "description":
-        return "Описание*";
-        break;
-      case "images":
-        return null;
-        break;
-      case "price":
-        return "Цена";
-        break;
-      case "catalog_product":
-        return null;
-        break;
-      case "sub_catalog_product":
-        return null;
-        break;
-      case "variations":
-        return null;
-        break;
-      case "tags":
-        return "Тэги товаров";
-        break;
-
-      case "characteristics":
-        return null;
-        break;
-
-      default:
-        return null;
-        break;
-    }
   };
 
   useEffect(() => {
@@ -111,7 +63,7 @@ function FormCopy({
           data &&
           Object.entries(data).map(([key, value], index) => (
             <div key={index}>
-              <Typography>{slovarik(key)}</Typography>
+              <Typography>{translator(key)}</Typography>
               {(() => {
                 switch (key) {
                   case "nameFrom1C":
@@ -120,8 +72,6 @@ function FormCopy({
                     return <Select options={brands.data} value={""} />;
                   case "catalog_product":
                     return <FormCategory data={data} setData={setData} />;
-                  case "sub_catalog_product":
-                    return null;
                   case "characteristics":
                     return (
                       <Characteristics
@@ -141,6 +91,8 @@ function FormCopy({
                   case "images":
                     return <FormImages data={data} setData={setData} />;
                   case "id":
+                    return null;
+                  case "sub_catalog_product":
                     return null;
                   case "description":
                     return (
