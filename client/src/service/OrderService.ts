@@ -1,42 +1,41 @@
-import axios from "axios";
-
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
-import { IComment, IParam, IResponse } from "../models/IResponse";
+import { IOrderMock } from "../models/IOrderMockData";
+import { IResponse } from "../models/IResponse";
 
-const baseUrl = "https://jsonplaceholder.typicode.com";
-
-export default class OrderService {
-  static async getAll(params: IParam): Promise<any> {
-    const url = "https://jsonplaceholder.typicode.com/comments";
-    const response = await axios.get(url, {
-      params: {
-        _page: params.page,
-        _limit: params.limit,
-      },
-    });
-    return response;
-  }
-}
+const baseUrl = "http://localhost:5005";
 
 export const orderAPI = createApi({
   reducerPath: "orderAPI",
   baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
+  tagTypes: ["Order"],
   endpoints: (build) => ({
-    fetchAllOrders: build.query<IResponse<IComment>, IParam>({
-      query: (params) => ({
-        url: "/comments",
-        params: {
-          _page: params.page,
-          _limit: params.limit,
-        },
+    fetchAllOrders: build.query<IResponse<IOrderMock>, null>({
+      query: () => ({
+        url: "/orders",
       }),
-      transformResponse: (data: IComment[], meta) => {
+      providesTags: () => ["Order"],
+      transformResponse: (data: IOrderMock[]) => {
+        const count = data.length;
         return {
           data,
-          count: Number(meta?.response?.headers.get("X-Total-Count")),
+          count,
         };
       },
+    }),
+    deleteOrder: build.mutation<IOrderMock, IOrderMock>({
+      query: (id) => ({
+        url: `/orders/${id}`,
+        method: "DELETE",
+      }),
+    }),
+    updateOrder: build.mutation<IOrderMock, IOrderMock>({
+      query: (order) => ({
+        url: `/orders/${order.id}`,
+        method: "PUT",
+        body: order,
+      }),
+      invalidatesTags: ["Order"],
     }),
   }),
 });

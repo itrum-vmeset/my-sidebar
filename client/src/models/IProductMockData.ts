@@ -52,7 +52,6 @@ export interface CatalogProduct {
   id: string;
   name: string;
   position: number;
-  _id: string;
 }
 
 export interface Characteristic {

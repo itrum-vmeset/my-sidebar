@@ -3,15 +3,15 @@ import { withLayout } from "../../components/layout/Layout";
 import { clientAPI } from "../../service/ClientsService";
 
 function Clients(): JSX.Element {
-  const [updateProduct] = clientAPI.useUpdateClientMutation();
-  const [deleteProduct] = clientAPI.useDeleteClientMutation();
+  const [updateClient] = clientAPI.useUpdateClientMutation();
+  const [deleteClient] = clientAPI.useDeleteClientMutation();
 
   return (
     <div>
       <Content
         service={clientAPI.useFetchAllClientsQuery}
-        updateProduct={updateProduct}
-        deleteProduct={deleteProduct}
+        updateItem={updateClient}
+        deleteItem={deleteClient}
       />
     </div>
   );

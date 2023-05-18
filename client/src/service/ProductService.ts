@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
-import { IProductFromApi, IResponse } from "../models/IResponse";
+import { IProductMock } from "../models/IProductMockData";
+import { IResponse } from "../models/IResponse";
 
 const baseUrl = "http://localhost:5005";
 
@@ -9,12 +10,12 @@ export const productAPI = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
   tagTypes: ["Product"],
   endpoints: (build) => ({
-    fetchAllProducts: build.query<IResponse<IProductFromApi>, null>({
+    fetchAllProducts: build.query<IResponse<IProductMock>, null>({
       query: () => ({
-        url: "/products",
+        url: "/products2",
       }),
-      providesTags: (result) => ["Product"],
-      transformResponse: (data: IProductFromApi[]) => {
+      providesTags: () => ["Product"],
+      transformResponse: (data: IProductMock[]): IResponse<IProductMock> => {
         const count = data.length;
         return {
           data,
@@ -22,18 +23,17 @@ export const productAPI = createApi({
         };
       },
     }),
-    updateProduct: build.mutation<IProductFromApi, IProductFromApi>({
+    deleteProduct: build.mutation<IProductMock, IProductMock>({
+      query: (id) => ({
+        url: `/products2/${id}`,
+        method: "DELETE",
+      }),
+    }),
+    updateProduct: build.mutation<IProductMock, IProductMock>({
       query: (product) => ({
-        url: `/products/${product.id}`,
+        url: `/products2/${product.id}`,
         method: "PUT",
         body: product,
-      }),
-      invalidatesTags: ["Product"],
-    }),
-    deleteProduct: build.mutation<IProductFromApi, IProductFromApi>({
-      query: (product) => ({
-        url: `/products/${product}`,
-        method: "DELETE",
       }),
       invalidatesTags: ["Product"],
     }),

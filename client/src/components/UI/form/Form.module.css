@@ -19,8 +19,18 @@
   flex-direction: column;
   padding: 16px 40px;
   overflow-y: scroll;
-  height: 85vh;
+  height: 87vh;
   gap: 4px;
+}
+
+.noScroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.noScroll::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 .formInpts select,
@@ -37,5 +47,36 @@
   min-height: 60px;
   overflow-y: scroll;
   resize: none;
-  margin-bottom: 30px;
+}
+
+/* .customSelect {
+  position: relative;
+}
+
+.selectInput {
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.selectIcon {
+  position: absolute;
+  top: 15px;
+  right: 18px;
+  cursor: pointer;
+  transform: rotate(0);
+}
+
+.selectIconActive {
+  transform: rotate(180deg);
+} */
+
+.total {
+  display: flex;
+  justify-content: space-between;
+}
+
+.totalTypography {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
 }

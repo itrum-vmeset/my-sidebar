@@ -1,0 +1,49 @@
+.list {
+  padding: 0;
+  overflow-y: auto;
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.list::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.listItem {
+  box-sizing: border-box;
+  padding: 0 10px;
+  height: 68px;
+  list-style: none;
+  border-bottom: 1px solid #ebecef;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  gap: 26px;
+  align-items: center;
+}
+
+.listHeader {
+  background: #f8f8fa;
+  color: #737680;
+  padding: 10px 8px;
+  border-top: 1px solid #ebecef;
+  height: 44px;
+}
+
+.itemName {
+  width: 350px;
+}
+
+.editIcon {
+  position: relative;
+}
+
+.deleteIcon {
+  position: relative;
+}
+
+.deleteIcon path {
+  fill: black;
+}

@@ -1,0 +1,47 @@
+.selectModal {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  display: none;
+  z-index: 1;
+  filter: drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.1));
+}
+
+.selectModalContent {
+  background: white;
+}
+
+.selectModalContent ul {
+  padding: 8px;
+  margin: 0;
+}
+
+.selectModalContent ul li {
+  list-style: none;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  padding: 8px 16px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.selectModalContent ul li:hover {
+  background: #f7ecf8 !important;
+}
+
+.selectModalContent ul li:last-child {
+  margin-bottom: 0;
+}
+
+.selectModal.active {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.activeLi {
+  background: #f7ecf8 !important;
+}

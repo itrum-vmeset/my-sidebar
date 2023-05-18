@@ -1,2 +1,15 @@
 .myTextarea {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.myTextarea::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.myTextarea:focus {
+  outline-color: #8a3597;
+  box-shadow: -2px -2px 0px #eed9f2, 2px 2px 0px #eed9f2, -2px 2px 0px #eed9f2,
+    2px -2px 0px #eed9f2;
 }

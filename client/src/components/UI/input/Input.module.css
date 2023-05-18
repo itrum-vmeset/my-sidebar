@@ -4,3 +4,9 @@
   border: 1px solid #d0d3da;
   border-radius: 8px;
 }
+
+.input:focus {
+  outline-color: #8a3597;
+  box-shadow: -2px -2px 0px #eed9f2, 2px 2px 0px #eed9f2, -2px 2px 0px #eed9f2,
+    2px -2px 0px #eed9f2;
+}

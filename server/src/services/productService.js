@@ -36,7 +36,6 @@ class ProductService {
 
     const brand = await brandModel.findOne({id: brandId})
     if(!brand) {
-      console.log(brandId)
       throw ApiError.badRequest(`Бренда с таким ID не найдено`)
     }
     const brandDto = new BrandDto(brand)

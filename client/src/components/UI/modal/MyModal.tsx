@@ -9,11 +9,13 @@ const MyModal = ({
   children,
   modalVisible,
   setModalVisible,
+  setActiveElement,
 }: MyModalProps): JSX.Element => {
   useEffect(() => {
     const close = (e: KeyboardEvent): void => {
       if (e.key === "Escape") {
         setModalVisible(false);
+        setActiveElement({});
       }
     };
     window.addEventListener("keydown", close);
@@ -25,7 +27,10 @@ const MyModal = ({
       className={classNames(styles.myModal, {
         [styles.active]: modalVisible === true,
       })}
-      onClick={() => setModalVisible(false)}
+      onClick={() => {
+        setModalVisible(false);
+        setActiveElement({});
+      }}
     >
       <div
         className={styles.myModalContent}

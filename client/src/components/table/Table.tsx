@@ -2,12 +2,20 @@ import React, { memo, useMemo } from "react";
 import { useEffect } from "react";
 import classNames from "classnames";
 import { useLocation } from "react-router-dom";
-import { Row, useColumnOrder, useTable } from "react-table";
+import { Row, useColumnOrder, usePagination, useTable } from "react-table";
+import { useBlockLayout } from "react-table";
+import { useGlobalFilter } from "react-table";
 
-import { CLIENTS_ROUTE } from "../../helpers/consts";
+import {
+  CLIENTS_ROUTE,
+  ORDERS_ROUTE,
+  PRODUCTS_ROUTE,
+} from "../../helpers/consts";
 import { useColumns } from "../../hooks/useColumns";
-import Loader from "../UI/loader/Loader";
 
+import { GlobalFilter } from "./filter/Filter";
+import { NoRows } from "./noRows/NoRows";
+import Paginator from "./pagination/Paginator";
 import { TableProps } from "./Table.props";
 
 import styles from "./Table.module.css";
@@ -22,24 +30,56 @@ function Table({
 }: TableProps): JSX.Element {
   const { pathname } = useLocation();
 
-  const productsData = useMemo(() => [...data], [data]);
+  const productsData = useMemo(() => data?.length && [...data], [data]);
   const productsColumns = useColumns(data, pathname);
 
-  const { getTableBodyProps, headerGroups, rows, prepareRow, setColumnOrder } =
-    useTable(
-      {
-        columns: productsColumns as any,
-        data: productsData,
+  console.log(productsColumns);
+
+  const {
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    setColumnOrder,
+    state,
+    page,
+    canPreviousPage,
+    canNextPage,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+    preGlobalFilteredRows,
+    setGlobalFilter,
+  } = useTable(
+    {
+      columns: productsColumns as any,
+      data: productsData,
+      initialState: {
+        pageSize: 10,
       },
-      useColumnOrder
-    );
+    },
+    useColumnOrder,
+    useBlockLayout,
+    useGlobalFilter,
+    usePagination
+  );
 
   useEffect(() => {
     pathname === CLIENTS_ROUTE &&
       setColumnOrder(["fullName", "email", "phone"]);
+    pathname === PRODUCTS_ROUTE && setColumnOrder(["name", "codeFrom1C"]);
+    pathname === ORDERS_ROUTE &&
+      setColumnOrder([
+        "customer",
+        "order_number",
+        "delivery_type",
+        "date",
+        "total",
+        "isPayed",
+      ]);
   }, []);
-
-  // const { getTableBodyProps, headerGroups, rows, prepareRow, setColumnOrder } = tableInstance;
 
   const selectItem = (row: Row): void => {
     let modifiedItems = [];
@@ -56,9 +96,8 @@ function Table({
     }
     modifiedItems.length ? setAlertVisible(true) : setAlertVisible(false);
   };
-
   const selectAll = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const filteredItems = rows.map((row) => {
+    const filteredItems = page.map((row) => {
       row.values.checked = e.target.checked;
       return row;
     });
@@ -72,33 +111,43 @@ function Table({
   };
 
   const handleClick = (row: Row): void => {
-    setActiveElement(row.cells);
-    setModalVisible(true);
+    if (pathname !== CLIENTS_ROUTE) {
+      setActiveElement(row.original);
+      setModalVisible(true);
+    }
   };
-
-  if (!rows.length) {
-    return <Loader />;
-  }
 
   return (
     <div className={styles.wrapper}>
-      {rows.length ? (
-        <table
-          className={classNames(styles.table, {
-            [styles.noScroll]: location.pathname === CLIENTS_ROUTE,
-          })}
-        >
+      <GlobalFilter
+        preGlobalFilteredRows={preGlobalFilteredRows}
+        globalFilter={state.globalFilter}
+        setGlobalFilter={setGlobalFilter}
+      />
+      <Paginator
+        gotoPage={gotoPage}
+        canPreviousPage={canPreviousPage}
+        canNextPage={canNextPage}
+        pageCount={pageCount}
+        nextPage={nextPage}
+        previousPage={previousPage}
+        setPageSize={setPageSize}
+        pageIndex={state.pageIndex}
+        pageSize={state.pageSize}
+      />
+      {page.length ? (
+        <table className={classNames(styles.table)}>
           <thead className={styles.tableHead}>
-            {headerGroups.map((headerGroup) => (
+            {headerGroups.map((headerGroup, index) => (
               // eslint-disable-next-line react/jsx-key
               <tr {...headerGroup.getHeaderGroupProps()}>
-                {pathname !== CLIENTS_ROUTE && (
+                {pathname === PRODUCTS_ROUTE && (
                   <th>
                     <input
                       className={styles.chkBox}
                       type="checkbox"
                       onChange={selectAll}
-                      checked={selectedItems.length === rows.length}
+                      checked={selectedItems.length === page.length}
                     />
                   </th>
                 )}
@@ -117,12 +166,12 @@ function Table({
             ))}
           </thead>
           <tbody className={styles.tableBody} {...getTableBodyProps()}>
-            {rows.map((row) => {
+            {page.map((row) => {
               prepareRow(row);
               return (
                 // eslint-disable-next-line react/jsx-key
                 <tr {...row.getRowProps()} onClick={() => handleClick(row)}>
-                  {pathname !== CLIENTS_ROUTE && (
+                  {pathname === PRODUCTS_ROUTE && (
                     <th onClick={(e) => e.stopPropagation()}>
                       <input
                         type="checkbox"
@@ -152,7 +201,7 @@ function Table({
           </tbody>
         </table>
       ) : (
-        <div className={styles.noGoods}>Здесь пока нет товаров</div>
+        <NoRows pathname={pathname} />
       )}
     </div>
   );

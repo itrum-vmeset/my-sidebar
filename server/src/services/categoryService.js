@@ -12,6 +12,20 @@ class CategoryService {
     })
     return category
   }
+
+  async delete(id) {
+    const category = await categoryModel.findByIdAndRemove({
+      id
+    })
+    return category
+  }
+
+  // async update(id, category) {
+  //   const newCategory = await categoryModel.findByIdAndUpdate({
+  //     id, device, {new: true}
+  //   })
+  //   return newCategory
+  // }
 }
 
 module.exports = new CategoryService()

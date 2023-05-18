@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
-import { ICategory, IResponse, ISubCategory } from "../models/IResponse";
+import { ICategory, IResponse } from "../models/IResponse";
 
-const baseUrl = "http://localhost:5000/api";
+const baseUrl = "http://localhost:5005";
 
 export const categoryAPI = createApi({
   reducerPath: "categoryAPI",
@@ -22,18 +22,13 @@ export const categoryAPI = createApi({
         };
       },
     }),
-    fetchAllSubCategories: build.query<IResponse<ISubCategory>, string>({
-      query: (catalog_product) => ({
-        url: "/subcategories",
-        params: {catalog_product}
+    createCategory: build.mutation<ICategory, any>({
+      query: (category) => ({
+        url: `/categories/`,
+        method: "POST",
+        body: category,
       }),
-      transformResponse: (data: ISubCategory[]) => {
-        const count = data.length;
-        return {
-          data,
-          count,
-        };
-      },
+      invalidatesTags: ["Category"],
     }),
     updateCategory: build.mutation<ICategory, ICategory>({
       query: (category) => ({

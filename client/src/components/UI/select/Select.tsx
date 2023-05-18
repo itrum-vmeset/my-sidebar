@@ -12,9 +12,13 @@ export const Select = ({
   ...props
 }: SelectProps): JSX.Element => {
   return (
-    <select className={classNames(styles.select, className)} {...props}>
+    <select
+      className={classNames(styles.select, className)}
+      value={value}
+      {...props}
+    >
       {defaultValue && (
-        <option disabled value="">
+        <option disabled value="" key={defaultValue}>
           {defaultValue}
         </option>
       )}
