@@ -1,0 +1,93 @@
+.wrapper {
+  margin-top: -20px;
+}
+
+.list {
+  padding: 0;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.list::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.listItem {
+  box-sizing: border-box;
+  padding-left: 10px;
+  height: 52px;
+  list-style: none;
+  border-bottom: 1px solid #ebecef;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  gap: 26px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.itemName {
+  width: 60%;
+  overflow: hidden;
+}
+
+.itemBrand {
+  width: 20%;
+}
+
+.itemDeleteIcon {
+  width: 8%;
+}
+
+.search {
+  display: flex;
+  justify-content: end;
+  position: relative;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ebecef;
+}
+
+.searchInput {
+  width: 320px;
+  padding-left: 36px;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+}
+
+.okIcon {
+  position: absolute;
+  top: 10px;
+  right: 65px;
+  cursor: pointer;
+}
+
+.itemDeleteIcon path {
+  fill: #000000;
+}
+
+.searchDeleteIcon {
+  width: 30px;
+  margin: 10px 8px 0 20px;
+}
+
+.searchDeleteIcon path {
+  fill: #000000;
+}
+
+.formButton {
+  border: none;
+  background: none;
+  padding-left: 0;
+  color: #c06ecc;
+}
+
+.disabledBtn {
+  color: #b8bdcc;
+  cursor: not-allowed;
+}

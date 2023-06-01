@@ -1,0 +1,23 @@
+.itemName {
+  width: 350px;
+  padding: 9px 0;
+}
+
+.deleteIcon path {
+  fill: black;
+}
+
+.input {
+  width: 100%;
+}
+
+.listItemActive,
+.listItem:hover {
+  background: #f8f8fa;
+}
+
+.listItemActive,
+.listItem:hover p {
+  color: #bd68ca;
+}
+

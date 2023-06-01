@@ -2,6 +2,7 @@ import React from "react";
 
 import { SubCatalogProduct } from "../../../../models/IProductMockData";
 import { categoryAPI } from "../../../../service/CategoryService";
+import { subCategoryAPI } from "../../../../service/SubCategoryService";
 import { Select } from "../../select/Select";
 import { Typography } from "../../typography/Typography";
 
@@ -12,8 +13,8 @@ import styles from "./FormCategory.module.css";
 function FormCategory({ data, setData }: FormCategoryProps): JSX.Element {
   const { data: catalog_products } =
     categoryAPI.useFetchAllCategoriesQuery(null);
-  const { data: subCategories } = categoryAPI.useFetchAllSubCategoriesQuery(
-    (data?.catalog_product?._id as any) || ""
+  const { data: subCategories } = subCategoryAPI.useFetchAllSubCategoriesQuery(
+    (data?.catalog_product?.id as any) || ""
   );
 
   return (
@@ -39,8 +40,12 @@ function FormCategory({ data, setData }: FormCategoryProps): JSX.Element {
       <div className={styles.categoryBlock}>
         <Typography>Подкатегория*</Typography>
         <Select
-          disabled={!data.catalog_product._id}
-          options={data.catalog_product._id ? subCategories?.data : []}
+          disabled={!data.catalog_product.id}
+          options={
+            data.catalog_product.id && subCategories?.data
+              ? subCategories?.data
+              : []
+          }
           value={data.sub_catalog_product.name}
           onChange={(e) => {
             const selectedSubCategory = subCategories?.data.find(

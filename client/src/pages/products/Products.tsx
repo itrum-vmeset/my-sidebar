@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 import Content from "../../components/content/Content";
 import { withLayout } from "../../components/layout/Layout";
 import { productAPI } from "../../service/ProductService";
@@ -10,8 +12,8 @@ function Products(): JSX.Element {
     <div>
       <Content
         service={productAPI.useFetchAllProductsQuery}
-        updateProduct={updateProduct}
-        deleteProduct={deleteProduct}
+        updateItem={updateProduct}
+        deleteItem={deleteProduct}
       />
     </div>
   );

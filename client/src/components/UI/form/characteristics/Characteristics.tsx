@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
 import { Button } from "../../button/Button";
-import FormRow from "../../productForm/formRow/FormRow";
 import { Typography } from "../../typography/Typography";
+import FormRow from "../formRow/FormRow";
 
 import { CharacteristicsProps } from "./Characteristics.props";
 
@@ -73,11 +73,31 @@ function Characteristics({
   };
 
   useEffect(() => {
-    if (!data.variations.length) {
-      data.variations.push({ id: Date.now(), value: "", code: "" });
-    }
-    if (!data.characteristics.length) {
-      data.variations.push({ id: Date.now(), value: "", code: "" });
+    if (data) {
+      if (!data.variations?.length) {
+        setData({
+          ...data,
+          variations: [
+            {
+              id: Date.now(),
+              value: "",
+              code: "",
+            },
+          ],
+        });
+      }
+      if (!data.characteristics?.length) {
+        setData({
+          ...data,
+          characteristics: [
+            {
+              id: Date.now(),
+              key: "",
+              value: "",
+            },
+          ],
+        });
+      }
     }
   }, []);
 
@@ -85,7 +105,7 @@ function Characteristics({
     <div>
       <Typography>{characteristics ? "Характеристики" : "Объем*"}</Typography>
       {characteristics
-        ? data.characteristics.map((item) => {
+        ? data?.characteristics?.map((item) => {
             return (
               <FormRow
                 key={item.id}
@@ -95,7 +115,7 @@ function Characteristics({
               />
             );
           })
-        : data.variations.map((item) => {
+        : data?.variations?.map((item) => {
             return (
               <FormRow
                 key={item.id}

@@ -7,7 +7,8 @@ export interface MyAlertProps
   > {
   alertVisible: boolean;
   setAlertVisible: (e: boolean) => void;
-  removeProduct: (items: any) => void;
+  deleteItems: () => any;
   selectedItems: any;
   setSelectedItems: any;
+  refetch: any;
 }

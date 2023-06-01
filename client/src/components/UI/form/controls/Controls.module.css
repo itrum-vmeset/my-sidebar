@@ -1,0 +1,17 @@
+.formBtns {
+  display: flex;
+  justify-content: center;
+  padding: 26px 0;
+  border-bottom: 1px solid #d0d3da;
+  gap: 16px;
+}
+
+.btn {
+  width: 270px;
+  border-radius: 4px;
+}
+
+.fullWidthBtn {
+  width: 560px;
+  border-radius: 4px;
+}

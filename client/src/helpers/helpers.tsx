@@ -25,15 +25,15 @@ import {
 
 export const menuItems: IMenu[] = [
   { id: 1, route: PRODUCTS_ROUTE, title: "Продукты", icon: <ProductIcon /> },
-  { id: 2, route: ORDERS_ROUTE, title: "Заказы", icon: <OrderIcon /> },
-  { id: 3, route: BRANDS_ROUTE, title: "Бренды", icon: <BrandsIcon /> },
-  { id: 4, route: CLIENTS_ROUTE, title: "Клиенты", icon: <ClientsIcon /> },
+  { id: 2, route: CLIENTS_ROUTE, title: "Клиенты", icon: <ClientsIcon /> },
   {
-    id: 5,
+    id: 3,
     route: CATEGORIES_ROUTE,
     title: "Категории",
     icon: <CategoriesIcon />,
   },
+  { id: 5, route: BRANDS_ROUTE, title: "Бренды", icon: <BrandsIcon /> },
+  { id: 4, route: ORDERS_ROUTE, title: "Заказы", icon: <OrderIcon /> },
   { id: 6, route: CITIES_ROUTE, title: "Города", icon: <CitiesIcon /> },
   {
     id: 7,
@@ -55,7 +55,24 @@ export const selectOptions = [
   { value: "10", name: "10" },
   { value: "25", name: "25" },
   { value: "50", name: "50" },
-  // { value: "-1", name: "все" },
+];
+
+export const paymentOptions = [
+  { value: "ONLINE", name: "Онлайн" },
+  { value: "OFFICE_CASH", name: "Наличными в офисе" },
+  {
+    value: "COURIER_CASH",
+    name: "Наличными курьеру",
+  },
+  {
+    value: "OFFICE_TERMINAL",
+    name: "Переводом в офисе",
+  },
+];
+
+export const deliveryOptions = [
+  { value: "DELIVERY", name: "Доставка" },
+  { value: "PICKUP", name: "Самовывоз" },
 ];
 
 export const modalData = {

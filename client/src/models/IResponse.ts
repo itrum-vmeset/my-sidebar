@@ -13,7 +13,6 @@ export interface ICategory {
   id: string;
   name: string;
   position: number;
-  _id: string;
 }
 
 export interface ISubCategory {
@@ -46,6 +45,7 @@ export interface IComment {
 
 export interface IResponse<T> {
   data: T[];
+  count: number;
 }
 
 export interface IUser {
@@ -67,4 +67,25 @@ export interface IClientFromJSONServer {
   lastName: string | null;
   firmName: string | null;
   role: string | null;
+}
+
+export interface IProtocolCategory {
+  id: string;
+  name: string;
+}
+
+export interface IProtocol {
+  id: string;
+  name: string;
+  description: string;
+  isRetailAllowed: boolean;
+  brand: IBrand;
+  protocol_category: IProtocolCategory;
+  products: IProductFromApi[];
+}
+
+export interface ICity {
+  id: string;
+  name: string;
+  address: string;
 }

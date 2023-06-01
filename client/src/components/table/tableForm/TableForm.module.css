@@ -1,0 +1,13 @@
+.tableForm {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.input {
+  width: 100%;
+}
+
+.btn {
+  width: 100%;
+}

@@ -10,8 +10,8 @@ function Brands(): JSX.Element {
     <div>
       <Content
         service={brandAPI.useFetchAllBrandsQuery}
-        updateProduct={updateProduct}
-        deleteProduct={deleteProduct}
+        updateItem={updateProduct}
+        deleteItem={deleteProduct}
       />
     </div>
   );

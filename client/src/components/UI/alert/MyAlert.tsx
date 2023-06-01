@@ -11,17 +11,9 @@ import styles from "./MyAlert.module.css";
 const MyAlert = ({
   alertVisible,
   setAlertVisible,
-  removeProduct,
+  deleteItems,
   selectedItems,
-  setSelectedItems,
 }: MyAlertProps): JSX.Element => {
-  const deleteItems = (): void => {
-    const selectedId = selectedItems.map((item: any) => item.original.id);
-    removeProduct(selectedId);
-    setSelectedItems([]);
-    setAlertVisible(false);
-  };
-
   return (
     <div
       className={classNames(styles.myAlert, {

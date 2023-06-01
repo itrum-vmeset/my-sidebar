@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 import { ReactComponent as AttachIcon } from "../../../../assets/icons/attach.svg";
 import { Input } from "../../input/Input";
-import ImgLinkRow from "../../productForm/imgLinkRow/ImgLinkRow";
 import { Typography } from "../../typography/Typography";
+import ImgLinkRow from "../imgLinkRow/ImgLinkRow";
 
 import { FormImagesProps } from "./FormImages.props";
 
