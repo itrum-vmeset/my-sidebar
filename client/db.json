@@ -1,103 +1,4 @@
 {
-  "products": [
-    {
-      "id": "99131dda-9d8f-49df-b1a5-2ea099526124",
-      "name": "Anti-age концентрат \"Сыворотка \"Супер Соя\", 30 мл",
-      "nameFrom1C": "Anti-age концентрат \"Сыворотка \"СуперСоя\" 30мл, 5015M",
-      "codeFrom1C": "00000003103",
-      "price": "12",
-      "volume": "30 мл",
-      "brand": {
-        "id": "f98f0cdf-4f88-43ad-afcf-ddd69cb44ff2",
-        "name": "Kosmoteros Personnel Paris",
-        "icon": "5ddb4dd7-a8b7-4965-82f4-0fa17e1d38b8.jpg"
-      }
-    },
-    {
-      "id": "a29aa6e7-e2c7-489a-adfe-0c5df08bef5d",
-      "name": "bioGel Gold (DMAE), 5 мл",
-      "nameFrom1C": "Гель косметический Bio Gel Gold (DMAE)  5мл",
-      "codeFrom1C": "УТ000000154",
-      "price": 2790,
-      "volume": "12",
-      "brand": {
-        "id": "bfc80e7e-76f3-4776-84ce-499647a1c359",
-        "name": "V45",
-        "icon": "24729c9d-5233-4d4e-815b-8b9d7ed5b410.jpg"
-      }
-    },
-    {
-      "id": "ca395b9a-57eb-401d-a529-2be3976355e8",
-      "name": "bioGel Green (Трегалоза), 5 мл",
-      "nameFrom1C": "Гель косметический Bio Gel Green (Трегалоза) 5мл",
-      "codeFrom1C": "00000004326",
-      "price": 2490,
-      "volume": "5 мл",
-      "isReady": true,
-      "isRetailAllowed": false,
-      "brand": {
-        "id": "7aaaeaee-6e50-4225-9ab2-15da6d802ba7",
-        "name": "Laboratory Cytolife",
-        "icon": "b350ff6b-5576-4c51-90a7-7747ec4b8c48.jpg"
-      }
-    },
-    {
-      "id": "ca0fb4cb-c17f-4010-ab46-f248762da099",
-      "name": "bioGel PREMIUM S LINE 2,2 мл",
-      "nameFrom1C": "Bio Gel PREMIUM S LINE 2,2мл",
-      "codeFrom1C": "УТ000001038",
-      "price": 2590,
-      "volume": "2,2 мл",
-      "brand": {
-        "id": "",
-        "name": "Laboratory Cytolife",
-        "icon": ""
-      }
-    },
-    {
-      "id": "75615f4f-c765-4f2c-8edd-13c688189823",
-      "name": "bioGel PREMIUM T LINE 2,2 мл",
-      "nameFrom1C": "Bio Gel PREMIUM T LINE 2,2мл",
-      "codeFrom1C": "УТ000001039",
-      "price": 2590,
-      "volume": "2,2 мл",
-      "isReady": true,
-      "isRetailAllowed": false,
-      "brand": {
-        "id": "f98f0cdf-4f88-43ad-afcf-ddd69cb44ff2",
-        "name": "Kosmoteros Personnel Paris",
-        "icon": "5ddb4dd7-a8b7-4965-82f4-0fa17e1d38b8.jpg"
-      }
-    },
-    {
-      "id": "12c19780-13f1-4e80-9554-c29a5d4708fa",
-      "name": "bioGel Red (Сукцинат), 5 мл",
-      "nameFrom1C": "Гель косметический Bio Gel Red (Сукцинат) 5мл",
-      "codeFrom1C": "00000004327",
-      "price": 2490,
-      "volume": "5 мл",
-      "isReady": true,
-      "isRetailAllowed": false,
-      "brand": {
-        "id": "7aaaeaee-6e50-4225-9ab2-15da6d802ba7",
-        "name": "Laboratory Cytolife",
-        "icon": "b350ff6b-5576-4c51-90a7-7747ec4b8c48.jpg"
-      }
-    },
-    {
-      "id": "7c99b2c5-a1c7-422a-954b-afccecfa4c66",
-      "name": "bioGel Silver (Цинк), 5 мл",
-      "nameFrom1C": "Гель косметический Bio Gel Silver (Цинк) 5мл",
-      "codeFrom1C": "00000004325",
-      "price": 2790,
-      "volume": "5 мл",
-      "brand": {
-        "id": "",
-        "name": "ТЕСТОВЫЙ БРЕНД УДАЛИТЬ",
-        "icon": ""
-      }
-    }
-  ],
   "products2": [
     {
       "id": "6ee9ef45-57b1-4112-a3af-5ac3f241b8e3",
@@ -105,12 +6,10 @@
       "name": "Cytolife Маска питательная с маслом авокадо, 30 г",
       "codeFrom1C": "УТ000001350",
       "brand": {
-        "_id": "644a6127a11293e39c4f1768",
-        "id": "9c44f061-6a7a-40a9-9c5c-b5c512bb5048",
-        "name": "V45",
-        "icon": "c0f061fe-8e64-4620-835a-517ce44f1c5d.jpg",
-        "margin": 60,
-        "__v": 0
+        "id": "7aaaeaee-6e50-4225-9ab2-15da6d802ba7",
+        "name": "Laboratory Cytolife",
+        "icon": "b350ff6b-5576-4c51-90a7-7747ec4b8c48.jpg",
+        "margin": 40
       },
       "description": "Препарат предназначен для молодой кожи в целях профилактики старения, устранения сухости, увлажнения кожи вокруг глаз, для уменьшения «гусиных лапок», синевы под глазами, повышения иммунного статуса кожи, снятия отечности и пастозности лица, антиоксидантная защита, восстановление кожи после избыточной инсоляции, подготовка и реабилитация после лазерных процедур.\n\nПоказания к применению: Морщины периорбитальной и периоральной зоны, молодая, тонкая и обезвоженная кожа, сниженный тургор, кожа склонная к пастозности, мелкоморщинистый тип старения, ТАЭ, купероз, чувствительная кожа, нарушенный эпидермальный барьер.\n\nСостав: гиалуронат натрия 0,8% (1100-1300 кДа), трегалоза, маннитол, буферный раствор.\n\nСтерильно, апирогенно, нетоксично.",
       "images": [
@@ -322,7 +221,7 @@
       "description": "Препарат предназначен для молодой кожи в целях профилактики старения, устранения сухости, увлажнения кожи вокруг глаз, для уменьшения «гусиных лапок», синевы под глазами, повышения иммунного статуса кожи, снятия отечности и пастозности лица, антиоксидантная защита, восстановление кожи после избыточной инсоляции, подготовка и реабилитация после лазерных процедур.\n\nПоказания к применению: Морщины периорбитальной и периоральной зоны, молодая, тонкая и обезвоженная кожа, сниженный тургор, кожа склонная к пастозности, мелкоморщинистый тип старения, ТАЭ, купероз, чувствительная кожа, нарушенный эпидермальный барьер.\n\nСостав: гиалуронат натрия 0,8% (1100-1300 кДа), трегалоза, маннитол, буферный раствор.\n\nСтерильно, апирогенно, нетоксично.",
       "images": [
         "https://drive.google.com/uc?export=view&id=1OZcJHRACGwkj4-rE0ZfIoi9ngKUj75_y",
-        "https://drive.google.com/uc?export=view&id=16d-yUL2pEo2FLPyTwRHQEPQ6JQYugwnp"
+        "https://drive.google.com/uc?export=view&id=0f7fe3e9-98fb-478c-a84d-0883ed245a7d"
       ],
       "price": 2000,
       "sub_catalog_product": {
@@ -1054,6 +953,11 @@
       "name": "Egia",
       "icon": "8e8a7917-5fa8-402d-8b92-53cf05211d83.jpg",
       "margin": 80
+    },
+    {
+      "id": "1685022786057",
+      "name": "wtf",
+      "icon": ""
     }
   ],
   "clients": [
@@ -9693,22 +9597,10 @@
       "__v": 0
     },
     {
-      "name": "23",
-      "id": 1684152037520,
-      "position": 19,
-      "catalog_product": null
-    },
-    {
-      "name": "23",
-      "id": 1684152044729,
-      "position": 19,
-      "catalog_product": null
-    },
-    {
-      "name": "aaa",
-      "id": 1684152051025,
-      "position": 19,
-      "catalog_product": null
+      "id": 1685345699576,
+      "position": 15,
+      "name": "next filler!",
+      "catalog_product": "644a5d861b666a27fd169ed4"
     }
   ],
   "protocolcategories": [
@@ -9731,10 +9623,6 @@
     {
       "id": "3f74a88c-5a7d-41ef-bf9a-f25b9a76e388",
       "name": "Для сухой кожи"
-    },
-    {
-      "name": "test cat",
-      "id": 1684225749195
     }
   ],
   "protocols": [
@@ -11673,6 +11561,15 @@
           "images": []
         }
       ]
+    },
+    {
+      "name": "www",
+      "brand": "",
+      "description": "",
+      "protocol_category": "a23e5f4c-6718-4cd0-8328-f4a93a96df22",
+      "products": [],
+      "id": 1685091180248,
+      "isRetailAllowed": false
     }
   ],
   "cities": [
@@ -11707,14 +11604,461 @@
       "address": "ул. Красная 180, офис 112"
     },
     {
-      "name": "Maykop",
-      "address": "Lenina 88",
-      "id": "1684420698941"
+      "id": "1685343769365",
+      "name": "city",
+      "address": "asd"
+    }
+  ],
+  "future": [
+    {
+      "id": "eead8d22-bb0e-43b2-877e-43fa856adb74",
+      "name": "Плоскостопия вальгусная деформация стопы",
+      "description": "◉ Анатомия мышц голени и стопы.\n◉ Причины плоскостопия и вальгусной деформации стопы.\n◉ Мануальная работа для решения проблем плоскостопия и вальгусной деформации.\n◉ Миофасциальный самомассаж  стопы.\n\nСтоимость: Бесплатно",
+      "speaker": "Наталья Гринько",
+      "speaker_speciality": "Косметолог, массажист, творческий партнер компании FILARAcosmo",
+      "city": {
+        "id": "f197c4cb-0d12-49f7-b758-04cb11c6da07",
+        "name": "Волгоград",
+        "address": "ул. Академическая 22, офис 313"
+      },
+      "datetime": "24.03.2023 10:30",
+      "image": "https://drive.google.com/uc?export=view&id=1RmFZwMZ3UVj5_Qo2GVPVc7LXMcahGmo-",
+      "mobileImage": "https://api.filara-cosmo.ru/images/1RmFZwMZ3UVj5_Qo2GVPVc7LXMcahGmo-"
     },
     {
-      "name": "Moscow",
-      "address": "asd",
-      "id": "1684420714927"
+      "id": "adec0ef9-3323-4341-a92e-20c85fb460f6",
+      "name": "Блефаролифт",
+      "description": "Блефаролифт- авторская методика миофасциального массажа головы,\nшей и декольте, с акцентом на переорбитальную область лица\nВ основе лежит работа с соединительной тканью для оздоровления, возвращения тонуса тканей и улучшения их функциональных свойств.\nКак результат, мы получаем гармоничные черты лица, без отеков, мешков, грыж, улучшение общего состояния кожи, самочувствия, отсутствие мигрений, улучшение сна.\n\nСтоимость: 5000 рублей",
+      "speaker": "Наталья Гринько",
+      "speaker_speciality": "Косметолог, массажист, творческий партнер компании FILARAcosmo",
+      "city": {
+        "id": "f197c4cb-0d12-49f7-b758-04cb11c6da07",
+        "name": "Волгоград",
+        "address": "ул. Академическая 22, офис 313"
+      },
+      "datetime": "15.03.2023 10:30",
+      "image": "https://drive.google.com/uc?export=view&id=1RmFZwMZ3UVj5_Qo2GVPVc7LXMcahGmo-",
+      "mobileImage": "https://api.filara-cosmo.ru/images/1RmFZwMZ3UVj5_Qo2GVPVc7LXMcahGmo-"
+    },
+    {
+      "id": "9867281b-87e8-4e54-b2a0-c296f14f48e1",
+      "name": "Как продавать не продавая",
+      "description": "▪️ Научиться продавать легко и без манипуляций\n▪️ Зарабатывать больше денег с одного клиента\n▪️ Как продавать без страха\n▪️ Повысить уровень экспертности в глазах клиента\n▪️ Схема легкой продажи на практике\n\nСтоимость: закупка препаратов на 1000 рублей",
+      "speaker": "Юлия Тишина",
+      "speaker_speciality": "Косметолог, творческий партнер FILARAcosmo",
+      "city": {
+        "id": "f197c4cb-0d12-49f7-b758-04cb11c6da07",
+        "name": "Волгоград",
+        "address": "ул. Академическая 22, офис 313"
+      },
+      "datetime": "14.03.2023 10:30",
+      "image": "https://drive.google.com/uc?export=view&id=1W_G0bwVnnZp0Wks7Kx4B8tA2D1Gi0OSy",
+      "mobileImage": "https://api.filara-cosmo.ru/images/1W_G0bwVnnZp0Wks7Kx4B8tA2D1Gi0OSy"
+    },
+    {
+      "id": "cb1f367f-8635-40fa-9655-b6c50734c035",
+      "name": "Препараты V45",
+      "description": "◉ Липосомальная составляющая и пептидный компонент как ключ к здоровой и сияющей коже\n◉ Холистический подход\n◉ Структура линеек, как подобрать максимально эффективный курс?\n◉ Инновационные всесезонные пилинги\n◉ Современные критерии выбора препарата\n◉ Разбор составов в зависимости от персональных параметров пациента\n◉ Потребности кожи для основных направлений косметологических задач\n◉ Комбинации с другими процедурами и протоколы для достижения стойкого и яркого результата.\n◉ Бонус: как стать востребованным специалистом?\n- фишки, небольшие секреты и индивидуальный подход к каждому пациенту",
+      "speaker": "Виктория Бедрина",
+      "speaker_speciality": "Врач-дерматолог, косметолог, сертифицированный тренер FILARAcosmo",
+      "city": {
+        "id": "defad517-2fc8-43a4-ae01-aa0ef0d2f264",
+        "name": "Сочи",
+        "address": "ул. Роз 117, офис 403"
+      },
+      "datetime": "13.03.2023 11:00",
+      "image": "https://drive.google.com/uc?export=view&id=1G4FQgULaZxkTWFE5UbS71cgk4j5JEiYa",
+      "mobileImage": "https://api.filara-cosmo.ru/images/1G4FQgULaZxkTWFE5UbS71cgk4j5JEiYa"
+    },
+    {
+      "id": "4ca58060-2c04-4fec-bc56-4a5c2d6f5fe4",
+      "name": "Эстетическая коррекция периоральной зоны губ",
+      "description": "1) Способы коррекции эстетических недостатков в периоральной области\n2) Показание для коррекции периоральной области\n3) Антропометрия идеальных губ. Гендерные особенности распределения объема.\n4) Анатомические ориентиры. Типы губ.\n5) Инволюционные изменения губ\n6) Оценка пациента перед проведением процедуры.\n7) Схема коррекции губ разного типа\n8) Анатомия губ. Уровни введения филлеров\n9) Приемы анастезии\n10) Идеальные препараты для губ\n11) Канюльная техника\n12) Современные тренды\n13) Биоривитализация губ\n14) Осложнения и НЯ, частые ошибки.",
+      "speaker": "Виктория Бедрина",
+      "speaker_speciality": "Врач-дерматолог, косметолог, сертифицированный тренер FILARAcosmo",
+      "city": {
+        "id": "9cabdf58-ca4c-4276-b81a-8b9dbb9f33f3",
+        "name": "Краснодар",
+        "address": "ул. Красная 180, офис 112"
+      },
+      "datetime": "25.03.2023 10:30",
+      "image": "https://drive.google.com/uc?export=view&id=1G4FQgULaZxkTWFE5UbS71cgk4j5JEiYa",
+      "mobileImage": "https://api.filara-cosmo.ru/images/1G4FQgULaZxkTWFE5UbS71cgk4j5JEiYa"
+    },
+    {
+      "id": "302e65ad-0a1e-4365-a636-73af37cb3424",
+      "name": "Lotos Форум",
+      "description": "◉ Инновации южнокорейских производителей, применяемые в решении актуальных задач эстетической медицины.\nПреимущества работы с продукцией Lotos Group\nСпикер: Никитина Елизавета Александровна, к.м.н., врач-дерматолог, косметолог, сертифицированный тренер Lotos Group\n\n◉ Топографическая анатомия лица как основа безопасной контурной пластики\nСпикер: Иванов Алексей Анатольевич, к.м.н., анатом\n\n◉ Инновационные пилинги и космецевтика V45 в эстетической косметологии\nСпикер: Покровский Илья Викторович, врач-дерматолог, косметолог, член международного комитета по косметологии и эстетике CIDESCO, сертифицированный тренер Lotos Group\n\n◉ Филлеры QT Fill N: инновационные технологии производства, высокотехнологичное сырьё, доказанная эффективность и безопасность\nСпикер: Никитина Елизавета Александровна, к.м.н., врач-дерматолог, косметолог, сертифицированный тренер Lotos Group\n\n◉ Биостимулирующее действие полимолочной кислоты: улучшая качество кожи, улучшаем качество жизни\nСпикер: Никитина Елизавета Александровна, к.м.н., врач-дерматолог, косметолог, сертифицированный тренер Lotos Group\n\n◉ Инновационная южнокорейская технология MCO™, оптимизирующая перекрестное связывание при минимальном количестве сшивающего агента\nСпикер: Покровский Илья Викторович, врач-дерматолог, косметолог, член международного комитета по косметологии и эстетике CIDESCO, сертифицированный тренер Lotos Group\n\n◉ Патогенез, принципы диагностики и профилактики осложнений инъекционной контурной пластики\nСпикер: Журавель Максим Вячеславович, врач дерматовенеролог, косметолог, трихолог. Ассистент кафедры биомедицины Институт Восточной Медицины РУДН, член Московского областного общества дерматовенерологов\n\n◉ Ботулинический токсин: вчера, сегодня, завтра\nСпикер: Покровский Илья Викторович, врач-дерматолог, косметолог, член международного комитета по косметологии и эстетике CIDESCO, сертифицированный тренер Lotos Group\n\n◉ Возможности ультразвуковой терапии в косметологии: от ультрафонофореза до УЗ-неоколлагеногенеза\nСпикер: Журавель Максим Вячеславович, врач дерматовенеролог, косметолог, трихолог. Ассистент кафедры биомедицины Институт Восточной Медицины РУДН, член Московского областного общества дерматовенерологов\n\n◉ Демонстрация техник инъекций\nСпикер: Никитина Елизавета Александровна, к.м.н., врач-дерматолог, косметолог, сертифицированный тренер Lotos Group\nСпикер: Покровский Илья Викторович, врач-дерматолог, косметолог, член международного комитета по косметологии и эстетике CIDESCO, сертифицированный тренер Lotos Group",
+      "speaker": "Максим Журавель",
+      "speaker_speciality": "Место проведения: Краснодар, Отель Мариот, конференц-зал Екатеринодар",
+      "city": {
+        "id": "9cabdf58-ca4c-4276-b81a-8b9dbb9f33f3",
+        "name": "Краснодар",
+        "address": "ул. Красная 180, офис 112"
+      },
+      "datetime": "23.03.2023 09:30",
+      "image": "https://drive.google.com/uc?export=view&id=1sMXFWWnGVCo3lLtIaXskpB4cuLedZ1_w",
+      "mobileImage": "https://api.filara-cosmo.ru/images/1sMXFWWnGVCo3lLtIaXskpB4cuLedZ1_w"
+    },
+    {
+      "id": "d0cacead-b411-44e1-a3a2-8744696d9824",
+      "name": "Канюльная мезотерапия и биоревитализация",
+      "description": "1) Мезотерапия. Понятие. Классификация мезотерапии\n2) Биоревитализация – определение, принятая терминология.\n3) Строение кожи. Преимущество канюльного введения, в каких слоях работаем (глубина введения). В каких случаях использовать канюлю.\n4) Показание и противопоказание к мототерапии и биоревитализации с помощью канюли.\n5) Обзор препаратов Laboratory Cytolife, Vec, MiraLine. Клинические эффекты\n6) Методики и схемы инъекций (лицо, губы, шея, декольте)\n7) Свежий взгляд. Работа в периорбитальной области. \n8) Тело. Методики инъекций (кисти рук, колени, локти). Мототерапия тела при помощи канюли.\n9) Эффективная работа с локальными жировыми отложениями",
+      "speaker": "Виктория Бедрина",
+      "speaker_speciality": "Врач-дерматолог, косметолог, сертифицированный тренер FILARAcosmo",
+      "city": {
+        "id": "9cabdf58-ca4c-4276-b81a-8b9dbb9f33f3",
+        "name": "Краснодар",
+        "address": "ул. Красная 180, офис 112"
+      },
+      "datetime": "16.03.2023 10:30",
+      "image": "https://drive.google.com/uc?export=view&id=1G4FQgULaZxkTWFE5UbS71cgk4j5JEiYa",
+      "mobileImage": "https://api.filara-cosmo.ru/images/1G4FQgULaZxkTWFE5UbS71cgk4j5JEiYa"
+    },
+    {
+      "id": "57437d0a-c2a8-403d-924c-0dc9b6687e40",
+      "name": "Семинар Académie в Краснодаре",
+      "description": "◉ Бестселлеры марки и тренды 2023 года\n◉ Всесезонные пилинги Derm Acte\n◉ Обзор новой линейки 2023 Hypo-Sensible\n\nМастер-класс\n\n◉ Процедура «Против покраснений»\n◉ Процедура «Депигментирующий пилинг UNI-PEEL» Derm Acte",
+      "speaker": "Татьяна Камышева",
+      "speaker_speciality": "Косметолог, тренер по косметологическим уходам и аппаратным технологиям, сертифицированный тренер Académie Scientifique de Beauté",
+      "city": {
+        "id": "9cabdf58-ca4c-4276-b81a-8b9dbb9f33f3",
+        "name": "Краснодар",
+        "address": "ул. Красная 180, офис 112"
+      },
+      "datetime": "15.03.2023 10:30",
+      "image": "https://drive.google.com/uc?export=view&id=1l4UdpY8r463mPJxbLi8wuBfwsgmW3_By",
+      "mobileImage": "https://api.filara-cosmo.ru/images/1l4UdpY8r463mPJxbLi8wuBfwsgmW3_By"
+    },
+    {
+      "id": "c80b4e93-fed5-497d-bbe6-f9e800c79ab1",
+      "name": "Семинар Académie в Ростове-на-Дону",
+      "description": "◉ Бестселлеры марки и тренды 2023 года\n◉ Всесезонные пилинги Derm Acte\n◉ Обзор новой линейки 2023 Hypo-Sensible\n\nМастер-класс\n\n◉ Процедура «Против покраснений»\n◉ Процедура «Депигментирующий пилинг UNI-PEEL» Derm Acte",
+      "speaker": "Татьяна Камышева",
+      "speaker_speciality": "Косметолог, тренер по косметологическим уходам и аппаратным технологиям, сертифицированный тренер Académie Scientifique de Beauté",
+      "city": {
+        "id": "a483f910-8300-427e-aae8-7abc8e7b3b74",
+        "name": "Ростов-на-Дону",
+        "address": "пр-т М.Нагибина, 14а, офис 645"
+      },
+      "datetime": "16.03.2023 10:30",
+      "image": "https://drive.google.com/uc?export=view&id=1l4UdpY8r463mPJxbLi8wuBfwsgmW3_By",
+      "mobileImage": "https://api.filara-cosmo.ru/images/1l4UdpY8r463mPJxbLi8wuBfwsgmW3_By"
+    }
+  ],
+  "history": [
+    {
+      "id": "255e9983-d9b2-469c-a5c7-0ffb26ab5580",
+      "name": "Конференция для врачей всех специализаций и косметологов \"Здоровье. Молодость.Красота\"",
+      "description": "Регуляторные пептиды Vitual\nФармакогеномика – будущее превентивной медицины\n\nWow lift peel- инновационная терапия кожи, единственная топическая терапия, которая работает с митохондриальным старением\n\nMederi- уникальный пептидный концентрат в инновационных протоколах косметологов",
+      "date": "30.11.2021",
+      "image": "https://drive.google.com/uc?export=view&id=1BK4QzJBXhdjetWHeP0vfApy6RpMsvwPl",
+      "mobileImage": "https://api.filara-cosmo.ru/images/1BK4QzJBXhdjetWHeP0vfApy6RpMsvwPl"
+    },
+    {
+      "id": "1684912688608",
+      "name": "ss",
+      "description": "zz",
+      "date": "22.05.2023",
+      "image": "dsadasda",
+      "mobileImage": ""
+    }
+  ],
+  "request": [
+    {
+      "id": "f4832117-613d-4c2e-b35c-666e2997901d",
+      "date": "14.03.2023",
+      "seminar": {
+        "id": "c80b4e93-fed5-497d-bbe6-f9e800c79ab1",
+        "name": "Семинар Académie в Ростове-на-Дону"
+      },
+      "user": {
+        "id": "69ca2722-78d8-4ded-ba92-0dd2a3721fc6",
+        "phone": "+79508471039",
+        "name": "Анастасия",
+        "lastName": "Ярополова",
+        "secondName": "",
+        "firmName": ""
+      }
+    },
+    {
+      "id": "2478bbd9-08f6-4214-acf1-dfa6fbbc4d43",
+      "date": "10.03.2023",
+      "seminar": {
+        "id": "4ca58060-2c04-4fec-bc56-4a5c2d6f5fe4",
+        "name": "Эстетическая коррекция периоральной зоны губ"
+      },
+      "user": {
+        "id": "8e47c6b9-0be0-4010-ae85-7c48b3208946",
+        "phone": "+79897000454",
+        "name": "Ксения",
+        "lastName": "Бабаян",
+        "secondName": "",
+        "firmName": ""
+      }
+    },
+    {
+      "id": "2a19bcef-4cc6-4364-b8b3-cf02abde27c1",
+      "date": "09.03.2023",
+      "seminar": {
+        "id": "302e65ad-0a1e-4365-a636-73af37cb3424",
+        "name": "Lotos Форум"
+      },
+      "user": {
+        "id": "fa7401c2-e603-4dce-96c9-4f5a8f239b94",
+        "phone": "+79505757210",
+        "name": "Marina",
+        "lastName": "Minaeva",
+        "secondName": "",
+        "firmName": ""
+      }
+    }
+  ],
+  "banners": [
+    {
+      "createdAt": "2023-04-08T08:16:01.719Z",
+      "updatedAt": "2023-04-08T08:16:01.719Z",
+      "id": "c6d49171-08c7-430d-b909-36bd3f42af6f",
+      "name": "Только в приложении",
+      "description": "Скидка 10% на пептидные препараты и биорепарант Catalystin",
+      "percent": 10,
+      "image": "https://drive.google.com/uc?export=view&id=1xuG4aI6WB07AhGlpYd6h9Mhrkm1imccT",
+      "mobileImage": "https://api.filara-cosmo.ru/images/1xuG4aI6WB07AhGlpYd6h9Mhrkm1imccT",
+      "availableFor": "SPECIALIST",
+      "type": "PERCENT",
+      "promocode": {
+        "id": "1f5d4a31-892e-4cdd-a882-d6b8e59179a7",
+        "name": "Только в приложении",
+        "promocode": null,
+        "percent": 10,
+        "price": null
+      },
+      "products": [
+        {
+          "id": "0e7236ed-7544-40d3-bf28-4bddfa99d8af",
+          "name": "Биоревитализант Catalystin, 4 мл",
+          "isRetailAllowed": false,
+          "brand": {
+            "id": "b9a8c4ab-3570-47a4-a75f-940f784211bd",
+            "name": "Vec"
+          },
+          "images": []
+        },
+        {
+          "id": "500290a7-09b9-4108-87c2-2bf4c0c45f88",
+          "name": "Геропротекторный комплекс Alinex, 2 мл",
+          "isRetailAllowed": false,
+          "brand": {
+            "id": "b9a8c4ab-3570-47a4-a75f-940f784211bd",
+            "name": "Vec"
+          },
+          "images": []
+        },
+        {
+          "id": "6cb32109-e2ca-4a2b-a372-a2fdd788f04e",
+          "name": "Мультипептидный комплекс, 2 мл",
+          "isRetailAllowed": false,
+          "brand": {
+            "id": "b9a8c4ab-3570-47a4-a75f-940f784211bd",
+            "name": "Vec"
+          },
+          "images": []
+        },
+        {
+          "id": "6f681ad4-d426-4607-9e30-2bda224ba67f",
+          "name": "Пептидный комплекс для иммунитета кожи DeAcne, 2 мл",
+          "isRetailAllowed": false,
+          "brand": {
+            "id": "b9a8c4ab-3570-47a4-a75f-940f784211bd",
+            "name": "Vec"
+          },
+          "images": []
+        },
+        {
+          "id": "5d6bc26f-c1a1-468e-8b50-79b61982bd6e",
+          "name": "Трихологический пептидный комплекс Tricholax, 2 мл",
+          "isRetailAllowed": false,
+          "brand": {
+            "id": "b9a8c4ab-3570-47a4-a75f-940f784211bd",
+            "name": "Vec"
+          },
+          "images": []
+        }
+      ]
+    },
+    {
+      "image": "https://react-hook-form.com/get-started#SchemaValidation",
+      "percent": 1,
+      "description": "asd",
+      "name": "www",
+      "id": "1685607154945",
+      "availableFor": "",
+      "products": []
+    }
+  ],
+  "promocodes": [
+    {
+      "id": "3254501a-c052-46dc-9328-954a856ddcbc",
+      "name": "Тест",
+      "promocode": "SOTRUDNIK",
+      "percent": 20,
+      "catalog_product": {
+        "id": "644a5d931b666a27fd169ed6",
+        "name": "Эстетический уход",
+        "position": 1,
+        "__v": 0
+      },
+      "sub_catalog_product": {
+        "id": "6a98af2a-e190-4af2-a8c9-7514f5cd4c72",
+        "name": "Скрабы",
+        "position": 1,
+        "catalog_product": "644a5d931b666a27fd169ed6",
+        "__v": 0
+      },
+      "brand": {
+        "id": "7aaaeaee-6e50-4225-9ab2-15da6d802ba7",
+        "name": "Laboratory Cytolife",
+        "icon": "b350ff6b-5576-4c51-90a7-7747ec4b8c48.jpg",
+        "margin": 40
+      },
+      "products": [
+        {
+          "id": "0e7236ed-7544-40d3-bf28-4bddfa99d8af",
+          "name": "Биоревитализант Catalystin, 4 мл",
+          "isRetailAllowed": false,
+          "brand": {
+            "id": "b9a8c4ab-3570-47a4-a75f-940f784211bd",
+            "name": "Vec"
+          },
+          "images": []
+        },
+        {
+          "id": "500290a7-09b9-4108-87c2-2bf4c0c45f88",
+          "name": "Геропротекторный комплекс Alinex, 2 мл",
+          "isRetailAllowed": false,
+          "brand": {
+            "id": "b9a8c4ab-3570-47a4-a75f-940f784211bd",
+            "name": "Vec"
+          },
+          "images": []
+        },
+        {
+          "id": "6cb32109-e2ca-4a2b-a372-a2fdd788f04e",
+          "name": "Мультипептидный комплекс, 2 мл",
+          "isRetailAllowed": false,
+          "brand": {
+            "id": "b9a8c4ab-3570-47a4-a75f-940f784211bd",
+            "name": "Vec"
+          },
+          "images": []
+        },
+        {
+          "id": "6f681ad4-d426-4607-9e30-2bda224ba67f",
+          "name": "Пептидный комплекс для иммунитета кожи DeAcne, 2 мл",
+          "isRetailAllowed": false,
+          "brand": {
+            "id": "b9a8c4ab-3570-47a4-a75f-940f784211bd",
+            "name": "Vec"
+          },
+          "images": []
+        },
+        {
+          "id": "5d6bc26f-c1a1-468e-8b50-79b61982bd6e",
+          "name": "Трихологический пептидный комплекс Tricholax, 2 мл",
+          "isRetailAllowed": false,
+          "brand": {
+            "id": "b9a8c4ab-3570-47a4-a75f-940f784211bd",
+            "name": "Vec"
+          },
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "f4ef5afc-c69a-4746-b94a-9d66bf627c51",
+      "name": "Скидка 20% на Kosmoteros Professionnel",
+      "promocode": "KOSMOTEROS",
+      "percent": 20,
+      "catalog_product": {
+        "id": "644a5d931b666a27fd169ed6",
+        "name": "Эстетический уход",
+        "position": 1,
+        "__v": 0
+      },
+      "sub_catalog_product": {
+        "id": "0e325ef5-b8fd-483d-b136-78895788e5a0",
+        "name": "Сыворотки-концентраты",
+        "position": 4,
+        "catalog_product": "644a5d931b666a27fd169ed6",
+        "__v": 0
+      },
+      "brand": {
+        "id": "9c44f061-6a7a-40a9-9c5c-b5c512bb5048",
+        "name": "V45",
+        "icon": "c0f061fe-8e64-4620-835a-517ce44f1c5d.jpg",
+        "margin": 60
+      },
+      "products": [
+        {
+          "id": "0e7236ed-7544-40d3-bf28-4bddfa99d8af",
+          "name": "Биоревитализант Catalystin, 4 мл",
+          "isRetailAllowed": false,
+          "brand": {
+            "id": "b9a8c4ab-3570-47a4-a75f-940f784211bd",
+            "name": "Vec"
+          },
+          "images": []
+        },
+        {
+          "id": "500290a7-09b9-4108-87c2-2bf4c0c45f88",
+          "name": "Геропротекторный комплекс Alinex, 2 мл",
+          "isRetailAllowed": false,
+          "brand": {
+            "id": "b9a8c4ab-3570-47a4-a75f-940f784211bd",
+            "name": "Vec"
+          },
+          "images": []
+        },
+        {
+          "id": "6cb32109-e2ca-4a2b-a372-a2fdd788f04e",
+          "name": "Мультипептидный комплекс, 2 мл",
+          "isRetailAllowed": false,
+          "brand": {
+            "id": "b9a8c4ab-3570-47a4-a75f-940f784211bd",
+            "name": "Vec"
+          },
+          "images": []
+        },
+        {
+          "id": "6f681ad4-d426-4607-9e30-2bda224ba67f",
+          "name": "Пептидный комплекс для иммунитета кожи DeAcne, 2 мл",
+          "isRetailAllowed": false,
+          "brand": {
+            "id": "b9a8c4ab-3570-47a4-a75f-940f784211bd",
+            "name": "Vec"
+          },
+          "images": []
+        },
+        {
+          "id": "5d6bc26f-c1a1-468e-8b50-79b61982bd6e",
+          "name": "Трихологический пептидный комплекс Tricholax, 2 мл",
+          "isRetailAllowed": false,
+          "brand": {
+            "id": "b9a8c4ab-3570-47a4-a75f-940f784211bd",
+            "name": "Vec"
+          },
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "1684923093649",
+      "name": "new promocode",
+      "description": "description",
+      "percent": "33",
+      "image": "http://kinked",
+      "availableFor": "",
+      "products": []
     }
   ]
 }

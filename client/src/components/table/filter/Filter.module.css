@@ -16,12 +16,20 @@
   right: 290px;
 }
 
-.closeIcon {
+.closeIconWrapper {
+  width: 30px;
+  height: 30px;
   position: absolute;
-  top: 13px;
-  right: 20px;
-  width: 6px;
+  top: 3px;
+  right: 10px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeIcon {
+  width: 6px;
 }
 
 .closeIcon path {

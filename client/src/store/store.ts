@@ -1,13 +1,16 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
+import { bannerAPI } from "../service/BannerService";
 import { brandAPI } from "../service/BrandService";
 import { categoryAPI } from "../service/CategoryService";
 import { cityAPI } from "../service/CityService";
 import { clientAPI } from "../service/ClientsService";
 import { orderAPI } from "../service/OrderService";
 import { productAPI } from "../service/ProductService";
+import { promocodeAPI } from "../service/PromocodeService";
 import { protocolCategoriesAPI } from "../service/ProtocolCategoriesService";
 import { protocolAPI } from "../service/ProtocolsService";
+import { seminarAPI } from "../service/SeminarService";
 import { subCategoryAPI } from "../service/SubCategoryService";
 
 import authReducer from "./reducers/AuthSlice";
@@ -22,6 +25,9 @@ const rootReducer = combineReducers({
   [protocolCategoriesAPI.reducerPath]: protocolCategoriesAPI.reducer,
   [protocolAPI.reducerPath]: protocolAPI.reducer,
   [cityAPI.reducerPath]: cityAPI.reducer,
+  [seminarAPI.reducerPath]: seminarAPI.reducer,
+  [bannerAPI.reducerPath]: bannerAPI.reducer,
+  [promocodeAPI.reducerPath]: promocodeAPI.reducer,
   authReducer,
 });
 
@@ -38,7 +44,10 @@ export const setupStore = () => {
         .concat(clientAPI.middleware)
         .concat(protocolCategoriesAPI.middleware)
         .concat(protocolAPI.middleware)
-        .concat(cityAPI.middleware),
+        .concat(cityAPI.middleware)
+        .concat(seminarAPI.middleware)
+        .concat(bannerAPI.middleware)
+        .concat(promocodeAPI.middleware),
   });
 };
 

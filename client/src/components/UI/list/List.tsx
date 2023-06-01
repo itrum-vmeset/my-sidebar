@@ -18,6 +18,8 @@ export const List = ({
   selected,
   setSelected,
   setActiveElement,
+  setModalVisible,
+  setFormVisible,
   ...props
 }: ListProps): JSX.Element => {
   const { pathname } = useLocation();
@@ -26,9 +28,6 @@ export const List = ({
   }
   return (
     <ul className={classNames(styles.list, className)} {...props}>
-      <li className={classNames(styles.listItem, styles.listHeader)}>
-        Название категории
-      </li>
       {data?.data?.map((el: any) => {
         return (
           <ListItem
@@ -42,6 +41,8 @@ export const List = ({
             selected={selected}
             setSelected={setSelected}
             setActiveElement={setActiveElement}
+            setModalVisible={setModalVisible}
+            setFormVisible={setFormVisible}
           />
         );
       })}

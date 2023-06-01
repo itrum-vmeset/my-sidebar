@@ -1,13 +1,13 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import classNames from "classnames";
+import { useLocation } from "react-router-dom";
 
 import { ReactComponent as DeleteIcon } from "../../../../assets/icons/del.svg";
 import { ReactComponent as OkIcon } from "../../../../assets/icons/ok.svg";
 import { ReactComponent as SearchIcon } from "../../../../assets/icons/search.svg";
+import { PROMOCODE_ROUTE, PROTOCOLS_ROUTE } from "../../../../helpers/consts";
 import { Button } from "../../button/Button";
 import { Input } from "../../input/Input";
-import { Typography } from "../../typography/Typography";
-import FormRow from "../formRow/FormRow";
 
 import { FormListProps } from "./FormList.props";
 
@@ -16,6 +16,7 @@ import styles from "./FormList.module.css";
 function FormList({ data, setData }: FormListProps): JSX.Element {
   const [query, setQuery] = useState("");
   const [searchedProducts, setSearchedProducts] = useState(data.products);
+  const { pathname } = useLocation();
   const filter = () => {
     const filtered = data.products.filter((product: any) =>
       product.name.toLowerCase().includes(query.toLowerCase())
@@ -42,7 +43,8 @@ function FormList({ data, setData }: FormListProps): JSX.Element {
           );
         })}
       </ul>
-      {data.products.length ? (
+      {(data.products.length && pathname === PROTOCOLS_ROUTE) ||
+      pathname === PROMOCODE_ROUTE ? (
         <div className={styles.search}>
           <SearchIcon className={styles.searchIcon} />
           <Input
@@ -59,7 +61,7 @@ function FormList({ data, setData }: FormListProps): JSX.Element {
       ) : null}
       <Button
         className={classNames(styles.formButton, {
-          [styles.disabledBtn]: !data.name || !data.brand,
+          // [styles.disabledBtn]: !data.name || !data.brand,
         })}
         // disabled
       >

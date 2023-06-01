@@ -1,9 +1,12 @@
 import { useLocation } from "react-router-dom";
 
 import {
+  BANNERS_ROUTE,
   ORDERS_ROUTE,
   PRODUCTS_ROUTE,
+  PROMOCODE_ROUTE,
   PROTOCOLS_ROUTE,
+  SEMINARS_ROUTE,
 } from "../../../../helpers/consts";
 import { Button } from "../../button/Button";
 
@@ -11,7 +14,11 @@ import { ControlsProps } from "./Controls.props";
 
 import styles from "./Controls.module.css";
 
-function Controls({ saveEdit, setModalVisible }: ControlsProps): JSX.Element {
+function Controls({
+  saveEdit,
+  setModalVisible,
+  deleteItem,
+}: ControlsProps): JSX.Element {
   const { pathname } = useLocation();
 
   return (
@@ -78,6 +85,35 @@ function Controls({ saveEdit, setModalVisible }: ControlsProps): JSX.Element {
                   onClick={() => {
                     saveEdit();
                     setModalVisible(false);
+                  }}
+                >
+                  Сохранить
+                </Button>
+              </>
+            );
+          case BANNERS_ROUTE:
+          case SEMINARS_ROUTE:
+          case PROMOCODE_ROUTE:
+            return (
+              <>
+                <Button
+                  appearance="transparent"
+                  arrow="none"
+                  className={styles.btn}
+                  onClick={() => {
+                    deleteItem && deleteItem();
+                    setModalVisible(false);
+                  }}
+                >
+                  Удалить
+                </Button>
+                <Button
+                  appearance="filled"
+                  arrow="none"
+                  className={styles.btn}
+                  onClick={() => {
+                    saveEdit();
+                    // setModalVisible(false);
                   }}
                 >
                   Сохранить

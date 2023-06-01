@@ -33,7 +33,6 @@ function FormImages({ data, setData }: FormImagesProps): JSX.Element {
       )}
       <Input
         placeholder="Вставте ссылку на Google Drive"
-        className="inputFile"
         value={newLink}
         onChange={(e) => setNewLink(e.target.value)}
         onKeyUp={(event) => (event.key === "Enter" ? addLink() : null)}

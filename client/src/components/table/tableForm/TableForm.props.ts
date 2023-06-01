@@ -1,4 +1,10 @@
-import { DetailedHTMLProps, FormHTMLAttributes } from "react";
+import { DetailedHTMLProps, FormHTMLAttributes, ReactNode } from "react";
+
+type CityInput = {
+  value: string;
+  placeholder: string;
+  attach?: ReactNode;
+};
 
 export interface TableFormProps
   extends DetailedHTMLProps<
@@ -6,6 +12,9 @@ export interface TableFormProps
     HTMLFormElement
   > {
   addItem: () => void;
-  item: Record<string, string>;
+  item: {
+    [key: string]: CityInput;
+  };
   setItem: (item: any) => void;
+  buttonText: string;
 }

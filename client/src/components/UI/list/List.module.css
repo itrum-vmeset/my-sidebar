@@ -1,6 +1,6 @@
 .list {
   padding: 0;
-  overflow-y: auto;
+  margin: 0;
   overflow: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -24,13 +24,13 @@
   align-items: center;
 }
 
-.listHeader {
+/* .listHeader {
   background: #f8f8fa;
   color: #737680;
   padding: 10px 8px;
   border-top: 1px solid #ebecef;
   height: 44px;
-}
+} */
 
 .itemName {
   width: 350px;

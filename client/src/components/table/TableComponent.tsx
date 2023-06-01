@@ -1,124 +1,86 @@
-import React, { memo, useMemo } from "react";
+/* eslint-disable prefer-const */
+import React, { memo } from "react";
 import classNames from "classnames";
 import { useLocation } from "react-router-dom";
-import { Row, usePagination, useTable } from "react-table";
-import { useBlockLayout } from "react-table";
-import { useGlobalFilter } from "react-table";
+import { Row } from "react-table";
 
-import { CITIES_ROUTE, CLIENTS_ROUTE } from "../../helpers/consts";
+import { BRANDS_ROUTE } from "../../helpers/consts";
 
-import { GlobalFilter } from "./filter/Filter";
 import { NoRows } from "./noRows/NoRows";
-import Paginator from "./pagination/Paginator";
 import { TableComponentProps } from "./TableComponent.props";
 
 import styles from "./TableComponent.module.css";
 
 function TableComponent({
-  data,
-  setModalVisible,
-  setActiveElement,
-  setAlertVisible,
+  setSelectVisible,
   selectedItems,
   setSelectedItems,
-  columns,
-  // children,
+  tableInstance,
+  renderActions,
+  checkBox,
+  handleClickRow,
 }: TableComponentProps): JSX.Element {
   const { pathname } = useLocation();
 
-  const productsData = useMemo(() => (data?.length ? [...data] : []), [data]);
-
-  const {
-    getTableBodyProps,
-    headerGroups,
-    prepareRow,
-    state,
-    page,
-    canPreviousPage,
-    canNextPage,
-    pageCount,
-    gotoPage,
-    nextPage,
-    previousPage,
-    setPageSize,
-    preGlobalFilteredRows,
-    setGlobalFilter,
-  } = useTable(
-    {
-      columns,
-      data: productsData,
-      initialState: {
-        pageSize: 10,
-      },
-    },
-    useBlockLayout,
-    useGlobalFilter,
-    usePagination
-  );
+  let { getTableBodyProps, headerGroups, rows, prepareRow, page } =
+    tableInstance;
 
   const selectItem = (row: Row): void => {
     let modifiedItems = [];
     row.values.checked = !row.values.checked;
     if (!row.values.checked) {
-      const filteredItems = selectedItems.filter(
-        (item: Row) => item.values.checked
-      );
-      modifiedItems = filteredItems;
-      setSelectedItems(modifiedItems);
+      const filteredItems =
+        selectedItems &&
+        selectedItems.filter((item: Row) => item.values.checked);
+      modifiedItems = filteredItems as any;
+      setSelectedItems && setSelectedItems(modifiedItems);
     } else {
-      modifiedItems = [...selectedItems, row];
-      setSelectedItems(modifiedItems);
+      modifiedItems = selectedItems && ([...selectedItems, row] as any);
+      setSelectedItems && setSelectedItems(modifiedItems);
     }
-    modifiedItems.length ? setAlertVisible(true) : setAlertVisible(false);
+    modifiedItems.length
+      ? setSelectVisible && setSelectVisible(true)
+      : setSelectVisible && setSelectVisible(false);
   };
   const selectAll = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const filteredItems = page.map((row) => {
+    const filteredItems = page.map((row: any) => {
       row.values.checked = e.target.checked;
       return row;
     });
     if (e.target.checked) {
-      setSelectedItems(filteredItems);
-      setAlertVisible(true);
+      setSelectedItems && setSelectedItems(filteredItems);
+      setSelectVisible && setSelectVisible(true);
     } else {
-      setSelectedItems([]);
-      setAlertVisible(false);
+      setSelectedItems && setSelectedItems([]);
+      setSelectVisible && setSelectVisible(false);
     }
   };
 
-  const handleClick = (row: Row): void => {
-    if (pathname === CLIENTS_ROUTE || pathname === CITIES_ROUTE) {
-      /* empty */
-    } else {
-      setActiveElement(row.original);
-      setModalVisible(true);
-    }
-  };
+  if (!page) {
+    page = rows;
+  }
 
   return (
     <div className={styles.wrapper}>
-      <GlobalFilter
-        preGlobalFilteredRows={preGlobalFilteredRows}
-        globalFilter={state.globalFilter}
-        setGlobalFilter={setGlobalFilter}
-      />
-      <Paginator
-        gotoPage={gotoPage}
-        canPreviousPage={canPreviousPage}
-        canNextPage={canNextPage}
-        pageCount={pageCount}
-        nextPage={nextPage}
-        previousPage={previousPage}
-        setPageSize={setPageSize}
-        pageIndex={state.pageIndex}
-        pageSize={state.pageSize}
-      />
-      {page.length ? (
+      {page?.length || rows.length ? (
         <table className={classNames(styles.table)}>
           <thead className={styles.tableHead}>
-            {headerGroups.map((headerGroup) => (
+            {headerGroups.map((headerGroup: any) => (
               // eslint-disable-next-line react/jsx-key
               <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
+                {checkBox && (
+                  <th>
+                    <input
+                      className={styles.chkBox}
+                      type="checkbox"
+                      onChange={selectAll}
+                      checked={
+                        selectedItems && selectedItems.length === page.length
+                      }
+                    />
+                  </th>
+                )}
+                {headerGroup.headers.map((column: any) => (
                   // eslint-disable-next-line react/jsx-key
                   <th
                     {...column.getHeaderProps({
@@ -129,16 +91,37 @@ function TableComponent({
                     {column.render("Header")}
                   </th>
                 ))}
+                {renderActions &&
+                  renderActions().map((item: any, index: number) => (
+                    <th key={index} style={{ width: item.width }}></th>
+                  ))}
               </tr>
             ))}
           </thead>
           <tbody className={styles.tableBody} {...getTableBodyProps()}>
-            {page.map((row) => {
+            {page.map((row: any) => {
               prepareRow(row);
               return (
                 // eslint-disable-next-line react/jsx-key
-                <tr {...row.getRowProps()} onClick={() => handleClick(row)}>
-                  {row.cells.map((cell) => {
+                <tr
+                  {...row.getRowProps()}
+                  onClick={() => (handleClickRow ? handleClickRow(row) : null)}
+                  className={classNames({
+                    [styles.brandsTableRow]: BRANDS_ROUTE === pathname,
+                    [styles.clickableRow]: handleClickRow,
+                  })}
+                >
+                  {checkBox && (
+                    <th onClick={(e) => e.stopPropagation()}>
+                      <input
+                        type="checkbox"
+                        className={styles.chkBox}
+                        checked={row.values.checked}
+                        onChange={() => selectItem(row)}
+                      />
+                    </th>
+                  )}
+                  {row.cells.map((cell: any) => {
                     return (
                       // eslint-disable-next-line react/jsx-key
                       <td
@@ -152,6 +135,19 @@ function TableComponent({
                       </td>
                     );
                   })}
+                  {renderActions &&
+                    renderActions().map((item: any, index: number) => (
+                      <td
+                        key={index}
+                        style={{ width: item.width }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          item.action(row.original);
+                        }}
+                      >
+                        {item.component}
+                      </td>
+                    ))}
                 </tr>
               );
             })}

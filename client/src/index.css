@@ -13,3 +13,34 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.actionIconWrapper {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -5px;
+}
+
+.container {
+  font-size: 14px;
+  line-height: 20px;
+  color: #434652;
+  flex-direction: column;
+  width: 1000px;
+  background-color: #fff;
+  box-shadow: -5px 1px 15px rgba(0, 0, 0, 0.05);
+  border-radius: 24px 24px 0px 0px;
+  padding: 24px;
+  height: 91vh;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.container::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}

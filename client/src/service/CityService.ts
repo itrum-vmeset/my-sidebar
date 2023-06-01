@@ -40,7 +40,7 @@ export const cityAPI = createApi({
     }),
     deleteCity: build.mutation<ICity, ICity>({
       query: (city) => ({
-        url: `/cities/${city}`,
+        url: `/cities/${city.id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["City"],

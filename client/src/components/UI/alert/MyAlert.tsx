@@ -29,10 +29,12 @@ const MyAlert = ({
           <DeleteIcon style={{ marginRight: "10px" }} />
           Удалить
         </div>
-        <CloseIcon
-          className={styles.closeIcon}
-          onClick={() => setAlertVisible(false)}
-        />
+        <div className={styles.closeIconWrapper}>
+          <CloseIcon
+            className={styles.closeIcon}
+            onClick={() => setAlertVisible(false)}
+          />
+        </div>
       </div>
     </div>
   );

@@ -19,13 +19,15 @@ export const GlobalFilter = ({
   return (
     <div className={styles.search}>
       <SearchIcon className={styles.searchIcon} />
-      <CloseIcon
-        className={styles.closeIcon}
+      <div
+        className={styles.closeIconWrapper}
         onClick={() => {
           setValue("");
           onChange("");
         }}
-      />
+      >
+        <CloseIcon className={styles.closeIcon} />
+      </div>
       <Input
         placeholder="Поиск"
         className={styles.searchInput}

@@ -7,6 +7,7 @@ import {
   ORDERS_ROUTE,
   PRODUCTS_ROUTE,
   PROTOCOLS_ROUTE,
+  SEMINARS_ROUTE,
 } from "../../../helpers/consts";
 
 import styles from "./NoRows.module.css";
@@ -30,6 +31,9 @@ export const NoRows = ({ pathname, className }: any): JSX.Element => {
             return <span>Здесь пока нет подкатегорий</span>;
           case PROTOCOLS_ROUTE:
             return <span>Здесь пока нет протоколов</span>;
+          case SEMINARS_ROUTE:
+            return <span>Здесь пока нет семинаров</span>;
+
           default:
             return <span>Совпадений не найдено</span>;
         }

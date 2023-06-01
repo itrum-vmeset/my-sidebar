@@ -24,8 +24,8 @@ export const productAPI = createApi({
       },
     }),
     deleteProduct: build.mutation<IProductMock, IProductMock>({
-      query: (id) => ({
-        url: `/products2/${id}`,
+      query: (product) => ({
+        url: `/products2/${product.id}`,
         method: "DELETE",
       }),
     }),

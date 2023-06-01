@@ -33,10 +33,10 @@ export const menuItems: IMenu[] = [
     icon: <CategoriesIcon />,
   },
   { id: 5, route: BRANDS_ROUTE, title: "Бренды", icon: <BrandsIcon /> },
-  { id: 4, route: ORDERS_ROUTE, title: "Заказы", icon: <OrderIcon /> },
-  { id: 6, route: CITIES_ROUTE, title: "Города", icon: <CitiesIcon /> },
+  { id: 7, route: ORDERS_ROUTE, title: "Заказы", icon: <OrderIcon /> },
+  { id: 4, route: CITIES_ROUTE, title: "Города", icon: <CitiesIcon /> },
   {
-    id: 7,
+    id: 6,
     route: PROTOCOLS_ROUTE,
     title: "Протоколы",
     icon: <ProtocolsIcon />,

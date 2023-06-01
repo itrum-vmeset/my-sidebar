@@ -5,10 +5,12 @@ import { ReactComponent as ArrowsIcon } from "../../assets/icons/Arrows.svg";
 import { withLayout } from "../../components/layout/Layout";
 import { NoRows } from "../../components/table/noRows/NoRows";
 import { Button } from "../../components/UI/button/Button";
+import DeleteModal from "../../components/UI/deleteModal/DeleteModal";
 import Form from "../../components/UI/form/Form";
 import { Input } from "../../components/UI/input/Input";
 import { List } from "../../components/UI/list/List";
 import MyModal from "../../components/UI/modal/MyModal";
+import { brandAPI } from "../../service/BrandService";
 import { protocolCategoriesAPI } from "../../service/ProtocolCategoriesService";
 import { protocolAPI } from "../../service/ProtocolsService";
 
@@ -16,10 +18,15 @@ import styles from "./Protocols.module.css";
 
 function Protocols(): JSX.Element {
   const { pathname } = useLocation();
-  const [category, setCategory] = useState(null);
-  const [activeElement, setActiveElement] = useState({ name: "" });
+  const [category, setCategory] = useState({ id: "" });
+  const [activeElement, setActiveElement] = useState<any>({
+    description: "",
+    protocol_category: "",
+  });
   const [selected, setSelected] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+  const [formVisible, setFormVisible] = useState(false);
+
   const [newCategoryName, setNewCategoryName] = useState("");
   const [updateCategory] =
     protocolCategoriesAPI.useUpdateProtocolCategoryMutation();
@@ -31,10 +38,11 @@ function Protocols(): JSX.Element {
   const [deleteProtocol] = protocolAPI.useDeleteProtocolMutation();
   const [createProtocol] = protocolAPI.useCreateProtocolMutation();
   const { data: protocols } = protocolAPI.useFetchAllProtocolsQuery(
-    (category as any) || ""
+    category?.id || ""
   );
   const { data: protocolCategories } =
     protocolCategoriesAPI.useFetchAllProtocolCategoriesQuery(null);
+  const { data: brands } = brandAPI.useFetchAllBrandsQuery(null);
 
   const handleCreate = (): void => {
     const newProtocolCategory = {
@@ -57,13 +65,11 @@ function Protocols(): JSX.Element {
     }
   };
 
-  const setData = (item: any) => {
+  const setNewProtocol = (item: any) => {
     if (!category) {
       return alert("Сначала выберите категорию");
     }
-    const name = protocolCategories?.data?.find(
-      (el) => el.id === item.protocol_category
-    );
+    const name = protocolCategories?.data?.find((el) => el.id === category.id);
     const newData = {
       ...item,
       name: item.name,
@@ -72,22 +78,41 @@ function Protocols(): JSX.Element {
       protocol_category: name,
       products: item.products,
     };
-    setModalVisible(true);
     setActiveElement(newData);
+    setFormVisible(true);
+  };
+
+  const handleCreateProtocol = (data: any) => {
+    createProtocol({
+      ...data,
+      protocol_category: data?.protocol_category?.id,
+    });
   };
 
   return (
     <div className={styles.wrapper}>
+      <DeleteModal
+        modalVisible={deleteModalVisible}
+        setModalVisible={setDeleteModalVisible}
+        activeElement={activeElement}
+        deleteItem={
+          activeElement.protocol_category ? deleteProtocol : deleteCategory
+        }
+        text={"протокол"}
+      />
       <MyModal
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisible}
+        modalVisible={formVisible}
+        setModalVisible={setFormVisible}
         setActiveElement={setActiveElement}
       >
         <Form
-          updateItem={activeElement.name ? updateProtocol : createProtocol}
-          setModalVisible={setModalVisible}
+          updateItem={
+            activeElement?.description ? updateProtocol : handleCreateProtocol
+          }
+          setModalVisible={setFormVisible}
           activeElement={activeElement}
           setActiveElement={setActiveElement}
+          brands={brands}
         />
       </MyModal>
       <div className={styles.list}>
@@ -100,6 +125,9 @@ function Protocols(): JSX.Element {
         <Button appearance="filled" onClick={() => handleCreate()}>
           Добавить категорию протокола
         </Button>
+        <div className={styles.headers}>
+          <div>Название категории</div>
+        </div>
         <List
           data={protocolCategories}
           category={category}
@@ -108,17 +136,18 @@ function Protocols(): JSX.Element {
           deleteCategory={deleteCategory}
           selected={selected}
           setSelected={setSelected}
-          setActiveElement={() => null}
+          setActiveElement={setActiveElement}
+          setModalVisible={setDeleteModalVisible}
         />
       </div>
       <ArrowsIcon className={styles.arrows} />
       <div className={styles.list}>
-        {category !== null ? (
+        {category.id ? (
           <>
             <Button
               appearance="filled"
               onClick={() =>
-                setData({
+                setNewProtocol({
                   name: "",
                   brand: "",
                   description: "",
@@ -133,15 +162,22 @@ function Protocols(): JSX.Element {
               Добавить протокол
             </Button>
             {category ? (
-              <List
-                data={protocols}
-                setCategory={() => null}
-                updateCategory={updateProtocol}
-                deleteCategory={deleteProtocol}
-                selected={selected}
-                setSelected={setSelected}
-                setActiveElement={setData}
-              />
+              <>
+                <div className={styles.headers}>
+                  <div>Название протокола</div>
+                </div>
+                <List
+                  data={protocols}
+                  setCategory={() => null}
+                  updateCategory={updateProtocol}
+                  deleteCategory={deleteProtocol}
+                  selected={selected}
+                  setSelected={setSelected}
+                  setActiveElement={setActiveElement}
+                  setModalVisible={setDeleteModalVisible}
+                  setFormVisible={setFormVisible}
+                />
+              </>
             ) : (
               <NoRows pathname={pathname} className={styles.noSubCategories} />
             )}

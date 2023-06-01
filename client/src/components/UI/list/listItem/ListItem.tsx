@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classNames from "classnames";
 import { useLocation } from "react-router-dom";
 
+import { ReactComponent as ClipIcon } from "../../../../assets/icons/clip.svg";
+import { ReactComponent as CloseIcon } from "../../../../assets/icons/close.svg";
 import { ReactComponent as DeleteIcon } from "../../../../assets/icons/del.svg";
 import { ReactComponent as EditIcon } from "../../../../assets/icons/edit.svg";
+import { ReactComponent as ImgIcon } from "../../../../assets/icons/img.svg";
+import { ReactComponent as OkIcon } from "../../../../assets/icons/ok.svg";
+import { BRANDS_ROUTE } from "../../../../helpers/consts";
 import { Input } from "../../input/Input";
 import { Typography } from "../../typography/Typography";
 
@@ -21,43 +26,59 @@ export const ListItem = ({
   selected,
   setSelected,
   setActiveElement,
+  setModalVisible,
+  setFormVisible,
   ...props
 }: ListItemProps): JSX.Element => {
-  const [editMode, seteditMode] = useState(false);
+  const [editMode, setEditMode] = useState(false);
   const [active, setActive] = useState(item.name);
   const { pathname } = useLocation();
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>): void => {
     if (e.key === "Enter") {
       updateCategory({ ...item, name: active });
-      seteditMode(false);
+      setEditMode(false);
       setSelected(null);
     }
     if (e.key === "Escape") {
       setActive(item.name);
-      seteditMode(false);
+      setEditMode(false);
       setSelected(null);
     }
   };
+
+  useEffect(() => {
+    if (selected !== item?.id) {
+      setEditMode(false);
+    }
+  }, [selected]);
 
   return (
     <li
       key={item.id}
       className={classNames(styles.listItem, className, {
         [styles.listItemActive]: item.id == category,
+        [styles.brandItem]: pathname === BRANDS_ROUTE,
       })}
       {...props}
     >
+      {pathname === BRANDS_ROUTE && (
+        <div className={styles.imgIcon}>
+          {editMode ? <ClipIcon /> : <ImgIcon />}
+        </div>
+      )}
       <Typography
         className={classNames(styles.itemName, {
           [styles.listItemActive]: item.id == category,
+          [styles.brandItemName]: pathname === BRANDS_ROUTE,
         })}
         onClick={() => {
-          setCategory(item.id);
+          setCategory && setCategory && setCategory(item);
           setActiveElement(item);
+          setFormVisible && setFormVisible(true);
         }}
       >
-        {selected === item.id ? (
+        {editMode ? (
           <Input
             value={active}
             onChange={(e) => setActive(e.target.value)}
@@ -72,19 +93,56 @@ export const ListItem = ({
           <span>{item.name}</span>
         )}
       </Typography>
-      <EditIcon
-        className={styles.editIcon}
-        onClick={(e) => {
-          e.stopPropagation();
-          setSelected(selected === item.id ? null : item.id);
-          setCategory(item.id);
-          seteditMode(!editMode);
-        }}
-      />
-      <DeleteIcon
-        className={styles.deleteIcon}
-        onClick={() => deleteCategory(item.id)}
-      />
+      {editMode ? (
+        <>
+          <div
+            className="actionIconWrapper"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelected(selected === item.id ? null : item.id);
+              setCategory && setCategory(item.id);
+              updateCategory({ ...item, name: active });
+              setEditMode(false);
+            }}
+          >
+            <OkIcon className={styles.editIcon} />
+          </div>
+          <div
+            className="actionIconWrapper"
+            onClick={() => {
+              setEditMode(false);
+              setSelected(selected === item.id ? null : item.id);
+            }}
+          >
+            <CloseIcon className={styles.deleteIcon} />
+          </div>
+        </>
+      ) : (
+        <>
+          <div
+            className="actionIconWrapper"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelected(selected === item.id ? null : item.id);
+              setCategory && setCategory(item.id);
+              setEditMode(!editMode);
+            }}
+          >
+            <EditIcon className={styles.editIcon} />
+          </div>
+
+          <div
+            className="actionIconWrapper"
+            onClick={(e) => {
+              e.stopPropagation();
+              setActiveElement(item);
+              setModalVisible(true);
+            }}
+          >
+            <DeleteIcon className={styles.deleteIcon} />
+          </div>
+        </>
+      )}
     </li>
   );
 };
