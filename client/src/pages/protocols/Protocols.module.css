@@ -19,7 +19,10 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 8px;
+}
+
+.list button {
+  margin: 8px 0;
 }
 
 .list input button {
@@ -47,5 +50,17 @@
 }
 
 .addProtocolBtn {
-  margin-top: 45px;
+  margin-top: 45px !important;
+}
+
+.headers {
+  display: flex;
+  gap: 60px;
+  background: #f8f8fa;
+  color: #737680;
+  padding: 0 8px;
+  border-top: 1px solid #ebecef;
+  border-bottom: 1px solid #ebecef;
+  height: 44px;
+  align-items: center;
 }

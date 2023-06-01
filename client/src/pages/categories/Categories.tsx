@@ -5,6 +5,7 @@ import { ReactComponent as ArrowsIcon } from "../../assets/icons/Arrows.svg";
 import { withLayout } from "../../components/layout/Layout";
 import { NoRows } from "../../components/table/noRows/NoRows";
 import { Button } from "../../components/UI/button/Button";
+import DeleteModal from "../../components/UI/deleteModal/DeleteModal";
 import { Input } from "../../components/UI/input/Input";
 import { List } from "../../components/UI/list/List";
 import { categoryAPI } from "../../service/CategoryService";
@@ -14,8 +15,11 @@ import styles from "./Categories.module.css";
 
 function Categories(): JSX.Element {
   const { pathname } = useLocation();
-  const [category, setCategory] = useState(null);
+  const [category, setCategory] = useState({ id: "" });
+  const [activeElement, setActiveElement] = useState({ catalog_product: "" });
   const [selected, setSelected] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [newCategoryName, setNewCategoryName] = useState("");
   const [newSubCategoryName, setNewSubCategoryName] = useState("");
   const [updateCategory] = categoryAPI.useUpdateCategoryMutation();
@@ -26,7 +30,7 @@ function Categories(): JSX.Element {
   const [createSubCategory] = subCategoryAPI.useCreateSubCategoryMutation();
   const { data: categories } = categoryAPI.useFetchAllCategoriesQuery(null);
   const { data: subCategories } = subCategoryAPI.useFetchAllSubCategoriesQuery(
-    (category as any) || ""
+    (category.id as any) || ""
   );
 
   const handleCreate = (marker: null | string): void => {
@@ -47,7 +51,7 @@ function Categories(): JSX.Element {
       createSubCategory({
         ...newCategory,
         name: newSubCategoryName,
-        catalog_product: category,
+        catalog_product: category.id,
       });
       setNewSubCategoryName("");
     }
@@ -64,7 +68,16 @@ function Categories(): JSX.Element {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.list}>
+      <DeleteModal
+        modalVisible={deleteModalVisible}
+        setModalVisible={setDeleteModalVisible}
+        activeElement={activeElement}
+        deleteItem={
+          activeElement.catalog_product ? deleteSubCategory : deleteCategory
+        }
+        text={"протокол"}
+      />
+      <div className={styles.content}>
         <Input
           placeholder="Введите название категории"
           value={newCategoryName}
@@ -74,40 +87,55 @@ function Categories(): JSX.Element {
         <Button appearance="filled" onClick={() => handleCreate(null)}>
           Добавить категорию
         </Button>
-        <List
-          data={categories}
-          category={category}
-          setCategory={setCategory}
-          updateCategory={updateCategory}
-          deleteCategory={deleteCategory}
-          selected={selected}
-          setSelected={setSelected}
-          setActiveElement={() => null}
-        />
+        <div className={styles.list}>
+          <div className={styles.headers}>
+            <div className={styles.title}>Название категории</div>
+          </div>
+          <List
+            data={categories}
+            category={category}
+            setCategory={setCategory}
+            updateCategory={updateCategory}
+            deleteCategory={deleteCategory}
+            selected={selected}
+            setSelected={setSelected}
+            setActiveElement={setActiveElement}
+            setModalVisible={setDeleteModalVisible}
+          />
+        </div>
       </div>
       <ArrowsIcon className={styles.arrows} />
-      <div className={styles.list}>
-        {category !== null ? (
+      <div className={styles.content}>
+        {category.id ? (
           <>
             <Input
               placeholder="Введите название подкатегории"
               value={newSubCategoryName}
               onChange={(e) => setNewSubCategoryName(e.target.value)}
-              onKeyDown={(e) => handleKeyDown(e, category)}
+              onKeyDown={(e) => handleKeyDown(e, category.id)}
             />
-            <Button appearance="filled" onClick={() => handleCreate(category)}>
+            <Button
+              appearance="filled"
+              onClick={() => handleCreate(category.id)}
+            >
               Добавить подкатегорию
             </Button>
             {category ? (
-              <List
-                data={subCategories}
-                setCategory={() => null}
-                updateCategory={updateSubCategory}
-                deleteCategory={deleteSubCategory}
-                selected={selected}
-                setSelected={setSelected}
-                setActiveElement={() => null}
-              />
+              <div className={styles.list}>
+                <div className={styles.headers}>
+                  <div className={styles.title}>Название подкатегории</div>
+                </div>
+                <List
+                  data={subCategories}
+                  setCategory={() => null}
+                  updateCategory={updateSubCategory}
+                  deleteCategory={deleteSubCategory}
+                  selected={selected}
+                  setSelected={setSelected}
+                  setActiveElement={setActiveElement}
+                  setModalVisible={setDeleteModalVisible}
+                />
+              </div>
             ) : (
               <NoRows pathname={pathname} className={styles.noSubCategories} />
             )}

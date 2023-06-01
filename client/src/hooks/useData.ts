@@ -1,9 +1,6 @@
 import { useEffect } from "react";
 
-import {
-  CLIENTS_ROUTE,
-  ORDERS_ROUTE,
-} from "../helpers/consts";
+import { CLIENTS_ROUTE, ORDERS_ROUTE } from "../helpers/consts";
 
 export const useData = (
   data: any,
@@ -47,30 +44,7 @@ export const useData = (
           };
         }) || [];
       !isGoodsLoading && setItems(newData);
-    }
-    // else if (location.pathname === PROTOCOLS_ROUTE) {
-    //   const newData =
-    //     data?.data?.map((item: any) => {
-    //       const {
-    //         name,
-    //         brand,
-    //         description,
-    //         protocol_category,
-    //         products,
-    //         ...dataItem
-    //       } = item;
-    //       return {
-    //         description,
-    //         name,
-    //         brand,
-    //         protocol_category,
-    //         products,
-    //         ...dataItem,
-    //       };
-    //     }) || [];
-    //   !isGoodsLoading && setItems(newData);
-    // }
-    else {
+    } else {
       !isGoodsLoading && setItems(data?.data);
     }
   }, [isGoodsLoading, data]);

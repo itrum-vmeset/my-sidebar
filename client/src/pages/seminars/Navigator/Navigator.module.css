@@ -1,0 +1,22 @@
+.navList {
+  padding: 0;
+  display: flex;
+  gap: 24px;
+}
+
+.listItem {
+  list-style: none;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #737680;
+  cursor: pointer;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #fff;
+}
+
+.selectedListItem,
+.listItem:hover {
+  border-bottom: 2px solid #c06ecc;
+  color: black;
+}

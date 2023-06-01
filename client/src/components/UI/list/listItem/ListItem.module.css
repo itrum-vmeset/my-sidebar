@@ -1,6 +1,15 @@
+.listItem {
+  display: flex;
+}
+
 .itemName {
-  width: 350px;
+  width: 330px;
   padding: 9px 0;
+}
+
+.brandItemName {
+  width: 700px;
+  margin-left: 40px;
 }
 
 .deleteIcon path {
@@ -21,3 +30,18 @@
   color: #bd68ca;
 }
 
+.brandItem {
+  width: 1200px !important;
+  height: 130px !important;
+}
+
+.imgIcon {
+  background: #fafafa;
+  height: 110px;
+}
+
+.imgIcon svg {
+  padding: 40px;
+  width: 30px;
+  height: 28px;
+}

@@ -1,7 +1,9 @@
-export const translator = (key: string) => {
+import { BANNERS_ROUTE, PROMOCODE_ROUTE } from "./consts";
+
+export const translator = (key: string, pathname: string) => {
   switch (key) {
     case "name":
-      return "Название*";
+      return pathname === PROMOCODE_ROUTE ? "Заголовок" : "Название*";
     case "nameFrom1C":
       return "Название 1C";
     case "brand":
@@ -49,32 +51,23 @@ export const translator = (key: string) => {
     case "protocol_category":
       return "Категория";
     case "products":
-      return "Товары протокола";
-
+      return pathname === BANNERS_ROUTE ? "Товары" : "Товары протокола";
+    case "speaker":
+      return "Спикер*";
+    case "speaker_speciality":
+      return "Специальность спикера*";
+    case "city":
+      return "Город*";
+    case "image":
+      return pathname === BANNERS_ROUTE ? "Баннер" : "Фото";
+    case "percent":
+      return "Процент скидки";
+    case "user":
+      return "Заказчик";
     default:
       return null;
   }
 };
-
-// "id": "5102fc00-66f0-4183-a1d1-e210245e838d",
-// "order_type": "OFFICE_CASH",
-// "total": 3797,
-// "isViewedByAdmin": false,
-// "order_number": "6787156649-0",
-// "delivery_type": "PICKUP",
-// "isPayed": false,
-// "user": {
-//   "id": "8969dc27-9208-4e31-aedc-1aaf43027f24",
-//   "name": "Овчарова",
-//   "lastName": "Наталья",
-//   "secondName": "",
-//   "firmName": "",
-//   "role": "SPECIALIST"
-// },
-// "warehouse": {
-//   "city": "Ростов-на-Дону"
-// },
-// "date": "16.03.23"
 
 export const headTranslator = (key: string) => {
   switch (key) {

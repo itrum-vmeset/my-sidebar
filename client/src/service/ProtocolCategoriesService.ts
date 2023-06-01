@@ -48,7 +48,7 @@ export const protocolCategoriesAPI = createApi({
       IProtocolCategory
     >({
       query: (protocolcategory) => ({
-        url: `/protocolcategories/${protocolcategory}`,
+        url: `/protocolcategories/${protocolcategory.id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["ProtocolCategories"],

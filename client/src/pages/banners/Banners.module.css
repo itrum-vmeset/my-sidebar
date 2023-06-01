@@ -1,0 +1,36 @@
+.list {
+  width: 100%;
+}
+
+.list ul li p {
+  width: 90%;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.btnFullWidth {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.headers {
+  display: flex;
+  gap: 60px;
+  background: #f8f8fa;
+  color: #737680;
+  padding: 10px 8px;
+  border-top: 1px solid #ebecef;
+  border-bottom: 1px solid #ebecef;
+  height: 44px;
+  align-items: center;
+}
+
+.delIcon {
+  padding: 10px;
+  margin-top: -10px;
+  cursor: pointer;
+}

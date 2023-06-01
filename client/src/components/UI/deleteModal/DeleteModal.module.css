@@ -1,0 +1,61 @@
+.deleteModal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: none;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.deleteModalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  justify-content: center;
+  background-color: white;
+  padding: 40px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.deleteModalContent div {
+  display: flex;
+  justify-content: center;
+}
+
+.modalTitle {
+  font-size: 24px;
+  line-height: 29px;
+  width: 320px;
+  text-align: center;
+  color: #000000;
+  font-weight: 500;
+}
+
+.modalItem {
+  font-size: 24px;
+  line-height: 29px;
+  width: 320px;
+  text-align: center;
+  color: #37393d;
+  font-weight: 400;
+}
+
+.closeIcon {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 330px;
+  cursor: pointer;
+}
+
+.deleteModal.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

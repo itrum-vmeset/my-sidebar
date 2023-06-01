@@ -13,34 +13,17 @@ import { PageContentProps } from "./PageContent.props";
 import styles from "./PageContent.module.css";
 
 function PageContent({
-  service,
   updateItem,
   deleteItem,
-  columns,
   children,
 }: PageContentProps): JSX.Element {
-  const [alertVisible, setAlertVisible] = useState(false);
-  const [selectedItems, setSelectedItems] = useState<any>([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [activeElement, setActiveElement] = useState({});
-  const [items, setItems] = useState<any>([]);
-  const { data, isLoading: isGoodsLoading, error, refetch } = service();
-
-  useData(data, setItems, isGoodsLoading);
-
-  const deleteItems = async () => {
-    for (const item of selectedItems) {
-      await deleteItem(item.original.id);
-    }
-    refetch();
-    setSelectedItems([]);
-    setAlertVisible(false);
-  };
 
   return (
     <div className={styles.wrapper}>
       {children}
-      <MyModal
+      {/* <MyModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         setActiveElement={setActiveElement}
@@ -50,29 +33,7 @@ function PageContent({
           setModalVisible={setModalVisible}
           activeElement={activeElement}
         />
-      </MyModal>
-      {error && <Typography>Произошла ошибка</Typography>}
-      {isGoodsLoading ? (
-        <Loader />
-      ) : (
-        <TableComponent
-          data={items}
-          setModalVisible={setModalVisible}
-          setActiveElement={setActiveElement}
-          setAlertVisible={setAlertVisible}
-          selectedItems={selectedItems}
-          setSelectedItems={setSelectedItems}
-          columns={columns}
-        />
-      )}
-      <MyAlert
-        alertVisible={alertVisible}
-        setAlertVisible={setAlertVisible}
-        deleteItems={deleteItems}
-        selectedItems={selectedItems}
-        setSelectedItems={setSelectedItems}
-        refetch={refetch}
-      />
+      </MyModal> */}
     </div>
   );
 }

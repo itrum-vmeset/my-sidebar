@@ -89,3 +89,18 @@ export interface ICity {
   name: string;
   address: string;
 }
+
+export interface IBanner {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  availableFor: string;
+}
+
+export interface IPromocode {
+  id: string;
+  name: string;
+  promocode: string;
+  percent: number;
+}

@@ -20,7 +20,7 @@ function CustomSelect({
     <div className={styles.customSelect}>
       <Input
         className={styles.selectInput}
-        value={translator(data) || data}
+        value={translator(data, "") || data}
         onClick={setSelectModalVisible}
         onChange={() => null}
       />

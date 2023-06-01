@@ -9,6 +9,8 @@
 
 .selectModalContent {
   background: white;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 .selectModalContent ul {

@@ -6,6 +6,7 @@
   width: 1000px;
   height: 750px;
   background-color: white;
+  margin-top: 20px;
 }
 
 .btnFullWidth {
@@ -23,6 +24,14 @@
   line-height: 24px;
   border-collapse: collapse;
   position: relative;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.table::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 .tableHead {
@@ -46,9 +55,17 @@
   padding: 20px 0 0 6px;
   border-bottom: 1px solid #ebecef;
 }
+.clickableRow {
+  cursor: pointer;
+}
 
 .tableBody tr td {
   height: 38px;
+}
+
+.brandsTableRow {
+  height: 100px;
+  align-items: center;
 }
 
 .chkBox {

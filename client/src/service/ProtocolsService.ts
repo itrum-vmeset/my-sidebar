@@ -41,7 +41,7 @@ export const protocolAPI = createApi({
     }),
     deleteProtocol: build.mutation<IProtocol, IProtocol>({
       query: (protocol) => ({
-        url: `/protocols/${protocol}`,
+        url: `/protocols/${protocol.id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Protocol"],

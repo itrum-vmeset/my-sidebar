@@ -11,4 +11,6 @@ export interface ListItemProps
   selected: any;
   setSelected: any;
   setActiveElement: any;
+  setModalVisible: any;
+  setFormVisible?: any;
 }

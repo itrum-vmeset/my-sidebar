@@ -33,8 +33,6 @@ function Table({
   const productsData = useMemo(() => data?.length && [...data], [data]);
   const productsColumns = useColumns(data, pathname);
 
-  console.log(productsColumns);
-
   const {
     getTableBodyProps,
     headerGroups,
@@ -181,6 +179,7 @@ function Table({
                       />
                     </th>
                   )}
+                  {/* {...renderActions} */}
                   {row.cells.map((cell) => {
                     return (
                       // eslint-disable-next-line react/jsx-key

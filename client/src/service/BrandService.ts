@@ -2,7 +2,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
 import { IBrand, IResponse } from "../models/IResponse";
 
-const baseUrl = "http://localhost:5000/api";
+// const baseUrl = "http://localhost:5000/api";
+const baseUrl = "http://localhost:5005";
 
 export const brandAPI = createApi({
   reducerPath: "brandAPI",
@@ -22,6 +23,14 @@ export const brandAPI = createApi({
         };
       },
     }),
+    createBrand: build.mutation<IBrand, IBrand>({
+      query: (brand) => ({
+        url: "/brands",
+        method: "POST",
+        body: brand,
+      }),
+      invalidatesTags: ["Brand"],
+    }),
     updateBrand: build.mutation<IBrand, IBrand>({
       query: (brand) => ({
         url: `/brands/${brand.id}`,
@@ -32,7 +41,7 @@ export const brandAPI = createApi({
     }),
     deleteBrand: build.mutation<IBrand, IBrand>({
       query: (brand) => ({
-        url: `/brands/${brand}`,
+        url: `/brands/${brand.id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Brand"],

@@ -1,0 +1,34 @@
+.list {
+  width: 100%;
+  height: 80%;
+}
+
+.imgIcon {
+  background: #fafafa;
+  padding: 40px;
+  margin-top: -40px;
+}
+
+.clipIcon {
+  position: absolute;
+  top: 15px;
+  right: 355px;
+}
+
+.delIcon {
+  padding: 10px;
+  margin-top: -10px;
+  cursor: pointer;
+}
+
+.headers {
+  display: flex;
+  gap: 60px;
+  background: #f8f8fa;
+  color: #737680;
+  padding: 10px 8px;
+  border-top: 1px solid #ebecef;
+  border-bottom: 1px solid #ebecef;
+  height: 44px;
+  align-items: center;
+}

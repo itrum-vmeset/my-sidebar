@@ -15,15 +15,12 @@
 }
 
 .myAlertContent {
-  /* padding: 25px;
-    background: white;
-    border-radius: 16px;
-    min-width: 250px; */
   display: flex;
   flex-direction: column;
   gap: 20px;
   position: relative;
   justify-content: center;
+  width: 250px;
 }
 
 .myAlertContent div {
