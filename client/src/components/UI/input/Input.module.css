@@ -11,3 +11,17 @@
   box-shadow: -2px -2px 0px #eed9f2, 2px 2px 0px #eed9f2, -2px 2px 0px #eed9f2,
     2px -2px 0px #eed9f2;
 }
+
+.hiddenInput {
+  display: none;
+}
+
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input[type="number"] {
+  -moz-appearance: textfield;
+}

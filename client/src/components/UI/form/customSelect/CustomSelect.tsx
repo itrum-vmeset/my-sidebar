@@ -21,7 +21,10 @@ function CustomSelect({
       <Input
         className={styles.selectInput}
         value={translator(data, "") || data}
-        onClick={setSelectModalVisible}
+        onClick={(e) => {
+          e.stopPropagation();
+          setSelectModalVisible(!selectModalVisible);
+        }}
         onChange={() => null}
       />
       <SelectModal
@@ -35,7 +38,8 @@ function CustomSelect({
         className={classNames(styles.selectIcon, {
           [styles.selectIconActive]: selectModalVisible,
         })}
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();
           setSelectModalVisible(!selectModalVisible);
         }}
       />

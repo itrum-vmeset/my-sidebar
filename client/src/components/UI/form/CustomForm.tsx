@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import classNames from "classnames";
 import { Controller, useForm } from "react-hook-form";
 
@@ -14,24 +14,32 @@ import styles from "./Form.module.css";
 
 function CustomForm({
   activeElement,
+  modalVisible,
   setFormVisible,
   formData,
   updateItem,
   removeItem,
   brands,
   cities,
+  validationSchema,
 }: CustomFormProps): JSX.Element {
+  const [customModalVisible, setCustomModalVisible] = useState(false);
+  const [categoryModalVisible, setCategoryModalVisible] = useState(false);
+  const [subCategoryModalVisible, setSubCategoryModalVisible] = useState(false);
+  const [orderModalVisible, setOrderModalVisible] = useState(false);
+  const [deliveryModalVisible, setDeliveryModalVisible] = useState(false);
   const {
     handleSubmit,
     reset,
     formState: { errors },
     control,
+    getValues,
+    setValue,
   } = useForm({
     defaultValues: activeElement,
-    resolver: yupResolver(BannerSchema),
+    resolver: yupResolver(validationSchema),
   });
   const saveEdit = (data: any): void => {
-    console.log(data);
     data && updateItem(data);
   };
   const onRemove = (): void => {
@@ -43,14 +51,33 @@ function CustomForm({
     reset(activeElement);
   }, [activeElement]);
 
+  useEffect(() => {
+    if (!modalVisible) {
+      setCustomModalVisible(false);
+      setCategoryModalVisible(false);
+      setSubCategoryModalVisible(false);
+      setOrderModalVisible(false);
+      setDeliveryModalVisible(false);
+    }
+  }, [modalVisible]);
+
   return (
-    <div className={styles.formWrapper}>
+    <div
+      className={styles.formWrapper}
+      onClick={() => {
+        setCategoryModalVisible(false);
+        setSubCategoryModalVisible(false);
+        setOrderModalVisible(false);
+        setDeliveryModalVisible(false);
+        setCustomModalVisible(false);
+      }}
+    >
+      <Controls
+        saveEdit={handleSubmit(saveEdit)}
+        setModalVisible={setFormVisible}
+        deleteItem={onRemove}
+      />
       <form onSubmit={(e) => e.preventDefault()}>
-        <Controls
-          saveEdit={handleSubmit(saveEdit)}
-          setModalVisible={setFormVisible}
-          deleteItem={onRemove}
-        />
         <div className={classNames(styles.formInpts, styles.noScroll)}>
           {formData.map(
             ({ id, title, Component, componentProps }: IFormData) => (
@@ -66,16 +93,33 @@ function CustomForm({
                 <Controller
                   control={control}
                   name={componentProps.name}
-                  render={({ field }) => (
-                    <Component
-                      value={field.value ? field.value : ""}
-                      onChange={field.onChange ? field.onChange : null}
-                      name={componentProps.name}
-                      className={
-                        errors[componentProps.name] ? styles.error : ""
-                      }
-                    />
-                  )}
+                  render={({ field }) => {
+                    return (
+                      <Component
+                        value={field.value ? field.value : ""}
+                        onChange={field.onChange ? field.onChange : null}
+                        name={componentProps.name}
+                        getall={getValues()}
+                        setValue={setValue}
+                        customModalVisible={customModalVisible}
+                        setCustomModalVisible={setCustomModalVisible}
+                        categoryModalVisible={categoryModalVisible}
+                        setCategoryModalVisible={setCategoryModalVisible}
+                        subCategoryModalVisible={subCategoryModalVisible}
+                        setSubCategoryModalVisible={setSubCategoryModalVisible}
+                        // orderModalVisible={orderModalVisible}
+                        // setOrderModalVisible={setOrderModalVisible}
+                        // deliveryModalVisible={deliveryModalVisible}
+                        // setDeliveryModalVisible={setDeliveryModalVisible}
+                        options={
+                          componentProps.options ? componentProps.options : []
+                        }
+                        className={
+                          errors[componentProps.name] ? styles.error : ""
+                        }
+                      />
+                    );
+                  }}
                 />
               </div>
             )

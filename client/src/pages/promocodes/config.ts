@@ -1,11 +1,12 @@
 import * as Yup from "yup";
 
-import FormImage from "../../components/UI/form/formImage/FormImage";
-import FormItemList from "../../components/UI/form/formList/FormItemList";
+import CustomFormCategory from "../../components/UI/form/category/CustomFormCategory";
+import CustomFormSelect from "../../components/UI/form/customSelect/CustomFormSelect";
+import CustomFormList from "../../components/UI/form/formList/CustomFormList";
 import { FormInput } from "../../components/UI/input/FormInput";
 import { FormInputPercent } from "../../components/UI/input/FormInputPercent";
 
-export interface IFormData {
+export interface IPromocodeFormData {
   id: number;
   title: string;
   Component: any;
@@ -20,10 +21,10 @@ export const columns = [
   },
 ];
 
-export const formData: IFormData[] = [
+export const formData: IPromocodeFormData[] = [
   {
     id: 1,
-    title: "Заголовок",
+    title: "Заголовок*",
     Component: FormInput,
     componentProps: {
       name: "name",
@@ -31,15 +32,15 @@ export const formData: IFormData[] = [
   },
   {
     id: 2,
-    title: "Краткое описание",
+    title: "Промокод*",
     Component: FormInput,
     componentProps: {
-      name: "description",
+      name: "promocode",
     },
   },
   {
     id: 3,
-    title: "Процент скидки",
+    title: "Процент скидки*",
     Component: FormInputPercent,
     componentProps: {
       name: "percent",
@@ -47,39 +48,44 @@ export const formData: IFormData[] = [
   },
   {
     id: 4,
-    title: "Баннер",
-    Component: FormImage,
+    title: "",
+    Component: CustomFormCategory,
     componentProps: {
-      name: "image",
+      name: "catalog_product",
     },
   },
   {
     id: 5,
+    title: "Бренд",
+    Component: CustomFormSelect,
+    componentProps: {
+      name: "brand",
+      options: "brands",
+    },
+  },
+  {
+    id: 6,
     title: "Товары",
-    Component: FormItemList,
+    Component: CustomFormList,
     componentProps: {
       name: "products",
     },
   },
 ];
 
-export const BannerSchema = Yup.object().shape({
+export const PromocodeSchema = Yup.object().shape({
   name: Yup.string()
     .typeError("Введите текст")
     .min(2, "Минимум 2 буквы")
-    .max(20, "Максимум 20 букв")
+    .max(30, "Максимум 50 букв")
     .required("Обязательное поле"),
-  description: Yup.string()
+  promocode: Yup.string()
     .typeError("Введите текст")
     .min(2, "Минимум 2 буквы")
-    .max(50, "Максимум 50 букв")
+    .max(30, "Максимум 50 букв")
     .required("Обязательное поле"),
   percent: Yup.number()
     .typeError("Введите число")
     .positive("Не может быть отрицательной")
-    .required("Обязательное поле"),
-  image: Yup.string()
-    .typeError("Введите текст")
-    .url("Здесь нужно добавить ссылку")
     .required("Обязательное поле"),
 });
