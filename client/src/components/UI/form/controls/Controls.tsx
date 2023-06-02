@@ -113,7 +113,6 @@ function Controls({
                   className={styles.btn}
                   onClick={() => {
                     saveEdit();
-                    // setModalVisible(false);
                   }}
                 >
                   Сохранить

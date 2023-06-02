@@ -3,7 +3,6 @@ import React from "react";
 import { SubCatalogProduct } from "../../../../models/IProductMockData";
 import { categoryAPI } from "../../../../service/CategoryService";
 import { subCategoryAPI } from "../../../../service/SubCategoryService";
-import { Select } from "../../select/Select";
 import { Typography } from "../../typography/Typography";
 import CustomSelect from "../customSelect/CustomSelect";
 
@@ -24,6 +23,8 @@ function FormCategory({
   const { data: subCategories } = subCategoryAPI.useFetchAllSubCategoriesQuery(
     (data?.catalog_product?.id as any) || ""
   );
+
+  
 
   return (
     <div className={styles.categorySection}>

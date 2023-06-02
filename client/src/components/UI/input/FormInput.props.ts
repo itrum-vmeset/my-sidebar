@@ -6,11 +6,7 @@ export interface FormInputProps
     HTMLInputElement
   > {
   className?: string;
-  name: string;
-  // value: any;
-  // onChange: any;
-  // label: string;
-  // register: any;
-  // required: boolean;
-  // getValues: any;
+  // name: string;
+  value: string;
+  onChange: any;
 }

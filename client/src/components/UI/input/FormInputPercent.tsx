@@ -1,15 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 
-import { FormInputProps } from "./FormInput.props";
+import { FormInputPercentProps } from "./FormInputPercent.props";
 
 import styles from "./Input.module.css";
-
-// export const percentage = (percent: any): string =>
-//   percent
-//     .toString()
-//     .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
-//     .concat(" %");
 
 export const FormInputPercent = ({
   className,
@@ -17,30 +11,37 @@ export const FormInputPercent = ({
   value,
   onChange,
   ...props
-}: FormInputProps): JSX.Element => {
-  const [state, setState] = useState<any>();
+}: FormInputPercentProps): JSX.Element => {
+  const [visibleInput, setVisibleInput] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  // useEffect(() => {
-  //   setState(value + "%");
-  // }, [value]);
+  useEffect(() => {
+    inputRef?.current?.focus();
+  }, [visibleInput]);
 
   return (
-    // <input
-    //   className={classNames(styles.input, className)}
-    //   value={name === "percent" ? percentage(value) : value}
-    //   onChange={onChange}
-    //   {...props}
-    // />
-    <input
-      value={state}
-      className={classNames(styles.input, className)}
-      onFocus={(e) => setState(e.target.value.replace("%", ""))}
-      onBlur={(e) => setState(e.target.value + "%")}
-      onChange={(e) => {
-        setState(e.target.value);
-        onChange && onChange(state);
-      }}
-      // onChange={onChange}
-    />
+    <div>
+      <input
+        ref={inputRef}
+        value={value}
+        type="number"
+        onChange={onChange}
+        onBlur={() => setVisibleInput(false)}
+        className={classNames(styles.input, className, {
+          [styles.hiddenInput]: !visibleInput,
+        })}
+      />
+      <input
+        value={value + "%"}
+        readOnly
+        onFocus={() => {
+          inputRef?.current?.focus();
+          setVisibleInput(true);
+        }}
+        className={classNames(styles.input, className, {
+          [styles.hiddenInput]: visibleInput,
+        })}
+      />
+    </div>
   );
 };

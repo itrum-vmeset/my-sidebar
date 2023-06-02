@@ -9,7 +9,7 @@ import MyModal from "../../components/UI/modal/MyModal";
 import { IBanner } from "../../models/IResponse";
 import { bannerAPI } from "../../service/BannerService";
 
-import { formData } from "./config";
+import { BannerSchema, formData } from "./config";
 
 import styles from "./Banners.module.css";
 
@@ -38,9 +38,11 @@ function Banners(): JSX.Element {
         setActiveElement={setActiveElement}
       >
         <CustomForm
+          modalVisible={formVisible}
           activeElement={activeElement}
           setFormVisible={setFormVisible}
           formData={formData}
+          validationSchema={BannerSchema}
           updateItem={
             activeElement.name
               ? (banner: IBanner) => updateBanner(banner)

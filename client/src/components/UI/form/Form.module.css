@@ -20,7 +20,7 @@
   padding: 16px 40px;
   overflow-y: scroll;
   height: 87vh;
-  gap: 4px;
+  gap: 8px;
 }
 
 .noScroll {
