@@ -76,7 +76,7 @@ function Banners(): JSX.Element {
 
   return (
     <div>
-      <DeleteModal
+      {/* <DeleteModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         activeElement={activeElement}
@@ -123,13 +123,11 @@ function Banners(): JSX.Element {
           Добавить баннер
         </Button>
         <TableComponent
-          data={productsData}
-          columns={columns}
           tableInstance={tableInstance}
           renderActions={renderActions}
           handleClickRow={handleClickRow}
         />
-      </PageContent>
+      </PageContent> */}
     </div>
   );
 }

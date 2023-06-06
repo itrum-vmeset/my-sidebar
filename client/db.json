@@ -11903,23 +11903,16 @@
       "promocode": "SOTRUDNIK",
       "percent": 20,
       "catalog_product": {
-        "id": "644a5d931b666a27fd169ed6",
-        "name": "Эстетический уход",
-        "position": 1,
-        "__v": 0
-      },
-      "sub_catalog_product": {
-        "id": "6a98af2a-e190-4af2-a8c9-7514f5cd4c72",
-        "name": "Скрабы",
-        "position": 1,
-        "catalog_product": "644a5d931b666a27fd169ed6",
+        "id": "644a5db01b666a27fd169eda",
+        "name": "Липолитики",
+        "position": 3,
         "__v": 0
       },
       "brand": {
-        "id": "7aaaeaee-6e50-4225-9ab2-15da6d802ba7",
-        "name": "Laboratory Cytolife",
-        "icon": "b350ff6b-5576-4c51-90a7-7747ec4b8c48.jpg",
-        "margin": 40
+        "id": "b5722983-b4a8-4e9a-b583-5211d5efe969",
+        "name": "AGT M",
+        "icon": "ebed07b3-d4b4-464a-b848-f2dc6ecc3112.jpg",
+        "margin": 0
       },
       "products": [
         {
@@ -11972,24 +11965,31 @@
           },
           "images": []
         }
-      ]
+      ],
+      "sub_catalog_product": {
+        "id": "72d4d04c-8b85-4bce-8252-949a22501fa8",
+        "name": "Прямые",
+        "position": 0,
+        "catalog_product": "644a5db01b666a27fd169eda",
+        "__v": 0
+      }
     },
     {
       "id": "f4ef5afc-c69a-4746-b94a-9d66bf627c51",
-      "name": "Скидка 20% на Kosmoteros Professionnel",
+      "name": "Скидка 20% на Kosmoteros",
       "promocode": "KOSMOTEROS",
       "percent": 20,
       "catalog_product": {
-        "id": "644a5d931b666a27fd169ed6",
-        "name": "Эстетический уход",
-        "position": 1,
+        "id": "644a5d861b666a27fd169ed4",
+        "name": "Контурная пластика",
+        "position": 0,
         "__v": 0
       },
       "sub_catalog_product": {
-        "id": "0e325ef5-b8fd-483d-b136-78895788e5a0",
-        "name": "Сыворотки-концентраты",
-        "position": 4,
-        "catalog_product": "644a5d931b666a27fd169ed6",
+        "id": "f33be44e-fcab-48f2-9871-dc3b01e6873f",
+        "name": "Филлеры",
+        "position": 0,
+        "catalog_product": "644a5d861b666a27fd169ed4",
         "__v": 0
       },
       "brand": {
@@ -12052,13 +12052,33 @@
       ]
     },
     {
-      "id": "1684923093649",
+      "percent": 33,
+      "promocode": "promo",
       "name": "new promocode",
+      "id": "1684923093649",
       "description": "description",
-      "percent": "33",
       "image": "http://kinked",
       "availableFor": "",
-      "products": []
+      "products": [],
+      "catalog_product": {
+        "id": "644a5d861b666a27fd169ed4",
+        "name": "Контурная пластика",
+        "position": 0,
+        "__v": 0
+      },
+      "sub_catalog_product": {
+        "id": "f33be44e-fcab-48f2-9871-dc3b01e6873f",
+        "name": "Филлеры",
+        "position": 0,
+        "catalog_product": "644a5d861b666a27fd169ed4",
+        "__v": 0
+      },
+      "brand": {
+        "id": "9c44f061-6a7a-40a9-9c5c-b5c512bb5048",
+        "name": "V45",
+        "icon": "c0f061fe-8e64-4620-835a-517ce44f1c5d.jpg",
+        "margin": 60
+      }
     }
   ]
 }

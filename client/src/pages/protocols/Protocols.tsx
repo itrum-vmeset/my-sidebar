@@ -96,7 +96,7 @@ function Protocols(): JSX.Element {
         setModalVisible={setDeleteModalVisible}
         activeElement={activeElement}
         deleteItem={
-          activeElement.protocol_category ? deleteProtocol : deleteCategory
+          activeElement?.protocol_category ? deleteProtocol : deleteCategory
         }
         text={"протокол"}
       />

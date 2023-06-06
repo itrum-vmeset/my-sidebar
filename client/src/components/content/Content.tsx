@@ -21,7 +21,7 @@ function Content({
   const [alertVisible, setAlertVisible] = useState(false);
   const [selectedItems, setSelectedItems] = useState<any>([]);
   const [modalVisible, setModalVisible] = useState(false);
-  const [activeElement, setActiveElement] = useState({});
+  const [activeElement, setActiveElement] = useState(undefined);
   const [items, setItems] = useState<any>([]);
   const { data, isLoading: isGoodsLoading, error, refetch } = service();
 

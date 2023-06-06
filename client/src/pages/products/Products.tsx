@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { useBlockLayout, useTable } from "react-table";
+import { Row, useBlockLayout, useTable } from "react-table";
 import { useGlobalFilter } from "react-table";
 import { usePagination } from "react-table";
 
@@ -33,7 +33,7 @@ function Products(): JSX.Element {
 
   const tableInstance = useTable(
     {
-      columns: columns as any,
+      columns: columns,
       data: productsData,
       initialState: {
         pageSize: 10,
@@ -57,7 +57,7 @@ function Products(): JSX.Element {
     setGlobalFilter,
   } = tableInstance;
 
-  const handleClickRow = (row: any): void => {
+  const handleClickRow = (row: Row): void => {
     setActiveElement(row.original);
     setFormVisible(true);
   };
@@ -104,8 +104,6 @@ function Products(): JSX.Element {
         pageSize={state.pageSize}
       />
       <TableComponent
-        data={productsData}
-        columns={columns}
         tableInstance={tableInstance}
         renderActions={() => {
           return [];

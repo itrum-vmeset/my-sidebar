@@ -1,5 +1,10 @@
 import { useMemo, useState } from "react";
-import { useBlockLayout, useGlobalFilter, useTable } from "react-table";
+import {
+  TableInstance,
+  useBlockLayout,
+  useGlobalFilter,
+  useTable,
+} from "react-table";
 import { usePagination } from "react-table";
 
 import { withLayout } from "../../components/layout/Layout";
@@ -27,7 +32,7 @@ function Orders(): JSX.Element {
 
   const tableInstance = useTable(
     {
-      columns: columns as any,
+      columns: columns,
       data: productsData,
       initialState: {
         pageSize: 10,
@@ -97,8 +102,6 @@ function Orders(): JSX.Element {
         pageSize={state.pageSize}
       />
       <TableComponent
-        data={productsData}
-        columns={columns}
         tableInstance={tableInstance}
         renderActions={() => {
           return [];

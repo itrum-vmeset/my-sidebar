@@ -8,7 +8,6 @@ import { withLayout } from "../../components/layout/Layout";
 import TableComponent from "../../components/table/TableComponent";
 import TableForm from "../../components/table/tableForm/TableForm";
 import DeleteModal from "../../components/UI/deleteModal/DeleteModal";
-import { ICity } from "../../models/IResponse";
 import { cityAPI } from "../../service/CityService";
 
 import { columns } from "./config";
@@ -39,7 +38,7 @@ function Cities(): JSX.Element {
 
   const tableInstance = useTable(
     {
-      columns: columns as any,
+      columns: columns,
       data: productsData,
     },
     useBlockLayout
@@ -97,8 +96,6 @@ function Cities(): JSX.Element {
           buttonText="Добавить город"
         />
         <TableComponent
-          data={productsData}
-          columns={columns}
           tableInstance={tableInstance}
           renderActions={renderActions}
         />

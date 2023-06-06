@@ -17,7 +17,15 @@ function Banners(): JSX.Element {
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
   const [selected, setSelected] = useState(null);
-  const [activeElement, setActiveElement] = useState<any>({});
+  const [activeElement, setActiveElement] = useState<IBanner | undefined>({
+    id: Date.now().toString(),
+    name: "",
+    description: "",
+    percent: 0,
+    image: "",
+    availableFor: "",
+    products: [],
+  });
   const [deleteBanner] = bannerAPI.useDeleteBannerMutation();
   const [updateBanner] = bannerAPI.useUpdateBannerMutation();
   const [createBanner] = bannerAPI.useCreateBannerMutation();
@@ -44,7 +52,7 @@ function Banners(): JSX.Element {
           formData={formData}
           validationSchema={BannerSchema}
           updateItem={
-            activeElement.name
+            activeElement?.name
               ? (banner: IBanner) => updateBanner(banner)
               : (banner: IBanner) => createBanner(banner)
           }
@@ -60,7 +68,7 @@ function Banners(): JSX.Element {
             id: Date.now().toString(),
             name: "",
             description: "",
-            percent: "",
+            percent: 0,
             image: "",
             availableFor: "",
             products: [],

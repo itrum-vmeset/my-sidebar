@@ -1,6 +1,8 @@
+import { Column } from "react-table";
+
 import { Typography } from "../../components/UI/typography/Typography";
 
-export const future = [
+export const future: Column[] = [
   {
     Header: "Название",
     accessor: "name",
@@ -21,7 +23,7 @@ export const future = [
   },
 ];
 
-export const history = [
+export const history: Column[] = [
   {
     Header: "Название",
     accessor: "name",
@@ -34,7 +36,7 @@ export const history = [
   },
 ];
 
-export const request = [
+export const request: Column[] = [
   {
     Header: "Название семнара",
     accessor: "seminar",
@@ -100,4 +102,4 @@ export const historyItem = {
   date: "",
   image: "",
   mobileImage: "",
-}
+};

@@ -4,17 +4,17 @@ import classNames from "classnames";
 import { Button } from "../button/Button";
 import { Typography } from "../typography/Typography";
 
-import { BrandModalProps } from "./DeleteModal.props";
+import { DeleteModalProps } from "./DeleteModal.props";
 
 import styles from "./DeleteModal.module.css";
 
-const DeleteModal = ({
+const DeleteModal = <T extends { name: string }>({
   modalVisible,
   setModalVisible,
   deleteItem,
   activeElement,
   text,
-}: BrandModalProps): JSX.Element => {
+}: DeleteModalProps<T>): JSX.Element => {
   useEffect(() => {
     const close = (e: KeyboardEvent): void => {
       if (e.key === "Escape") {
@@ -42,16 +42,15 @@ const DeleteModal = ({
           Вы действительно хотите удалить {text}
         </Typography>
         <Typography className={styles.modalItem}>
-          {activeElement?.name}
-          {/* {pathname === SEMINARS_ROUTE
-            ? activeElement?.name
-            : activeElement?.name} */}
+          {activeElement?.name ? activeElement.name : ""}
         </Typography>
         <Button
           appearance="filled"
           onClick={() => {
             setModalVisible(false);
-            deleteItem(activeElement);
+            if (activeElement) {
+              deleteItem(activeElement);
+            }
           }}
         >
           Удалить

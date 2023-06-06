@@ -1,3 +1,5 @@
+import { Column } from "react-table";
+
 function formatPhoneNumber(phoneNumberString: string) {
   const cleaned = ("" + phoneNumberString).replace(/\D/g, "");
   const match = cleaned.match(/^(7|)?(\d{3})(\d{3})(\d{4})$/);
@@ -10,7 +12,7 @@ function formatPhoneNumber(phoneNumberString: string) {
   );
 }
 
-export const columns = [
+export const columns: Column[] = [
   {
     Header: "ФИ",
     accessor: (row: any) => `${row.name} ${row.lastName}`,

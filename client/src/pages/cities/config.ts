@@ -1,4 +1,6 @@
-export const columns = [
+import { Column } from "react-table";
+
+export const columns: Column[] = [
   {
     Header: "Город",
     accessor: "name",

@@ -63,7 +63,7 @@ function Promocodes(): JSX.Element {
 
   return (
     <div>
-      <DeleteModal
+      {/* <DeleteModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         activeElement={activeElement}
@@ -110,13 +110,13 @@ function Promocodes(): JSX.Element {
           Добавить промокод
         </Button>
         <TableComponent
-          data={productsData}
-          columns={columns}
+          // data={productsData}
+          // columns={columns}
           tableInstance={tableInstance}
           renderActions={renderActions}
           handleClickRow={handleClickRow}
         />
-      </PageContent>
+      </PageContent> */}
     </div>
   );
 }

@@ -22,7 +22,7 @@ function Clients(): JSX.Element {
 
   const tableInstance = useTable(
     {
-      columns: columns as any,
+      columns: columns,
       data: productsData,
       initialState: {
         pageSize: 10,
@@ -65,8 +65,6 @@ function Clients(): JSX.Element {
         pageSize={state.pageSize}
       />
       <TableComponent
-        data={productsData}
-        columns={columns}
         tableInstance={tableInstance}
         renderActions={() => {
           return [];
