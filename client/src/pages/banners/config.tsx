@@ -4,13 +4,7 @@ import FormImage from "../../components/UI/form/formImage/FormImage";
 import FormItemList from "../../components/UI/form/formList/FormItemList";
 import { FormInput } from "../../components/UI/input/FormInput";
 import { FormInputPercent } from "../../components/UI/input/FormInputPercent";
-
-export interface IFormData {
-  id: number;
-  title: string;
-  Component: any;
-  componentProps: any;
-}
+import { IFormData } from "../../models/IFormData";
 
 export const columns = [
   {
@@ -67,7 +61,7 @@ export const BannerSchema = Yup.object().shape({
   name: Yup.string()
     .typeError("Введите текст")
     .min(2, "Минимум 2 буквы")
-    .max(20, "Максимум 20 букв")
+    .max(40, "Максимум 40 букв")
     .required("Обязательное поле"),
   description: Yup.string()
     .typeError("Введите текст")

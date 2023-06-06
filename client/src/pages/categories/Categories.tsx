@@ -16,7 +16,12 @@ import styles from "./Categories.module.css";
 function Categories(): JSX.Element {
   const { pathname } = useLocation();
   const [category, setCategory] = useState({ id: "" });
-  const [activeElement, setActiveElement] = useState({ catalog_product: "" });
+  const [activeElement, setActiveElement] = useState({
+    catalog_product: "",
+    id: "",
+    name: "",
+    position: 0,
+  });
   const [selected, setSelected] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);

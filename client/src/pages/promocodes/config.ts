@@ -1,3 +1,5 @@
+import { FC } from "react";
+import { Column } from "react-table";
 import * as Yup from "yup";
 
 import CustomFormCategory from "../../components/UI/form/category/CustomFormCategory";
@@ -5,15 +7,9 @@ import CustomFormSelect from "../../components/UI/form/customSelect/CustomFormSe
 import CustomFormList from "../../components/UI/form/formList/CustomFormList";
 import { FormInput } from "../../components/UI/input/FormInput";
 import { FormInputPercent } from "../../components/UI/input/FormInputPercent";
+import { IFormData } from "../../models/IFormData";
 
-export interface IPromocodeFormData {
-  id: number;
-  title: string;
-  Component: any;
-  componentProps: any;
-}
-
-export const columns = [
+export const columns: Column[] = [
   {
     Header: "Заголовок",
     accessor: "name",
@@ -21,7 +17,7 @@ export const columns = [
   },
 ];
 
-export const formData: IPromocodeFormData[] = [
+export const formData: IFormData[] = [
   {
     id: 1,
     title: "Заголовок*",
@@ -77,12 +73,12 @@ export const PromocodeSchema = Yup.object().shape({
   name: Yup.string()
     .typeError("Введите текст")
     .min(2, "Минимум 2 буквы")
-    .max(30, "Максимум 50 букв")
+    .max(30, "Максимум 30 букв")
     .required("Обязательное поле"),
   promocode: Yup.string()
     .typeError("Введите текст")
     .min(2, "Минимум 2 буквы")
-    .max(30, "Максимум 50 букв")
+    .max(30, "Максимум 30 букв")
     .required("Обязательное поле"),
   percent: Yup.number()
     .typeError("Введите число")

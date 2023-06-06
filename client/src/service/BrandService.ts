@@ -2,7 +2,6 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
 import { IBrand, IResponse } from "../models/IResponse";
 
-// const baseUrl = "http://localhost:5000/api";
 const baseUrl = "http://localhost:5005";
 
 export const brandAPI = createApi({

@@ -1,7 +1,9 @@
+import { Column } from "react-table";
+
 import { priceRu } from "../../helpers/priceRu";
 import { translator } from "../../helpers/translator";
 
-export const columns = [
+export const columns: Column[] = [
   {
     Header: "Заказчик",
     accessor: (row: any) => {

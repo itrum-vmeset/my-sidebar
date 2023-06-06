@@ -5,7 +5,6 @@ import { useGlobalFilter } from "react-table";
 
 import { ReactComponent as DeleteIcon } from "../../assets/icons/delete.svg";
 import { ReactComponent as ShapeIcon } from "../../assets/icons/shape.svg";
-import PageContent from "../../components/cityContent/PageContent";
 import { withLayout } from "../../components/layout/Layout";
 import { GlobalFilter } from "../../components/table/filter/Filter";
 import Paginator from "../../components/table/pagination/Paginator";
@@ -51,7 +50,7 @@ function Seminars(): JSX.Element {
 
   const tableInstance = useTable(
     {
-      columns: columns as any,
+      columns: columns,
       data: productsData,
       initialState: {
         pageSize: 10,
@@ -179,7 +178,7 @@ function Seminars(): JSX.Element {
       >
         <Form
           updateItem={
-            activeElement.name
+            activeElement?.name
               ? (seminar: any) => updateSeminar({ seminar, activeRoute })
               : (seminar: any) => createSeminar({ seminar, activeRoute })
           }
@@ -229,8 +228,6 @@ function Seminars(): JSX.Element {
         </Button>
       )}
       <TableComponent
-        data={productsData}
-        columns={columns}
         tableInstance={tableInstance}
         renderActions={renderActions}
         checkBox={activeRoute === "request" ? false : true}

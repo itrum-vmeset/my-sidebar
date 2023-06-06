@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
 import classNames from "classnames";
-import { Controller, useForm } from "react-hook-form";
+import {
+  Controller,
+  FieldValues,
+  SubmitHandler,
+  useForm,
+} from "react-hook-form";
+import { AnyObject, ObjectSchema } from "yup";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { BannerSchema, IFormData } from "../../../pages/banners/config";
+import { IFormData } from "../../../models/IFormData";
 import { Typography } from "../typography/Typography";
 
 import Controls from "./controls/Controls";
@@ -12,17 +18,18 @@ import { CustomFormProps } from "./CustomFormProps";
 
 import styles from "./Form.module.css";
 
-function CustomForm({
+function CustomForm<
+  S extends ObjectSchema<any, AnyObject, any, "">,
+  T extends { [x: string]: any } | undefined
+>({
   activeElement,
   modalVisible,
   setFormVisible,
   formData,
   updateItem,
   removeItem,
-  brands,
-  cities,
   validationSchema,
-}: CustomFormProps): JSX.Element {
+}: CustomFormProps<S, T>): JSX.Element {
   const [customModalVisible, setCustomModalVisible] = useState(false);
   const [categoryModalVisible, setCategoryModalVisible] = useState(false);
   const [subCategoryModalVisible, setSubCategoryModalVisible] = useState(false);
@@ -39,11 +46,11 @@ function CustomForm({
     defaultValues: activeElement,
     resolver: yupResolver(validationSchema),
   });
-  const saveEdit = (data: any): void => {
+  const saveEdit = (data: T): void => {
     data && updateItem(data);
   };
   const onRemove = (): void => {
-    removeItem(activeElement);
+    activeElement && removeItem(activeElement);
     setFormVisible(false);
   };
 
@@ -73,7 +80,7 @@ function CustomForm({
       }}
     >
       <Controls
-        saveEdit={handleSubmit(saveEdit)}
+        saveEdit={handleSubmit(saveEdit as SubmitHandler<FieldValues>)}
         setModalVisible={setFormVisible}
         deleteItem={onRemove}
       />

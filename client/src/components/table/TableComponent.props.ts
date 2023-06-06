@@ -1,19 +1,21 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react";
-import { Row } from "react-table";
+import { Row, TableInstance } from "react-table";
+
+interface IRenderAction {
+  component: JSX.Element;
+  width: number;
+  action: (item: any) => void;
+}
 
 export interface TableComponentProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  data: any;
   setModalVisible?: (event: boolean) => void;
-  setActiveElement?: (element: any) => void;
   setAlertVisible?: (event: boolean) => void;
   selectedItems?: Row[];
-  setSelectedItems?: (element: any) => void;
-  columns: any;
-  action?: any;
-  tableInstance: any;
-  renderActions: any;
+  setSelectedItems?: (element: Row[]) => void;
+  tableInstance: TableInstance<{}>;
+  renderActions: () => IRenderAction[];
   checkBox?: boolean;
   setSelectVisible?: (event: boolean) => void;
-  handleClickRow?: (row: any) => void;
+  handleClickRow?: (row: Row) => void;
 }

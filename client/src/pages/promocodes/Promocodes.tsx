@@ -1,15 +1,15 @@
 import { useEffect, useMemo, useState } from "react";
-import { useTable } from "react-table";
+import { Row, useTable } from "react-table";
 import { useBlockLayout } from "react-table";
 
 import { ReactComponent as DeleteIcon } from "../../assets/icons/delete.svg";
-import PageContent from "../../components/cityContent/PageContent";
 import { withLayout } from "../../components/layout/Layout";
 import TableComponent from "../../components/table/TableComponent";
 import { Button } from "../../components/UI/button/Button";
 import DeleteModal from "../../components/UI/deleteModal/DeleteModal";
 import CustomForm from "../../components/UI/form/CustomForm";
 import MyModal from "../../components/UI/modal/MyModal";
+import { IFormData } from "../../models/IFormData";
 import { IPromocode } from "../../models/IResponse";
 import { brandAPI } from "../../service/BrandService";
 import { promocodeAPI } from "../../service/PromocodeService";
@@ -20,9 +20,28 @@ import styles from "./Promocodes.module.css";
 
 function Promocodes(): JSX.Element {
   const [modalVisible, setModalVisible] = useState(false);
-  const [enrichedFormData, setEnrichedFormData] = useState<any>([]);
+  const [enrichedFormData, setEnrichedFormData] = useState<IFormData[]>([]);
   const [formVisible, setFormVisible] = useState(false);
-  const [activeElement, setActiveElement] = useState<any>({});
+  const [activeElement, setActiveElement] = useState<IPromocode | undefined>({
+    id: "",
+    name: "",
+    promocode: "",
+    percent: 0,
+    catalog_product: {
+      id: "",
+      name: "",
+    },
+    sub_catalog_product: {
+      id: "",
+      name: "",
+      catalog_product: "",
+    },
+    brand: {
+      id: "",
+      name: "",
+    },
+    products: [],
+  });
   const [deletePromocode] = promocodeAPI.useDeletePromocodeMutation();
   const [updatePromocode] = promocodeAPI.useUpdatePromocodeMutation();
   const [createPromocode] = promocodeAPI.useCreatePromocodeMutation();
@@ -36,14 +55,14 @@ function Promocodes(): JSX.Element {
 
   const tableInstance = useTable(
     {
-      columns: columns as any,
+      columns: columns,
       data: productsData,
     },
     useBlockLayout
   );
 
-  const handleClickRow = (row: any): void => {
-    setActiveElement(row.original);
+  const handleClickRow = (row: Row): void => {
+    setActiveElement(row.original as IPromocode);
     setFormVisible(true);
   };
 
@@ -90,7 +109,6 @@ function Promocodes(): JSX.Element {
         deleteItem={deletePromocode}
         text={"промокод"}
       />
-
       <MyModal
         modalVisible={formVisible}
         setModalVisible={setFormVisible}
@@ -101,10 +119,9 @@ function Promocodes(): JSX.Element {
           activeElement={activeElement}
           setFormVisible={setFormVisible}
           formData={enrichedFormData}
-          brands={brands}
           validationSchema={PromocodeSchema}
           updateItem={
-            activeElement.name
+            activeElement?.name
               ? (promocode: IPromocode) => updatePromocode(promocode)
               : (promocode: IPromocode) => createPromocode(promocode)
           }
@@ -128,6 +145,7 @@ function Promocodes(): JSX.Element {
             sub_catalog_product: {
               id: "",
               name: "",
+              catalog_product: "",
             },
             brand: {
               id: "",
@@ -141,8 +159,6 @@ function Promocodes(): JSX.Element {
         Добавить промокод
       </Button>
       <TableComponent
-        data={productsData}
-        columns={columns}
         tableInstance={tableInstance}
         renderActions={renderActions}
         handleClickRow={handleClickRow}

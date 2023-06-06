@@ -5,17 +5,17 @@ import { MyModalProps } from "./MyModal.props";
 
 import styles from "./MyModal.module.css";
 
-const MyModal = ({
+const MyModal = <T,>({
   children,
   modalVisible,
   setModalVisible,
   setActiveElement,
-}: MyModalProps): JSX.Element => {
+}: MyModalProps<T>): JSX.Element => {
   useEffect(() => {
     const close = (e: KeyboardEvent): void => {
       if (e.key === "Escape") {
         setModalVisible(false);
-        setActiveElement({});
+        setActiveElement(undefined);
       }
     };
     window.addEventListener("keydown", close);
@@ -29,7 +29,7 @@ const MyModal = ({
       })}
       onClick={() => {
         setModalVisible(false);
-        setActiveElement({});
+        setActiveElement(undefined);
       }}
     >
       <div

@@ -21,7 +21,6 @@ function CustomFormCategory({
   setValue,
 }: CustomFormCategoryProps): JSX.Element {
   const [subCategoryValue, setSubCategoryValue] = useState("");
-  const [disabled, setDisabled] = useState(false);
   const { data: catalog_products } =
     categoryAPI.useFetchAllCategoriesQuery(null);
   const { data: subCategories } = subCategoryAPI.useFetchAllSubCategoriesQuery(
@@ -45,7 +44,7 @@ function CustomFormCategory({
             options={catalog_products?.data}
             setData={(e) => {
               const selectedCategory = catalog_products.data.find(
-                (category) => category.name === e
+                (category) => category.name === e.name
               );
               onChange(selectedCategory);
               setSubCategoryValue("Выберите подкатегорию");
@@ -69,7 +68,7 @@ function CustomFormCategory({
           options={value?.id && subCategories?.data ? subCategories?.data : []}
           setData={(e) => {
             const selectedSubCategory = subCategories?.data.find(
-              (subCategory) => subCategory.name === e
+              (subCategory) => subCategory.name === e.name
             );
             setValue("sub_catalog_product", selectedSubCategory, {
               shouldValidate: true,

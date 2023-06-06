@@ -91,11 +91,18 @@ export interface ICity {
 }
 
 export interface IBanner {
+  createdAt?: string;
+  updatedAt?: string;
   id: string;
   name: string;
   description: string;
+  percent: number;
   image: string;
+  mobileImage?: string;
   availableFor: string;
+  type?: string;
+  promocode?: IPromocode;
+  products: Product[];
 }
 
 export interface IPromocode {
@@ -103,4 +110,38 @@ export interface IPromocode {
   name: string;
   promocode: string;
   percent: number;
+  catalog_product: CatalogProduct;
+  brand: Brand;
+  products: Product[];
+  sub_catalog_product: SubCatalogProduct;
+}
+
+export interface CatalogProduct {
+  id: string;
+  name: string;
+  position?: number;
+  __v?: number;
+}
+
+export interface Brand {
+  id: string;
+  name: string;
+  icon?: string;
+  margin?: number;
+}
+
+export interface Product {
+  id: string;
+  name: string;
+  isRetailAllowed: boolean;
+  brand: Brand;
+  images: any[];
+}
+
+export interface SubCatalogProduct {
+  id: string;
+  name: string;
+  position?: number;
+  catalog_product: string;
+  __v?: number;
 }
