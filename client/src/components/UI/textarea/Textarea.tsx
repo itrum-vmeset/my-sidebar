@@ -8,7 +8,6 @@ export const Textarea = ({
   className,
   value,
   onChange,
-  disabled,
 }: TextareaProps): JSX.Element => {
   return (
     <textarea

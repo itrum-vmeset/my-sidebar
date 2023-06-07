@@ -3,18 +3,22 @@ import { useTable } from "react-table";
 import { useBlockLayout } from "react-table";
 
 import { ReactComponent as DeleteIcon } from "../../assets/icons/delete.svg";
-import PageContent from "../../components/cityContent/PageContent";
 import { withLayout } from "../../components/layout/Layout";
 import TableComponent from "../../components/table/TableComponent";
 import TableForm from "../../components/table/tableForm/TableForm";
 import DeleteModal from "../../components/UI/deleteModal/DeleteModal";
+import { ICity } from "../../models/IResponse";
 import { cityAPI } from "../../service/CityService";
 
 import { columns } from "./config";
 
 function Cities(): JSX.Element {
   const [modalVisible, setModalVisible] = useState(false);
-  const [activeElement, setActiveElement] = useState<any>({});
+  const [activeElement, setActiveElement] = useState<ICity | undefined>({
+    id: "",
+    name: "",
+    address: "",
+  });
 
   const [newCity, setNewCity] = useState({
     name: {
@@ -27,7 +31,6 @@ function Cities(): JSX.Element {
     },
   });
   const [deleteCity] = cityAPI.useDeleteCityMutation();
-  const [updateCity] = cityAPI.useUpdateCityMutation();
   const [createCity] = cityAPI.useCreateCityMutation();
   const { data } = cityAPI.useFetchAllCitiesQuery(null);
 
@@ -71,7 +74,7 @@ function Cities(): JSX.Element {
           </div>
         ),
         width: 40,
-        action: (item: any) => {
+        action: (item: ICity) => {
           setActiveElement(item);
           setModalVisible(true);
         },
@@ -80,7 +83,7 @@ function Cities(): JSX.Element {
   };
 
   return (
-    <div>
+    <div className="container">
       <DeleteModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
@@ -88,18 +91,16 @@ function Cities(): JSX.Element {
         deleteItem={deleteCity}
         text={"город"}
       />
-      <PageContent deleteItem={deleteCity} updateItem={updateCity}>
-        <TableForm
-          addItem={handleCreate}
-          item={newCity}
-          setItem={setNewCity}
-          buttonText="Добавить город"
-        />
-        <TableComponent
-          tableInstance={tableInstance}
-          renderActions={renderActions}
-        />
-      </PageContent>
+      <TableForm
+        addItem={handleCreate}
+        item={newCity}
+        setItem={setNewCity}
+        buttonText="Добавить город"
+      />
+      <TableComponent
+        tableInstance={tableInstance}
+        renderActions={renderActions}
+      />
     </div>
   );
 }
