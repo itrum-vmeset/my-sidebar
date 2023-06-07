@@ -6,9 +6,15 @@ import styles from "./Textarea.module.css";
 
 export const Textarea = ({
   className,
-  ...props
+  value,
+  onChange,
+  disabled,
 }: TextareaProps): JSX.Element => {
   return (
-    <textarea className={classNames(styles.myTextarea, className)} {...props} />
+    <textarea
+      value={value}
+      onChange={onChange}
+      className={classNames(styles.myTextarea, className)}
+    />
   );
 };

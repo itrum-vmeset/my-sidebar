@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import { ReactComponent as ArrowsIcon } from "../../assets/icons/Arrows.svg";
@@ -6,22 +6,32 @@ import { withLayout } from "../../components/layout/Layout";
 import { NoRows } from "../../components/table/noRows/NoRows";
 import { Button } from "../../components/UI/button/Button";
 import DeleteModal from "../../components/UI/deleteModal/DeleteModal";
-import Form from "../../components/UI/form/Form";
+import CustomForm from "../../components/UI/form/CustomForm";
 import { Input } from "../../components/UI/input/Input";
 import { List } from "../../components/UI/list/List";
 import MyModal from "../../components/UI/modal/MyModal";
+import { IFormData } from "../../models/IFormData";
+import { IProtocol } from "../../models/IResponse";
 import { brandAPI } from "../../service/BrandService";
 import { protocolCategoriesAPI } from "../../service/ProtocolCategoriesService";
 import { protocolAPI } from "../../service/ProtocolsService";
+
+import { formData, ProtocolSchema } from "./config";
 
 import styles from "./Protocols.module.css";
 
 function Protocols(): JSX.Element {
   const { pathname } = useLocation();
-  const [category, setCategory] = useState({ id: "" });
-  const [activeElement, setActiveElement] = useState<any>({
+  const [category, setCategory] = useState({ id: "", name: "" });
+  const [enrichedFormData, setEnrichedFormData] = useState<IFormData[]>([]);
+  const [activeElement, setActiveElement] = useState<IProtocol | undefined>({
+    id: "",
+    name: "",
     description: "",
-    protocol_category: "",
+    isRetailAllowed: false,
+    brand: { id: "", name: "" },
+    protocol_category: category?.name,
+    products: [],
   });
   const [selected, setSelected] = useState(null);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
@@ -65,7 +75,7 @@ function Protocols(): JSX.Element {
     }
   };
 
-  const setNewProtocol = (item: any) => {
+  const setNewProtocol = (item: IProtocol): void => {
     if (!category) {
       return alert("Сначала выберите категорию");
     }
@@ -75,19 +85,38 @@ function Protocols(): JSX.Element {
       name: item.name,
       brand: item.brand,
       description: item.description,
-      protocol_category: name,
+      protocol_category: name?.name,
       products: item.products,
     };
-    setActiveElement(newData);
+    if (name?.name) {
+      setActiveElement(newData as IProtocol);
+    }
     setFormVisible(true);
   };
 
-  const handleCreateProtocol = (data: any) => {
+  const handleCreateProtocol = (data: IProtocol): void => {
     createProtocol({
       ...data,
-      protocol_category: data?.protocol_category?.id,
+      protocol_category: category?.id,
     });
   };
+
+  useEffect(() => {
+    const enriched = formData.map((item) => {
+      if (item.componentProps.options === "brands") {
+        return {
+          ...item,
+          componentProps: {
+            ...item.componentProps,
+            options: brands?.data,
+          },
+        };
+      } else {
+        return item;
+      }
+    });
+    setEnrichedFormData(enriched);
+  }, [brands]);
 
   return (
     <div className={styles.wrapper}>
@@ -105,14 +134,18 @@ function Protocols(): JSX.Element {
         setModalVisible={setFormVisible}
         setActiveElement={setActiveElement}
       >
-        <Form
-          updateItem={
-            activeElement?.description ? updateProtocol : handleCreateProtocol
-          }
-          setModalVisible={setFormVisible}
+        <CustomForm
+          modalVisible={formVisible}
           activeElement={activeElement}
-          setActiveElement={setActiveElement}
-          brands={brands}
+          setFormVisible={setFormVisible}
+          formData={enrichedFormData}
+          validationSchema={ProtocolSchema}
+          updateItem={
+            activeElement?.name
+              ? (protocol: IProtocol) => updateProtocol(protocol)
+              : (protocol: IProtocol) => handleCreateProtocol(protocol)
+          }
+          removeItem={(protocol: IProtocol) => deleteProtocol(protocol)}
         />
       </MyModal>
       <div className={styles.list}>
@@ -149,11 +182,11 @@ function Protocols(): JSX.Element {
               onClick={() =>
                 setNewProtocol({
                   name: "",
-                  brand: "",
+                  brand: { id: "", name: "" },
                   description: "",
-                  protocol_category: category,
+                  protocol_category: category?.name,
                   products: [],
-                  id: Date.now(),
+                  id: Date.now().toString(),
                   isRetailAllowed: false,
                 })
               }

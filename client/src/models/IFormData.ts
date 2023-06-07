@@ -9,5 +9,6 @@ export interface IFormData {
   componentProps: {
     name: string;
     options?: string | IBrand[];
+    disabled?: boolean;
   };
 }

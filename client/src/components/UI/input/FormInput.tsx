@@ -8,12 +8,14 @@ export const FormInput = ({
   value,
   onChange,
   className,
+  disabled,
 }: FormInputProps): JSX.Element => {
   return (
     <input
       className={classNames(styles.input, className)}
       value={value}
       onChange={onChange}
+      disabled={disabled}
     />
   );
 };

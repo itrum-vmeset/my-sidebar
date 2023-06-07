@@ -114,6 +114,7 @@ function CustomForm<
                         setCategoryModalVisible={setCategoryModalVisible}
                         subCategoryModalVisible={subCategoryModalVisible}
                         setSubCategoryModalVisible={setSubCategoryModalVisible}
+                        disabled={componentProps.disabled ? true : false}
                         // orderModalVisible={orderModalVisible}
                         // setOrderModalVisible={setOrderModalVisible}
                         // deliveryModalVisible={deliveryModalVisible}

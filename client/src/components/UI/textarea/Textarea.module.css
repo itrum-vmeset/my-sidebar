@@ -1,4 +1,15 @@
 .myTextarea {
+  box-sizing: border-box;
+  padding: 8px 12px 32px;
+  border: 1px solid #d0d3da;
+  border-radius: 8px;
+  width: 100%;
+  min-height: 60px;
+  overflow-y: scroll;
+  resize: none;
+}
+
+.myTextarea {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
