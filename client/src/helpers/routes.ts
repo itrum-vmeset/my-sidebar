@@ -5,7 +5,6 @@ import Categories from "../pages/categories/Categories";
 import Cities from "../pages/cities/Cities";
 import Clients from "../pages/clients/Clients";
 import Orders from "../pages/orders/Orders";
-import OrdersOld from "../pages/orders/OrdersOld";
 import Products from "../pages/products/Products";
 import Promocodes from "../pages/promocodes/Promocodes";
 import Protocols from "../pages/protocols/Protocols";

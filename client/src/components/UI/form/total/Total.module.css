@@ -1,0 +1,10 @@
+.total {
+  display: flex;
+  justify-content: space-between;
+}
+
+.totalTypography {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}

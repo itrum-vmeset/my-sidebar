@@ -4,6 +4,7 @@
   border: 1px solid #d0d3da;
   border-radius: 8px;
   text-align: left;
+  cursor: pointer;
 }
 
 .input:focus {

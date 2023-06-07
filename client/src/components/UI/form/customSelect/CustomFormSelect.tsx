@@ -1,6 +1,7 @@
 import classNames from "classnames";
 
 import { ReactComponent as SelectIcon } from "../../../../assets/icons/select.svg";
+import { translator } from "../../../../helpers/translator";
 import { Input } from "../../input/Input";
 import SelectModal from "../../selectModal/SelectModal";
 
@@ -16,22 +17,27 @@ function CustomFormSelect({
   setCategoryModalVisible,
   setSubCategoryModalVisible,
   options,
+  name,
 }: CustomFormSelectProps): JSX.Element {
   return (
-    <div className={styles.customSelect}>
+    <div
+      className={styles.customSelect}
+      onClick={(e) => {
+        e.stopPropagation();
+        setCustomModalVisible({ [name]: !customModalVisible[name] });
+      }}
+    >
       <Input
         className={styles.selectInput}
-        value={value.name || ""}
-        onClick={(e) => {
-          e.stopPropagation();
-          setCustomModalVisible(!customModalVisible);
-          setCategoryModalVisible(false);
-          setSubCategoryModalVisible(false);
-        }}
+        value={
+          typeof value === "string"
+            ? translator(value, "") || ""
+            : value?.name || ""
+        }
         onChange={() => null}
       />
       <SelectModal
-        selectModalVisible={customModalVisible}
+        selectModalVisible={customModalVisible[name]}
         setSelectModalVisible={setCustomModalVisible}
         active={value}
         setData={onChange}
@@ -39,14 +45,8 @@ function CustomFormSelect({
       />
       <SelectIcon
         className={classNames(styles.selectIcon, {
-          [styles.selectIconActive]: customModalVisible,
+          [styles.selectIconActive]: customModalVisible[name],
         })}
-        onClick={(e) => {
-          e.stopPropagation();
-          setCustomModalVisible(!customModalVisible);
-          setCategoryModalVisible(false);
-          setSubCategoryModalVisible(false);
-        }}
       />
     </div>
   );

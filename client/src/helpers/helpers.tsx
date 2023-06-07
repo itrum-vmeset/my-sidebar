@@ -57,7 +57,12 @@ export const selectOptions = [
   { value: "50", name: "50" },
 ];
 
-export const paymentOptions = [
+export interface IPayment {
+  value: string;
+  name: string;
+}
+
+export const paymentOptions: IPayment[] = [
   { value: "ONLINE", name: "Онлайн" },
   { value: "OFFICE_CASH", name: "Наличными в офисе" },
   {
@@ -69,6 +74,11 @@ export const paymentOptions = [
     name: "Переводом в офисе",
   },
 ];
+
+export interface IDelivery {
+  value: string;
+  name: string;
+}
 
 export const deliveryOptions = [
   { value: "DELIVERY", name: "Доставка" },

@@ -1,4 +1,4 @@
-export interface IOrderMock {
+export interface IOrder {
   id: string;
   order_type: string;
   total: number;
@@ -17,7 +17,7 @@ export interface User {
   lastName: any;
   secondName: any;
   firmName: any;
-  role: string;
+  role?: string;
 }
 
 export interface Warehouse {
