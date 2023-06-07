@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
-import { IOrderMock } from "../models/IOrderMockData";
+import { IOrder } from "../models/IOrder";
 import { IResponse } from "../models/IResponse";
 
 const baseUrl = "http://localhost:5005";
@@ -10,12 +10,12 @@ export const orderAPI = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
   tagTypes: ["Order"],
   endpoints: (build) => ({
-    fetchAllOrders: build.query<IResponse<IOrderMock>, null>({
+    fetchAllOrders: build.query<IResponse<IOrder>, null>({
       query: () => ({
         url: "/orders",
       }),
       providesTags: () => ["Order"],
-      transformResponse: (data: IOrderMock[]) => {
+      transformResponse: (data: IOrder[]) => {
         const count = data.length;
         return {
           data,
@@ -23,13 +23,13 @@ export const orderAPI = createApi({
         };
       },
     }),
-    deleteOrder: build.mutation<IOrderMock, IOrderMock>({
+    deleteOrder: build.mutation<IOrder, IOrder>({
       query: (id) => ({
         url: `/orders/${id}`,
         method: "DELETE",
       }),
     }),
-    updateOrder: build.mutation<IOrderMock, IOrderMock>({
+    updateOrder: build.mutation<IOrder, IOrder>({
       query: (order) => ({
         url: `/orders/${order.id}`,
         method: "PUT",

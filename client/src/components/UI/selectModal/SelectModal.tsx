@@ -31,7 +31,7 @@ const SelectModal = ({
       <div className={styles.selectModalContent}>
         <ul>
           {options?.length
-            ? options.map((el: any) => (
+            ? options?.map((el: any) => (
                 <li
                   key={el.value ? el.value : el.name}
                   value={el.value ? el.value : el.name}

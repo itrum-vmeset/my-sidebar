@@ -30,11 +30,9 @@ function CustomForm<
   removeItem,
   validationSchema,
 }: CustomFormProps<S, T>): JSX.Element {
-  const [customModalVisible, setCustomModalVisible] = useState(false);
+  const [customModalVisible, setCustomModalVisible] = useState({});
   const [categoryModalVisible, setCategoryModalVisible] = useState(false);
   const [subCategoryModalVisible, setSubCategoryModalVisible] = useState(false);
-  const [orderModalVisible, setOrderModalVisible] = useState(false);
-  const [deliveryModalVisible, setDeliveryModalVisible] = useState(false);
   const {
     handleSubmit,
     reset,
@@ -44,7 +42,7 @@ function CustomForm<
     setValue,
   } = useForm({
     defaultValues: activeElement,
-    resolver: yupResolver(validationSchema),
+    resolver: validationSchema ? yupResolver(validationSchema) : undefined,
   });
   const saveEdit = (data: T): void => {
     data && updateItem(data);
@@ -60,11 +58,9 @@ function CustomForm<
 
   useEffect(() => {
     if (!modalVisible) {
-      setCustomModalVisible(false);
+      setCustomModalVisible({});
       setCategoryModalVisible(false);
       setSubCategoryModalVisible(false);
-      setOrderModalVisible(false);
-      setDeliveryModalVisible(false);
     }
   }, [modalVisible]);
 
@@ -74,9 +70,7 @@ function CustomForm<
       onClick={() => {
         setCategoryModalVisible(false);
         setSubCategoryModalVisible(false);
-        setOrderModalVisible(false);
-        setDeliveryModalVisible(false);
-        setCustomModalVisible(false);
+        setCustomModalVisible({});
       }}
     >
       <Controls
@@ -108,17 +102,13 @@ function CustomForm<
                         name={componentProps.name}
                         getall={getValues()}
                         setValue={setValue}
+                        disabled={componentProps.disabled ? true : false}
                         customModalVisible={customModalVisible}
                         setCustomModalVisible={setCustomModalVisible}
                         categoryModalVisible={categoryModalVisible}
                         setCategoryModalVisible={setCategoryModalVisible}
                         subCategoryModalVisible={subCategoryModalVisible}
                         setSubCategoryModalVisible={setSubCategoryModalVisible}
-                        disabled={componentProps.disabled ? true : false}
-                        // orderModalVisible={orderModalVisible}
-                        // setOrderModalVisible={setOrderModalVisible}
-                        // deliveryModalVisible={deliveryModalVisible}
-                        // setDeliveryModalVisible={setDeliveryModalVisible}
                         options={
                           componentProps.options ? componentProps.options : []
                         }

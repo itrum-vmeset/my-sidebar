@@ -6,7 +6,7 @@ import CustomFormCategory from "../../components/UI/form/category/CustomFormCate
 import CustomFormSelect from "../../components/UI/form/customSelect/CustomFormSelect";
 import CustomFormList from "../../components/UI/form/formList/CustomFormList";
 import { FormInput } from "../../components/UI/input/FormInput";
-import { FormInputPercent } from "../../components/UI/input/FormInputPercent";
+import { FormInputPercent } from "../../components/UI/input/percent/FormInputPercent";
 import { IFormData } from "../../models/IFormData";
 
 export const columns: Column[] = [

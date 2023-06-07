@@ -3,14 +3,12 @@ import classNames from "classnames";
 
 import { FormInputPercentProps } from "./FormInputPercent.props";
 
-import styles from "./Input.module.css";
+import styles from "../Input.module.css";
 
 export const FormInputPercent = ({
   className,
-  name,
   value,
   onChange,
-  ...props
 }: FormInputPercentProps): JSX.Element => {
   const [visibleInput, setVisibleInput] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);

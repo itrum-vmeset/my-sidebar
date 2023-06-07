@@ -1,5 +1,7 @@
 import { FC } from "react";
 
+import { IPayment } from "../helpers/helpers";
+
 import { IBrand } from "./IResponse";
 
 export interface IFormData {
@@ -8,7 +10,7 @@ export interface IFormData {
   Component: FC<any>;
   componentProps: {
     name: string;
-    options?: string | IBrand[];
+    options?: string | IBrand[] | IPayment[];
     disabled?: boolean;
   };
 }
