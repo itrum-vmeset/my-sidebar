@@ -11481,7 +11481,7 @@
     },
     {
       "id": "0c44b3de-89e1-40dd-8e09-524da852340b",
-      "name": "Протокол для сухой кожи №2",
+      "name": "Протокол для сухой кожи №211",
       "description": "● Очищение: 3200 Гель очищающий, 400 мл\n● Тонизирование: 3206 Гидроактиватор, 400 мл\n● Дополнительное очищение: 3028 Пилинг-гоммаж, 200 мл\n● Концентрат или сыворотка: 3115 Восстанавливающая сыворотка с фруктовыми кислотами, 50 мл\n● Маска: 3047 Увлажняющая маска «Нежные сливки», 200 мл\n● Завершающий крем: 3175 Крем для сухой кожи, 200 мл\n● Фотозащита: 5058 Крем солнцезащитный SPF30, 200 мл",
       "isRetailAllowed": false,
       "brand": {
@@ -11569,6 +11569,34 @@
       "protocol_category": "a23e5f4c-6718-4cd0-8328-f4a93a96df22",
       "products": [],
       "id": 1685091180248,
+      "isRetailAllowed": false
+    },
+    {
+      "name": "asd",
+      "brand": {
+        "id": "9c44f061-6a7a-40a9-9c5c-b5c512bb5048",
+        "name": "V45",
+        "icon": "c0f061fe-8e64-4620-835a-517ce44f1c5d.jpg",
+        "margin": 60
+      },
+      "description": "asdas",
+      "protocol_category": "Для жирной кожи",
+      "products": [],
+      "id": "1686121956743",
+      "isRetailAllowed": false
+    },
+    {
+      "name": "asd",
+      "brand": {
+        "id": "7aaaeaee-6e50-4225-9ab2-15da6d802ba7",
+        "name": "Laboratory Cytolife",
+        "icon": "b350ff6b-5576-4c51-90a7-7747ec4b8c48.jpg",
+        "margin": 40
+      },
+      "description": "asd",
+      "protocol_category": "Для жирной кожи",
+      "products": [],
+      "id": "1686122039482",
       "isRetailAllowed": false
     }
   ],
@@ -11993,10 +12021,10 @@
         "__v": 0
       },
       "brand": {
-        "id": "9c44f061-6a7a-40a9-9c5c-b5c512bb5048",
-        "name": "V45",
-        "icon": "c0f061fe-8e64-4620-835a-517ce44f1c5d.jpg",
-        "margin": 60
+        "id": "4c5d671d-4b68-4a8a-aece-272f91c6d91f",
+        "name": "Academie",
+        "icon": "27388458-d4c8-4d91-810c-df2c763cd4a9.jpg",
+        "margin": 100
       },
       "products": [
         {

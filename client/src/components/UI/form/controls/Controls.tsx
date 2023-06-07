@@ -84,7 +84,7 @@ function Controls({
                   className={styles.fullWidthBtn}
                   onClick={() => {
                     saveEdit();
-                    setModalVisible(false);
+                    // setModalVisible(false);
                   }}
                 >
                   Сохранить

@@ -6,7 +6,7 @@ export interface IParam {
 export interface IBrand {
   id: string;
   name: string;
-  icon: string;
+  icon?: string;
 }
 
 export interface ICategory {
@@ -80,7 +80,7 @@ export interface IProtocol {
   description: string;
   isRetailAllowed: boolean;
   brand: IBrand;
-  protocol_category: IProtocolCategory;
+  protocol_category: string;
   products: IProductFromApi[];
 }
 
