@@ -15,7 +15,7 @@ const SelectModal = ({
   useEffect(() => {
     const close = (e: KeyboardEvent): void => {
       if (e.key === "Escape") {
-        setSelectModalVisible(false);
+        setSelectModalVisible({});
       }
     };
     window.addEventListener("keydown", close);
@@ -42,7 +42,7 @@ const SelectModal = ({
                   })}
                   onClick={() => {
                     setData(el);
-                    setSelectModalVisible(false);
+                    setSelectModalVisible({});
                   }}
                 >
                   {el.name}

@@ -4,14 +4,10 @@ export interface CustomFormSelectProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   value: any;
   onChange: any;
-  customModalVisible: any;
-  setCustomModalVisible: any;
-  setCategoryModalVisible: any;
-  setSubCategoryModalVisible: any;
-  deliveryModalVisible: boolean;
-  setDeliveryModalVisible: any;
-  orderModalVisible: boolean;
-  setOrderModalVisible: any;
+  customModalVisible: Record<string, boolean>;
+  setCustomModalVisible: (action: Record<string, boolean>) => void;
+  setCategoryModalVisible: (action: boolean) => void;
+  setSubCategoryModalVisible: (action: boolean) => void;
   options: any;
   name: string;
 }

@@ -19,12 +19,16 @@ function CustomFormSelect({
   options,
   name,
 }: CustomFormSelectProps): JSX.Element {
+  console.log(setCustomModalVisible);
+
   return (
     <div
       className={styles.customSelect}
       onClick={(e) => {
         e.stopPropagation();
         setCustomModalVisible({ [name]: !customModalVisible[name] });
+        setCategoryModalVisible(false);
+        setSubCategoryModalVisible(false);
       }}
     >
       <Input

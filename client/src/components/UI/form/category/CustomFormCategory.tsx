@@ -18,7 +18,9 @@ function CustomFormCategory({
   subCategoryModalVisible,
   setSubCategoryModalVisible,
   setCustomModalVisible,
+  customModalVisible,
   setValue,
+  name,
 }: CustomFormCategoryProps): JSX.Element {
   const [subCategoryValue, setSubCategoryValue] = useState("");
   const { data: catalog_products } =
@@ -57,7 +59,7 @@ function CustomFormCategory({
             setSelectModalVisible={() => {
               setCategoryModalVisible(!categoryModalVisible);
               setSubCategoryModalVisible(false);
-              setCustomModalVisible(false);
+              setCustomModalVisible({ [name]: !customModalVisible[name] });
             }}
           />
         )}
@@ -81,7 +83,7 @@ function CustomFormCategory({
           setSelectModalVisible={() => {
             setSubCategoryModalVisible(!subCategoryModalVisible);
             setCategoryModalVisible(false);
-            setCustomModalVisible(false);
+            setCustomModalVisible({ [name]: !customModalVisible[name] });
           }}
         />
       </div>

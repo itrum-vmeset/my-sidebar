@@ -10,6 +10,7 @@ export interface CustomFormCategoryProps
   setSubCategoryModalVisible: any;
   getall: any;
   setValue: any;
-  customModalVisible: boolean;
+  customModalVisible: any;
   setCustomModalVisible: any;
+  name: string;
 }
