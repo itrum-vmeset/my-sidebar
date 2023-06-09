@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { Column } from "react-table";
 import * as Yup from "yup";
 

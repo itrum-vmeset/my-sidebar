@@ -3,7 +3,7 @@
     {
       "id": "6ee9ef45-57b1-4112-a3af-5ac3f241b8e3",
       "nameFrom1C": "Anti-age концентрат \"Сыворотка \"Супер Соя\", 50 мл",
-      "name": "Cytolife Маска питательная с маслом авокадо, 30 г",
+      "name": "Cytolife Маска питательная с маслом авокадо, 350 г",
       "codeFrom1C": "УТ000001350",
       "brand": {
         "id": "7aaaeaee-6e50-4225-9ab2-15da6d802ba7",
@@ -41,7 +41,7 @@
         {
           "id": "9033b2fd-a2f4-4ade-9e5e-61e01af7e832",
           "key": "Код товара",
-          "value": ""
+          "value": "11"
         },
         {
           "id": "55c30ef0-05c1-48e3-9d55-d31d01f240fd",
@@ -103,8 +103,8 @@
       "variations": [
         {
           "id": 1683721561783,
-          "value": "",
-          "code": ""
+          "value": "asd",
+          "code": "aasd"
         }
       ],
       "characteristics": [

@@ -6,7 +6,7 @@ import {
   SubmitHandler,
   useForm,
 } from "react-hook-form";
-import { AnyObject, ObjectSchema } from "yup";
+import { AnyObject, object, ObjectSchema } from "yup";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -64,6 +64,9 @@ function CustomForm<
     }
   }, [modalVisible]);
 
+  // console.log((errors as any).variations?.[0].code.message);
+  console.log(errors);
+
   return (
     <div
       className={styles.formWrapper}
@@ -85,11 +88,20 @@ function CustomForm<
               <div key={id}>
                 <Typography>
                   {title}{" "}
-                  {errors[componentProps.name] ? (
+                  {(errors as any)[componentProps.name] !== "variations" ? (
                     <span className={styles.errorText}>
                       {errors[componentProps.name]?.message as string}
                     </span>
-                  ) : null}
+                  ) : (
+                    <span className={styles.errorText}>
+                      необходимо добавить свойства
+                    </span>
+                  )}
+                  {/* {(errors as any)[componentProps.name] === "variations" && (
+                    <span className={styles.errorText}>
+                      необходимо добавить свойства
+                    </span>
+                  )} */}
                 </Typography>
                 <Controller
                   control={control}

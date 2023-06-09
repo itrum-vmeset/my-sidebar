@@ -16,6 +16,9 @@ function Characteristics({
   const addCharacteristics = (): void => {
     if (name === "characteristics") {
       if (value.length < 16) {
+        // onChange({
+        //   characteristics: [...value, { id: Date.now(), key: "", value: "" }],
+        // });
         onChange([...value, { id: Date.now(), key: "", value: "" }]);
       } else {
         alert("Максимум 15 харакеристик");
@@ -26,10 +29,34 @@ function Characteristics({
   };
   const removeCharacteristics = (id: number): void => {
     if (name === "characteristics") {
+      //   setData({
+      //     ...data,
+      //     characteristics: value.filter((el) => el.id !== id),
+      //   });
+      // } else {
+      //   setData({
+      //     ...data,
+      //     variations: data.variations.filter((el) => el.id !== id),
+      //   });
       value.filter((el: any) => el.id !== id);
     }
   };
   const changeCharacteristics = (newValue: any) => {
+    // if (characteristics) {
+    //   setData({
+    //     ...data,
+    //     characteristics: value.map((i) =>
+    //       i.id === id ? { ...i, [key]: value } : i
+    //     ),
+    //   });
+    // } else {
+    //   setData({
+    //     ...data,
+    //     variations: data.variations.map((i) =>
+    //       i.id === id ? { ...i, [key]: value } : i
+    //     ),
+    //   });
+    // }
     onChange(
       value.map((el: any) => {
         if (el.id === newValue.id) {
@@ -67,6 +94,27 @@ function Characteristics({
             />
           );
         })}
+      {/* {characteristics
+        ? data?.characteristics?.map((item) => {
+            return (
+              <FormRow
+                key={item.id}
+                item={item}
+                changeRow={changeCharacteristics}
+                removeRow={removeCharacteristics}
+              />
+            );
+          })
+        : data?.variations?.map((item) => {
+            return (
+              <FormRow
+                key={item.id}
+                item={item}
+                changeRow={changeCharacteristics}
+                removeRow={removeCharacteristics}
+              />
+            );
+          })} */}
       {name === "characteristics" ? (
         <Typography sizer="s">Максимум 15 харакеристик</Typography>
       ) : null}

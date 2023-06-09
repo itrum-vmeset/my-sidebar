@@ -19,8 +19,6 @@ function CustomFormSelect({
   options,
   name,
 }: CustomFormSelectProps): JSX.Element {
-  console.log(setCustomModalVisible);
-
   return (
     <div
       className={styles.customSelect}

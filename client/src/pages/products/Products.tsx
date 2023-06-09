@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Row, useBlockLayout, useTable } from "react-table";
 import { useGlobalFilter } from "react-table";
 import { usePagination } from "react-table";
@@ -8,18 +8,20 @@ import { GlobalFilter } from "../../components/table/filter/Filter";
 import Paginator from "../../components/table/pagination/Paginator";
 import TableComponent from "../../components/table/TableComponent";
 import MyAlert from "../../components/UI/alert/MyAlert";
-import Form from "../../components/UI/form/Form";
+import CustomForm from "../../components/UI/form/CustomForm";
 import MyModal from "../../components/UI/modal/MyModal";
+import { IFormData } from "../../models/IFormData";
 import { brandAPI } from "../../service/BrandService";
 import { productAPI } from "../../service/ProductService";
 
-import { columns } from "./config";
+import { columns, formData, ProductSchema } from "./config";
 
 function Products(): JSX.Element {
   const [selectedItems, setSelectedItems] = useState<any>([]);
   const [selectVisible, setSelectVisible] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
   const [activeElement, setActiveElement] = useState<any>({});
+  const [enrichedFormData, setEnrichedFormData] = useState<IFormData[]>([]);
 
   const [updateProduct] = productAPI.useUpdateProductMutation();
   const [deleteProduct] = productAPI.useDeleteProductMutation();
@@ -71,6 +73,23 @@ function Products(): JSX.Element {
     setSelectVisible(false);
   };
 
+  useEffect(() => {
+    const enriched = formData.map((item) => {
+      if (item.componentProps.options === "brands") {
+        return {
+          ...item,
+          componentProps: {
+            ...item.componentProps,
+            options: brands?.data,
+          },
+        };
+      } else {
+        return item;
+      }
+    });
+    setEnrichedFormData(enriched);
+  }, [brands]);
+
   return (
     <div className="container">
       <MyModal
@@ -78,13 +97,14 @@ function Products(): JSX.Element {
         setModalVisible={setFormVisible}
         setActiveElement={setActiveElement}
       >
-        <Form
+        <CustomForm
+          modalVisible={formVisible}
+          setFormVisible={setFormVisible}
+          activeElement={activeElement}
+          formData={enrichedFormData}
+          validationSchema={ProductSchema}
           updateItem={updateProduct}
           removeItem={deleteProduct}
-          modalVisible={formVisible}
-          setModalVisible={setFormVisible}
-          activeElement={activeElement}
-          brands={brands}
         />
       </MyModal>
       <GlobalFilter
