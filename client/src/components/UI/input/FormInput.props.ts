@@ -1,7 +1,5 @@
 import { DetailedHTMLProps, InputHTMLAttributes } from "react";
 
-import { User } from "../../../models/IOrder";
-
 export interface FormInputProps
   extends DetailedHTMLProps<
     InputHTMLAttributes<HTMLInputElement>,
@@ -9,6 +7,5 @@ export interface FormInputProps
   > {
   className?: string;
   value: any;
-  // value: string | User;
   onChange: () => void;
 }

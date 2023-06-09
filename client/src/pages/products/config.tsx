@@ -132,11 +132,11 @@ export const ProductSchema = Yup.object().shape({
     .min(2, "Минимум 2 буквы")
     .max(1000, "Максимум 1000 букв")
     .required("Обязательное поле"),
-  variations: Yup.array().of(
-    Yup.object().shape({
-      value: Yup.string().min(2).required("Обязательное поле"),
-      code: Yup.string().min(2).required("Обязательное поле"),
-    })
-  ),
-  images: Yup.array().of(Yup.string().required("Обязательное поле")),
+  // variations: Yup.array().of(
+  //   Yup.object({
+  //     value: Yup.string().min(2).required("Обязательное поле"),
+  //     code: Yup.string().min(2).required("Обязательное поле"),
+  //   })
+  // ),
+  images: Yup.array().min(1, "Необходимо добавить хотя бы одно изображение"),
 });

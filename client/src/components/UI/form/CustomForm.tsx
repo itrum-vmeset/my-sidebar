@@ -6,7 +6,7 @@ import {
   SubmitHandler,
   useForm,
 } from "react-hook-form";
-import { AnyObject, object, ObjectSchema } from "yup";
+import { AnyObject, ObjectSchema } from "yup";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -64,9 +64,6 @@ function CustomForm<
     }
   }, [modalVisible]);
 
-  // console.log((errors as any).variations?.[0].code.message);
-  console.log(errors);
-
   return (
     <div
       className={styles.formWrapper}
@@ -110,6 +107,7 @@ function CustomForm<
                     return (
                       <Component
                         value={field.value ? field.value : ""}
+                        changeValue={field.onChange ? field.onChange : null}
                         onChange={field.onChange ? field.onChange : null}
                         name={componentProps.name}
                         getall={getValues()}

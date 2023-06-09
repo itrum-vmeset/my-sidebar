@@ -1,5 +1,3 @@
-import React from "react";
-
 import { ReactComponent as DelIcon } from "../../../../assets/icons/del.svg";
 import { Input } from "../../input/Input";
 
@@ -18,7 +16,6 @@ function FormRow({ item, changeRow, removeRow }: FormRowProps): JSX.Element {
     <div key={item.id} className={styles.row}>
       <Input
         value={Object.values(item)[1] as string}
-        // onChange={(e) => changeRow(item.id, itemKeys[1], e.target.value)}
         onChange={(e) =>
           changeRow({ ...item, [`${itemKeys[1]}`]: e.target.value })
         }

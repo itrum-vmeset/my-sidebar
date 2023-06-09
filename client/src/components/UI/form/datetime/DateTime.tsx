@@ -7,11 +7,11 @@ import { DateTimeProps } from "./DateTime.props";
 
 import styles from "./DateTime.module.css";
 
-function DateTime({ data, setData }: DateTimeProps): JSX.Element {
+function DateTime({ value, changeValue }: DateTimeProps): JSX.Element {
   const [date, setDate] = useState(
-    data.datetime.split(" ")[0].split(".").reverse().join("-")
+    value.split(" ")[0].split(".").reverse().join("-")
   );
-  const [time, setTime] = useState(data.datetime.split(" ")[1]);
+  const [time, setTime] = useState(value.split(" ")[1]);
 
   return (
     <div className={styles.categorySection}>
@@ -19,14 +19,13 @@ function DateTime({ data, setData }: DateTimeProps): JSX.Element {
         <Typography>Дата*</Typography>
         <Input
           type="date"
-          value={data.datetime.split(" ")[0].split(".").reverse().join("-")}
+          value={value.split(" ")[0].split(".").reverse().join("-")}
           onChange={(e) => {
             setDate(
               e.target.value.replaceAll("-", ".").split(".").reverse().join(".")
             );
-            setData({
-              ...data,
-              datetime: "".concat(
+            changeValue(
+              "".concat(
                 e.target.value
                   .replaceAll("-", ".")
                   .split(".")
@@ -34,8 +33,8 @@ function DateTime({ data, setData }: DateTimeProps): JSX.Element {
                   .join("."),
                 " ",
                 time
-              ),
-            });
+              )
+            );
           }}
         />
       </div>
@@ -43,13 +42,10 @@ function DateTime({ data, setData }: DateTimeProps): JSX.Element {
         <Typography>Время*</Typography>
         <Input
           type="time"
-          value={data.datetime.split(" ")[1]}
+          value={value.split(" ")[1]}
           onChange={(e) => {
             setTime(e.target.value);
-            setData({
-              ...data,
-              datetime: date.concat(" ", e.target.value),
-            });
+            changeValue(date.concat(" ", e.target.value));
           }}
         />
       </div>

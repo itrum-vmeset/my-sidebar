@@ -11,6 +11,7 @@ import MyAlert from "../../components/UI/alert/MyAlert";
 import CustomForm from "../../components/UI/form/CustomForm";
 import MyModal from "../../components/UI/modal/MyModal";
 import { IFormData } from "../../models/IFormData";
+import { IProductMock } from "../../models/IProductMockData";
 import { brandAPI } from "../../service/BrandService";
 import { productAPI } from "../../service/ProductService";
 

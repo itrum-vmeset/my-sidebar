@@ -254,8 +254,8 @@ function Form({
                         options={cities?.data?.length ? cities.data : []}
                       />
                     );
-                  case "datetime":
-                    return <DateTime data={data} setData={setData} />;
+                  // case "datetime":
+                  //   return <DateTime data={data} setData={setData} />;
                   case "date":
                     return (
                       <Input

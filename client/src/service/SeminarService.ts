@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
-import { IResponse } from "../models/IResponse";
-import { IFutureSeminar, ISeminar } from "../models/ISeminar";
+import { IResponse, ISeminar } from "../models/IResponse";
 
 const baseUrl = "http://localhost:5005";
 
@@ -10,14 +9,12 @@ export const seminarAPI = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
   tagTypes: ["Seminar"],
   endpoints: (build) => ({
-    fetchAllSeminars: build.query<IResponse<IFutureSeminar>, string>({
+    fetchAllSeminars: build.query<IResponse<ISeminar>, string>({
       query: (query) => ({
         url: `/${query}`,
       }),
       providesTags: () => ["Seminar"],
-      transformResponse: (
-        data: IFutureSeminar[]
-      ): IResponse<IFutureSeminar> => {
+      transformResponse: (data: ISeminar[]): IResponse<ISeminar> => {
         const count = data.length;
         return {
           data,
@@ -48,7 +45,7 @@ export const seminarAPI = createApi({
       invalidatesTags: ["Seminar"],
     }),
     deleteSeminar: build.mutation<
-      IFutureSeminar,
+      ISeminar,
       { seminar: any; activeRoute: string }
     >({
       query: ({ seminar, activeRoute }) => ({
