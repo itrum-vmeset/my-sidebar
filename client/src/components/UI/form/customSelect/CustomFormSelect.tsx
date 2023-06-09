@@ -25,6 +25,8 @@ function CustomFormSelect({
       onClick={(e) => {
         e.stopPropagation();
         setCustomModalVisible({ [name]: !customModalVisible[name] });
+        setCategoryModalVisible(false);
+        setSubCategoryModalVisible(false);
       }}
     >
       <Input

@@ -85,11 +85,20 @@ function CustomForm<
               <div key={id}>
                 <Typography>
                   {title}{" "}
-                  {errors[componentProps.name] ? (
+                  {(errors as any)[componentProps.name] !== "variations" ? (
                     <span className={styles.errorText}>
                       {errors[componentProps.name]?.message as string}
                     </span>
-                  ) : null}
+                  ) : (
+                    <span className={styles.errorText}>
+                      необходимо добавить свойства
+                    </span>
+                  )}
+                  {/* {(errors as any)[componentProps.name] === "variations" && (
+                    <span className={styles.errorText}>
+                      необходимо добавить свойства
+                    </span>
+                  )} */}
                 </Typography>
                 <Controller
                   control={control}
@@ -98,6 +107,7 @@ function CustomForm<
                     return (
                       <Component
                         value={field.value ? field.value : ""}
+                        changeValue={field.onChange ? field.onChange : null}
                         onChange={field.onChange ? field.onChange : null}
                         name={componentProps.name}
                         getall={getValues()}

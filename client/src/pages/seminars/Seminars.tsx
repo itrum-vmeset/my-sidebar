@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { usePagination, useTable } from "react-table";
+import { Row, usePagination, useTable } from "react-table";
 import { useBlockLayout } from "react-table";
 import { useGlobalFilter } from "react-table";
 
@@ -12,16 +12,20 @@ import TableComponent from "../../components/table/TableComponent";
 import MyAlert from "../../components/UI/alert/MyAlert";
 import { Button } from "../../components/UI/button/Button";
 import DeleteModal from "../../components/UI/deleteModal/DeleteModal";
-import Form from "../../components/UI/form/Form";
+import CustomForm from "../../components/UI/form/CustomForm";
 import MyModal from "../../components/UI/modal/MyModal";
+import { IFormData } from "../../models/IFormData";
+import { ISeminar } from "../../models/IResponse";
 import { cityAPI } from "../../service/CityService";
 import { seminarAPI } from "../../service/SeminarService";
 
 import Navigator from "./Navigator/Navigator";
 import {
   future,
+  futureFormData,
   futureItem,
   history,
+  historyFormData,
   historyItem,
   navItems,
   request,
@@ -35,8 +39,23 @@ function Seminars(): JSX.Element {
   const [columns, setColumns] = useState(future);
   const [modalVisible, setModalVisible] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
-  const [activeRoute, setActiveRoute] = useState(navItems[0].value);
-  const [activeElement, setActiveElement] = useState<any>({});
+  const [enrichedFormData, setEnrichedFormData] = useState<IFormData[]>([]);
+  const [activeRoute, setActiveRoute] = useState<string>(navItems[0].value);
+  const [activeElement, setActiveElement] = useState<ISeminar | undefined>({
+    id: "",
+    name: "",
+    description: "",
+    speaker: "",
+    speaker_speciality: "",
+    city: {
+      id: "",
+      name: "",
+      address: "",
+    },
+    datetime: "",
+    image: "",
+    mobileImage: "",
+  });
   const [deleteSeminar] = seminarAPI.useDeleteSeminarMutation();
   const [updateSeminar] = seminarAPI.useUpdateSeminarMutation();
   const [createSeminar] = seminarAPI.useCreateSeminarMutation();
@@ -74,11 +93,11 @@ function Seminars(): JSX.Element {
     setGlobalFilter,
   } = tableInstance;
 
-  const handleClickRow = (row: any): void => {
+  const handleClickRow = (row: Row): void => {
     if (activeRoute === "request") {
       return;
     }
-    setActiveElement(row.original);
+    setActiveElement(row.original as ISeminar);
     setFormVisible(true);
   };
 
@@ -92,16 +111,31 @@ function Seminars(): JSX.Element {
   };
 
   useEffect(() => {
+    const enriched = futureFormData.map((item) => {
+      if (item.componentProps.options === "cities") {
+        return {
+          ...item,
+          componentProps: {
+            ...item.componentProps,
+            options: cities?.data,
+          },
+        };
+      }
+      return item;
+    });
+
     switch (activeRoute) {
       case "future":
         setColumns(future);
         setSelectVisible(false);
         setSelectedItems([]);
+        setEnrichedFormData(enriched);
         break;
       case "history":
         setColumns(history);
         setSelectVisible(false);
         setSelectedItems([]);
+        setEnrichedFormData(historyFormData);
         break;
       case "request":
         setColumns(request);
@@ -176,17 +210,19 @@ function Seminars(): JSX.Element {
         setModalVisible={setFormVisible}
         setActiveElement={setActiveElement}
       >
-        <Form
+        <CustomForm
+          modalVisible={formVisible}
+          activeElement={activeElement}
+          setFormVisible={setFormVisible}
+          formData={enrichedFormData}
           updateItem={
             activeElement?.name
-              ? (seminar: any) => updateSeminar({ seminar, activeRoute })
-              : (seminar: any) => createSeminar({ seminar, activeRoute })
+              ? (seminar: ISeminar) => updateSeminar({ seminar, activeRoute })
+              : (seminar: ISeminar) => createSeminar({ seminar, activeRoute })
           }
-          removeItem={(seminar: any) => deleteSeminar({ seminar, activeRoute })}
-          modalVisible={formVisible}
-          setModalVisible={setFormVisible}
-          activeElement={activeElement}
-          cities={cities}
+          removeItem={(seminar: ISeminar) =>
+            deleteSeminar({ seminar, activeRoute })
+          }
         />
       </MyModal>
       <GlobalFilter
@@ -219,7 +255,9 @@ function Seminars(): JSX.Element {
           className={styles.btnFullWidth}
           onClick={() => {
             setActiveElement(
-              activeRoute === "future" ? futureItem : historyItem
+              activeRoute === "future"
+                ? futureItem
+                : (historyItem as unknown as ISeminar)
             );
             setFormVisible(true);
           }}

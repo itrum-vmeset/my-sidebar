@@ -1,30 +1,29 @@
 import { useState } from "react";
 
-import { IProductMock, Tag } from "../../../models/IProductMockData";
 import { Input } from "../input/Input";
 import { Typography } from "../typography/Typography";
 
+import { TagsInputProps } from "./TagsInput.props";
+
 import styles from "./TagsInput.module.css";
 
-interface TagsInputProps {
-  data: IProductMock;
-  setData: (selectedCategory: IProductMock) => void;
+interface ITag {
+  id: string;
+  name: string;
 }
 
-const TagsInput = ({ data, setData }: TagsInputProps): JSX.Element => {
+const TagsInput = ({ value, onChange }: TagsInputProps): JSX.Element => {
   const [newTag, setNewTag] = useState("");
 
-  const removeTag = (id: string | number): void => {
-    setData({ ...data, tags: data.tags.filter((tag: any) => tag.id !== id) });
-    // setTags([...tags.filter((tag) => tag.id !== id)]);
+  const removeTag = (id: string): void => {
+    onChange(value.filter((tag: ITag) => tag.id !== id));
   };
   const addTag = (tag: string): void => {
-    if (data.tags.length > 120) {
-      alert("Максимум 120 тегов");
+    if (value?.length > 120) {
+      return alert("Максимум 120 тегов");
     }
-    if (tag !== "" && data.tags.length < 121) {
-      // setTags([...tags, event.target.value]);
-      setData({ ...data, tags: [...data.tags, { id: Date.now(), name: tag }] });
+    if (tag !== "" && value.length < 121) {
+      onChange([...value, { id: Date.now().toString(), name: tag }]);
     }
   };
 
@@ -37,17 +36,18 @@ const TagsInput = ({ data, setData }: TagsInputProps): JSX.Element => {
     <div>
       <div className={styles.tagsInput}>
         <ul className={styles.tags}>
-          {data?.tags.map((tag: Tag) => (
-            <li key={tag.id} className={styles.tag}>
-              <span className={styles.tagTitle}>{tag.name}</span>
-              <span
-                className={styles.tagCloseIcon}
-                onClick={() => removeTag(tag.id)}
-              >
-                x
-              </span>
-            </li>
-          ))}
+          {value &&
+            value?.map((tag: ITag) => (
+              <li key={tag.id} className={styles.tag}>
+                <span className={styles.tagTitle}>{tag.name}</span>
+                <span
+                  className={styles.tagCloseIcon}
+                  onClick={() => removeTag(tag.id)}
+                >
+                  x
+                </span>
+              </li>
+            ))}
         </ul>
         <Input
           value={newTag}

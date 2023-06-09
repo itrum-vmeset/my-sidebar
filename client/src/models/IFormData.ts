@@ -2,7 +2,7 @@ import { FC } from "react";
 
 import { IPayment } from "../helpers/helpers";
 
-import { IBrand } from "./IResponse";
+import { IBrand, ICity } from "./IResponse";
 
 export interface IFormData {
   id: number;
@@ -10,7 +10,7 @@ export interface IFormData {
   Component: FC<any>;
   componentProps: {
     name: string;
-    options?: string | IBrand[] | IPayment[];
+    options?: string | IBrand[] | IPayment[] | ICity[];
     disabled?: boolean;
   };
 }

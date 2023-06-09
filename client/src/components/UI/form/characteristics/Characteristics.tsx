@@ -9,127 +9,71 @@ import { CharacteristicsProps } from "./Characteristics.props";
 import styles from "./Characteristics.module.css";
 
 function Characteristics({
-  data,
-  setData,
-  characteristics,
-  variations,
+  value,
+  onChange,
+  name,
 }: CharacteristicsProps): JSX.Element {
   const addCharacteristics = (): void => {
-    if (characteristics) {
-      if (data.characteristics.length < 16) {
-        setData({
-          ...data,
-          characteristics: [
-            ...data.characteristics,
-            { id: Date.now(), key: "", value: "" },
-          ],
-        });
+    if (name === "characteristics") {
+      if (value.length < 16) {
+        onChange([...value, { id: Date.now(), key: "", value: "" }]);
       } else {
         alert("Максимум 15 харакеристик");
       }
     } else {
-      setData({
-        ...data,
-        variations: [
-          ...data.variations,
-          { id: Date.now(), value: "", code: "" },
-        ],
-      });
+      onChange([...value, { id: Date.now(), value: "", code: "" }]);
     }
   };
   const removeCharacteristics = (id: number): void => {
-    if (characteristics) {
-      setData({
-        ...data,
-        characteristics: data.characteristics.filter((el) => el.id !== id),
-      });
-    } else {
-      setData({
-        ...data,
-        variations: data.variations.filter((el) => el.id !== id),
-      });
+    if (name === "characteristics") {
+      value.filter((el: any) => el.id !== id);
     }
   };
-  const changeCharacteristics = (
-    id: number,
-    key: string,
-    value: string
-  ): void => {
-    if (characteristics) {
-      setData({
-        ...data,
-        characteristics: data.characteristics.map((i) =>
-          i.id === id ? { ...i, [key]: value } : i
-        ),
-      });
-    } else {
-      setData({
-        ...data,
-        variations: data.variations.map((i) =>
-          i.id === id ? { ...i, [key]: value } : i
-        ),
-      });
-    }
+  const changeCharacteristics = (newValue: any) => {
+    onChange(
+      value.map((el: any) => {
+        if (el.id === newValue.id) {
+          return newValue;
+        }
+        return el;
+      })
+    );
   };
 
   useEffect(() => {
-    if (data) {
-      if (!data.variations?.length) {
-        setData({
-          ...data,
-          variations: [
-            {
-              id: Date.now(),
-              value: "",
-              code: "",
-            },
-          ],
-        });
-      }
-      if (!data.characteristics?.length) {
-        setData({
-          ...data,
-          characteristics: [
-            {
-              id: Date.now(),
-              key: "",
-              value: "",
-            },
-          ],
-        });
-      }
+    if (value?.length === 0) {
+      name === "characteristics"
+        ? onChange([
+            ...value,
+            { id: Date.now().toString(), key: "", value: "" },
+          ])
+        : onChange([...value, { id: Date.now(), value: "", code: "" }]);
     }
   }, []);
 
   return (
     <div>
-      <Typography>{characteristics ? "Характеристики" : "Объем*"}</Typography>
-      {characteristics
-        ? data?.characteristics?.map((item) => {
-            return (
-              <FormRow
-                key={item.id}
-                item={item}
-                changeRow={changeCharacteristics}
-                removeRow={removeCharacteristics}
-              />
-            );
-          })
-        : data?.variations?.map((item) => {
-            return (
-              <FormRow
-                key={item.id}
-                item={item}
-                changeRow={changeCharacteristics}
-                removeRow={removeCharacteristics}
-              />
-            );
-          })}
-      {characteristics ? (
+      <Typography>
+        {name === "characteristics" ? "Характеристики" : "Объем*"}
+      </Typography>
+      {value?.length &&
+        value?.map((item: any) => {
+          return (
+            <FormRow
+              key={item.id}
+              item={item}
+              changeRow={changeCharacteristics}
+              removeRow={removeCharacteristics}
+            />
+          );
+        })}
+      {name === "characteristics" ? (
         <Typography sizer="s">Максимум 15 харакеристик</Typography>
       ) : null}
       <Button className={styles.formButton} onClick={addCharacteristics}>
-        {characteristics ? "Добавить характеристику" : "Добавить объем"}
+        {name === "characteristics"
+          ? "Добавить характеристику"
+          : "Добавить объем"}
       </Button>
     </div>
   );

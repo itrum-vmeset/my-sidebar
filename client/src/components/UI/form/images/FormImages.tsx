@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { ReactComponent as AttachIcon } from "../../../../assets/icons/attach.svg";
 import { Input } from "../../input/Input";
@@ -9,24 +9,36 @@ import { FormImagesProps } from "./FormImages.props";
 
 import styles from "./FormImages.module.css";
 
-function FormImages({ data, setData }: FormImagesProps): JSX.Element {
+function FormImages({ value, onChange }: FormImagesProps): JSX.Element {
   const [newLink, setNewLink] = useState("");
-
   const addLink = (): void => {
+    if (value.length > 4) {
+      return alert("Не больше пяти изображений");
+    }
     if (newLink !== "") {
-      setData({ ...data, images: [...data.images, newLink] });
+      onChange([...value, newLink]);
       setNewLink("");
     }
   };
   const removeLink = (link: string): void => {
-    setData({ ...data, images: data.images.filter((el) => el !== link) });
+    onChange(
+      value.filter((el: string) => {
+        return el !== link;
+      })
+    );
   };
   return (
     <div className="images">
       <Typography>Изображения*</Typography>
-      {data.images.length ? (
-        data.images.map((item, index) => {
-          return <ImgLinkRow key={index} link={item} removeLink={removeLink} />;
+      {value.length ? (
+        value.map((item: string, index: number) => {
+          return (
+            <ImgLinkRow
+              key={index}
+              link={item}
+              removeLink={() => removeLink(item)}
+            />
+          );
         })
       ) : (
         <></>

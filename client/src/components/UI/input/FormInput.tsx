@@ -29,7 +29,7 @@ export const FormInput = ({
   return (
     <input
       className={classNames(styles.input, className)}
-      value={typeof value === "string" ? value : fullName()}
+      value={typeof value === "object" ? fullName() : value}
       onChange={onChange}
       disabled={disabled}
     />

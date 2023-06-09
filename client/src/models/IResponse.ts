@@ -145,3 +145,15 @@ export interface SubCatalogProduct {
   catalog_product: string;
   __v?: number;
 }
+
+export interface ISeminar {
+  id: string;
+  name: string;
+  description: string;
+  speaker: string;
+  speaker_speciality: string;
+  city: ICity;
+  datetime: string;
+  image: string;
+  mobileImage: string;
+}

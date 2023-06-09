@@ -1,7 +1,7 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 
-export interface DateTimeProps
+export interface TagsInputProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   value: any;
-  changeValue: any;
+  onChange: (element: any) => void;
 }

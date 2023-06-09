@@ -1,5 +1,7 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 
+import { ICategory } from "../../../../models/IResponse";
+
 export interface CustomFormCategoryProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   value: any;
@@ -10,6 +12,7 @@ export interface CustomFormCategoryProps
   setSubCategoryModalVisible: any;
   getall: any;
   setValue: any;
-  customModalVisible: boolean;
+  customModalVisible: any;
   setCustomModalVisible: any;
+  name: string;
 }

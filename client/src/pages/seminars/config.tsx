@@ -1,6 +1,13 @@
 import { Column } from "react-table";
 
+import CustomFormSelect from "../../components/UI/form/customSelect/CustomFormSelect";
+import DateTime from "../../components/UI/form/datetime/DateTime";
+import FormImage from "../../components/UI/form/formImage/FormImage";
+import { FormInputDate } from "../../components/UI/input/date/FormInputDate";
+import { FormInput } from "../../components/UI/input/FormInput";
+import { Textarea } from "../../components/UI/textarea/Textarea";
 import { Typography } from "../../components/UI/typography/Typography";
+import { IFormData } from "../../models/IFormData";
 
 export const future: Column[] = [
   {
@@ -103,3 +110,99 @@ export const historyItem = {
   image: "",
   mobileImage: "",
 };
+
+export const futureFormData: IFormData[] = [
+  {
+    id: 1,
+    title: "Название*",
+    Component: FormInput,
+    componentProps: {
+      name: "name",
+    },
+  },
+  {
+    id: 2,
+    title: "Описание*",
+    Component: Textarea,
+    componentProps: {
+      name: "description",
+    },
+  },
+  {
+    id: 3,
+    title: "Спикер*",
+    Component: FormInput,
+    componentProps: {
+      name: "speaker",
+    },
+  },
+  {
+    id: 4,
+    title: "Специальность спикера*",
+    Component: FormInput,
+    componentProps: {
+      name: "speaker_speciality",
+    },
+  },
+
+  {
+    id: 5,
+    title: "Город*",
+    Component: CustomFormSelect,
+    componentProps: {
+      name: "city",
+      options: "cities",
+    },
+  },
+  {
+    id: 6,
+    title: "",
+    Component: DateTime,
+    componentProps: {
+      name: "datetime",
+    },
+  },
+  {
+    id: 7,
+    title: "Фото",
+    Component: FormImage,
+    componentProps: {
+      name: "image",
+    },
+  },
+];
+
+export const historyFormData: IFormData[] = [
+  {
+    id: 1,
+    title: "Название*",
+    Component: FormInput,
+    componentProps: {
+      name: "name",
+    },
+  },
+  {
+    id: 2,
+    title: "Описание*",
+    Component: Textarea,
+    componentProps: {
+      name: "description",
+    },
+  },
+  {
+    id: 3,
+    title: "Дата оформления",
+    Component: FormInputDate,
+    componentProps: {
+      name: "date",
+    },
+  },
+  {
+    id: 4,
+    title: "Фото",
+    Component: FormImage,
+    componentProps: {
+      name: "image",
+    },
+  },
+];

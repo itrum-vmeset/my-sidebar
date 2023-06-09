@@ -146,24 +146,24 @@ function Form({
                         }}
                       />
                     );
-                  case "characteristics":
-                    return (
-                      <Characteristics
-                        data={data}
-                        setData={setData}
-                        characteristics={data.characteristics}
-                      />
-                    );
-                  case "variations":
-                    return (
-                      <Characteristics
-                        data={data}
-                        setData={setData}
-                        variations={data.variations}
-                      />
-                    );
-                  case "images":
-                    return <FormImages data={data} setData={setData} />;
+                  // case "characteristics":
+                  //   return (
+                  //     <Characteristics
+                  //       data={data}
+                  //       setData={setData}
+                  //       characteristics={data.characteristics}
+                  //     />
+                  //   );
+                  // case "variations":
+                  //   return (
+                  //     <Characteristics
+                  //       data={data}
+                  //       setData={setData}
+                  //       variations={data.variations}
+                  //     />
+                  //   );
+                  // case "images":
+                  //   return <FormImages data={data} setData={setData} />;
 
                   case "description":
                     return (
@@ -175,8 +175,8 @@ function Form({
                         className={styles.description}
                       />
                     );
-                  case "tags":
-                    return <TagsInput data={data} setData={setData} />;
+                  // case "tags":
+                  //   return <TagsInput data={data} setData={setData} />;
                   case "order_type":
                     return (
                       <CustomSelect
@@ -254,8 +254,8 @@ function Form({
                         options={cities?.data?.length ? cities.data : []}
                       />
                     );
-                  case "datetime":
-                    return <DateTime data={data} setData={setData} />;
+                  // case "datetime":
+                  //   return <DateTime data={data} setData={setData} />;
                   case "date":
                     return (
                       <Input
