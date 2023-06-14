@@ -6,9 +6,9 @@ import { usePagination } from "react-table";
 import { withLayout } from "../../components/layout/Layout";
 import { GlobalFilter } from "../../components/table/filter/Filter";
 import Paginator from "../../components/table/pagination/Paginator";
-import TableComponent from "../../components/table/TableComponent";
+import Table from "../../components/table/Table";
 import MyAlert from "../../components/UI/alert/MyAlert";
-import CustomForm from "../../components/UI/form/CustomForm";
+import Form from "../../components/UI/form/Form";
 import MyModal from "../../components/UI/modal/MyModal";
 import { IFormData } from "../../models/IFormData";
 import { IProductMock } from "../../models/IProductMockData";
@@ -18,10 +18,12 @@ import { productAPI } from "../../service/ProductService";
 import { columns, formData, ProductSchema } from "./config";
 
 function Products(): JSX.Element {
-  const [selectedItems, setSelectedItems] = useState<any>([]);
+  const [selectedItems, setSelectedItems] = useState<Row[]>([]);
   const [selectVisible, setSelectVisible] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
-  const [activeElement, setActiveElement] = useState<any>({});
+  const [activeElement, setActiveElement] = useState<IProductMock>(
+    {} as IProductMock
+  );
   const [enrichedFormData, setEnrichedFormData] = useState<IFormData[]>([]);
 
   const [updateProduct] = productAPI.useUpdateProductMutation();
@@ -61,13 +63,13 @@ function Products(): JSX.Element {
   } = tableInstance;
 
   const handleClickRow = (row: Row): void => {
-    setActiveElement(row.original);
+    setActiveElement(row.original as IProductMock);
     setFormVisible(true);
   };
 
   const deleteItems = async () => {
     for (const item of selectedItems) {
-      await deleteProduct(item.original);
+      await deleteProduct(item.original as IProductMock);
     }
     refetch();
     setSelectedItems([]);
@@ -93,21 +95,23 @@ function Products(): JSX.Element {
 
   return (
     <div className="container">
-      <MyModal
-        modalVisible={formVisible}
-        setModalVisible={setFormVisible}
-        setActiveElement={setActiveElement}
-      >
-        <CustomForm
+      {formVisible && (
+        <MyModal
           modalVisible={formVisible}
-          setFormVisible={setFormVisible}
-          activeElement={activeElement}
-          formData={enrichedFormData}
-          validationSchema={ProductSchema}
-          updateItem={updateProduct}
-          removeItem={deleteProduct}
-        />
-      </MyModal>
+          setModalVisible={setFormVisible}
+          setActiveElement={setActiveElement}
+        >
+          <Form
+            modalVisible={formVisible}
+            setFormVisible={setFormVisible}
+            activeElement={activeElement}
+            formData={enrichedFormData}
+            validationSchema={ProductSchema}
+            updateItem={updateProduct}
+            removeItem={deleteProduct}
+          />
+        </MyModal>
+      )}
       <GlobalFilter
         preGlobalFilteredRows={preGlobalFilteredRows}
         globalFilter={state.globalFilter}
@@ -124,7 +128,7 @@ function Products(): JSX.Element {
         pageIndex={state.pageIndex}
         pageSize={state.pageSize}
       />
-      <TableComponent
+      <Table
         tableInstance={tableInstance}
         renderActions={() => {
           return [];
@@ -140,8 +144,6 @@ function Products(): JSX.Element {
         setAlertVisible={setSelectVisible}
         deleteItems={deleteItems}
         selectedItems={selectedItems}
-        setSelectedItems={setSelectedItems}
-        refetch={refetch}
       />
     </div>
   );

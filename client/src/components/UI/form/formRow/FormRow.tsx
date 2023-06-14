@@ -1,13 +1,9 @@
 import { ReactComponent as DelIcon } from "../../../../assets/icons/del.svg";
 import { Input } from "../../input/Input";
 
-import styles from "./FormRow.module.css";
+import { FormRowProps } from "./FormRow.props";
 
-interface FormRowProps {
-  changeRow: (item: any) => void;
-  removeRow: (id: number) => void;
-  item: any;
-}
+import styles from "./FormRow.module.css";
 
 function FormRow({ item, changeRow, removeRow }: FormRowProps): JSX.Element {
   const itemKeys = Object.keys(item);

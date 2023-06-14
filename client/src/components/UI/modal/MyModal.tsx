@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import classNames from "classnames";
+import { observer } from "mobx-react-lite";
 
 import { MyModalProps } from "./MyModal.props";
 
@@ -15,7 +16,7 @@ const MyModal = <T,>({
     const close = (e: KeyboardEvent): void => {
       if (e.key === "Escape") {
         setModalVisible(false);
-        setActiveElement(undefined);
+        setActiveElement({} as T);
       }
     };
     window.addEventListener("keydown", close);
@@ -29,7 +30,7 @@ const MyModal = <T,>({
       })}
       onClick={() => {
         setModalVisible(false);
-        setActiveElement(undefined);
+        setActiveElement({} as T);
       }}
     >
       <div
@@ -42,4 +43,4 @@ const MyModal = <T,>({
   );
 };
 
-export default MyModal;
+export default observer(MyModal);

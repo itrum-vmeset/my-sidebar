@@ -8,14 +8,14 @@ import { ReactComponent as ShapeIcon } from "../../assets/icons/shape.svg";
 import { withLayout } from "../../components/layout/Layout";
 import { GlobalFilter } from "../../components/table/filter/Filter";
 import Paginator from "../../components/table/pagination/Paginator";
-import TableComponent from "../../components/table/TableComponent";
+import Table from "../../components/table/Table";
 import MyAlert from "../../components/UI/alert/MyAlert";
 import { Button } from "../../components/UI/button/Button";
 import DeleteModal from "../../components/UI/deleteModal/DeleteModal";
-import CustomForm from "../../components/UI/form/CustomForm";
+import Form from "../../components/UI/form/Form";
 import MyModal from "../../components/UI/modal/MyModal";
 import { IFormData } from "../../models/IFormData";
-import { ISeminar } from "../../models/IResponse";
+import { IFutureSeminar, IHistorySeminar } from "../../models/IResponse";
 import { cityAPI } from "../../service/CityService";
 import { seminarAPI } from "../../service/SeminarService";
 
@@ -34,14 +34,16 @@ import {
 import styles from "./Seminars.module.css";
 
 function Seminars(): JSX.Element {
-  const [selectedItems, setSelectedItems] = useState<any>([]);
+  const [selectedItems, setSelectedItems] = useState<Row[]>([]);
   const [selectVisible, setSelectVisible] = useState(false);
   const [columns, setColumns] = useState(future);
   const [modalVisible, setModalVisible] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
   const [enrichedFormData, setEnrichedFormData] = useState<IFormData[]>([]);
   const [activeRoute, setActiveRoute] = useState<string>(navItems[0].value);
-  const [activeElement, setActiveElement] = useState<ISeminar | undefined>({
+  const [activeElement, setActiveElement] = useState<
+    IFutureSeminar | IHistorySeminar
+  >({
     id: "",
     name: "",
     description: "",
@@ -97,13 +99,16 @@ function Seminars(): JSX.Element {
     if (activeRoute === "request") {
       return;
     }
-    setActiveElement(row.original as ISeminar);
+    setActiveElement(row.original as IFutureSeminar);
     setFormVisible(true);
   };
 
   const deleteItems = async () => {
     for (const item of selectedItems) {
-      await deleteSeminar({ seminar: item.original, activeRoute });
+      await deleteSeminar({
+        seminar: item.original as IFutureSeminar | IHistorySeminar,
+        activeRoute,
+      });
     }
     refetch();
     setSelectedItems([]);
@@ -147,7 +152,7 @@ function Seminars(): JSX.Element {
     }
   }, [activeRoute]);
 
-  const renderActions = () => {
+  const renderActions = <T,>() => {
     if (activeRoute === "request") {
       return [];
     }
@@ -161,7 +166,7 @@ function Seminars(): JSX.Element {
             </div>
           ),
           width: 80,
-          action: (item: any) => {
+          action: () => {
             alert("не делай так больше");
           },
         },
@@ -172,7 +177,7 @@ function Seminars(): JSX.Element {
             </div>
           ),
           width: 40,
-          action: (item: any) => {
+          action: (item: IHistorySeminar) => {
             setActiveElement(item);
             setModalVisible(true);
           },
@@ -187,7 +192,7 @@ function Seminars(): JSX.Element {
           </div>
         ),
         width: 40,
-        action: (item: any) => {
+        action: (item: IFutureSeminar ) => {
           setActiveElement(item);
           setModalVisible(true);
         },
@@ -204,27 +209,30 @@ function Seminars(): JSX.Element {
         deleteItem={(seminar) => deleteSeminar({ seminar, activeRoute })}
         text={"семинар"}
       />
-
-      <MyModal
-        modalVisible={formVisible}
-        setModalVisible={setFormVisible}
-        setActiveElement={setActiveElement}
-      >
-        <CustomForm
+      {formVisible && (
+        <MyModal
           modalVisible={formVisible}
-          activeElement={activeElement}
-          setFormVisible={setFormVisible}
-          formData={enrichedFormData}
-          updateItem={
-            activeElement?.name
-              ? (seminar: ISeminar) => updateSeminar({ seminar, activeRoute })
-              : (seminar: ISeminar) => createSeminar({ seminar, activeRoute })
-          }
-          removeItem={(seminar: ISeminar) =>
-            deleteSeminar({ seminar, activeRoute })
-          }
-        />
-      </MyModal>
+          setModalVisible={setFormVisible}
+          setActiveElement={setActiveElement}
+        >
+          <Form
+            modalVisible={formVisible}
+            activeElement={activeElement as IFutureSeminar}
+            setFormVisible={setFormVisible}
+            formData={enrichedFormData}
+            updateItem={
+              activeElement?.name
+                ? (seminar: IFutureSeminar) =>
+                    updateSeminar({ seminar, activeRoute })
+                : (seminar: IFutureSeminar) =>
+                    createSeminar({ seminar, activeRoute })
+            }
+            removeItem={(seminar: IFutureSeminar) =>
+              deleteSeminar({ seminar, activeRoute })
+            }
+          />
+        </MyModal>
+      )}
       <GlobalFilter
         preGlobalFilteredRows={preGlobalFilteredRows}
         globalFilter={state.globalFilter}
@@ -255,9 +263,7 @@ function Seminars(): JSX.Element {
           className={styles.btnFullWidth}
           onClick={() => {
             setActiveElement(
-              activeRoute === "future"
-                ? futureItem
-                : (historyItem as unknown as ISeminar)
+              activeRoute === "future" ? futureItem : historyItem
             );
             setFormVisible(true);
           }}
@@ -265,7 +271,7 @@ function Seminars(): JSX.Element {
           Добавить семинар
         </Button>
       )}
-      <TableComponent
+      <Table
         tableInstance={tableInstance}
         renderActions={renderActions}
         checkBox={activeRoute === "request" ? false : true}
@@ -279,8 +285,6 @@ function Seminars(): JSX.Element {
         setAlertVisible={setSelectVisible}
         deleteItems={deleteItems}
         selectedItems={selectedItems}
-        setSelectedItems={setSelectedItems}
-        refetch={refetch}
       />
     </div>
   );

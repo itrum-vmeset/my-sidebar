@@ -1,155 +1,90 @@
-import React, { memo, useMemo } from "react";
-import { useEffect } from "react";
+/* eslint-disable prefer-const */
+import React, { memo } from "react";
 import classNames from "classnames";
 import { useLocation } from "react-router-dom";
-import { Row, useColumnOrder, usePagination, useTable } from "react-table";
-import { useBlockLayout } from "react-table";
-import { useGlobalFilter } from "react-table";
+import { Cell, HeaderGroup, Row } from "react-table";
 
-import {
-  CLIENTS_ROUTE,
-  ORDERS_ROUTE,
-  PRODUCTS_ROUTE,
-} from "../../helpers/consts";
-import { useColumns } from "../../hooks/useColumns";
+import { BRANDS_ROUTE } from "../../helpers/consts";
 
-import { GlobalFilter } from "./filter/Filter";
 import { NoRows } from "./noRows/NoRows";
-import Paginator from "./pagination/Paginator";
 import { TableProps } from "./Table.props";
 
 import styles from "./Table.module.css";
 
-function Table({
-  data,
-  setModalVisible,
-  setActiveElement,
-  setAlertVisible,
+function Table<T>({
+  setSelectVisible,
   selectedItems,
   setSelectedItems,
-}: TableProps): JSX.Element {
+  tableInstance,
+  renderActions,
+  checkBox,
+  handleClickRow,
+}: TableProps<T>): JSX.Element {
   const { pathname } = useLocation();
 
-  const productsData = useMemo(() => data?.length && [...data], [data]);
-  const productsColumns = useColumns(data, pathname);
-
-  const {
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-    setColumnOrder,
-    state,
-    page,
-    canPreviousPage,
-    canNextPage,
-    pageCount,
-    gotoPage,
-    nextPage,
-    previousPage,
-    setPageSize,
-    preGlobalFilteredRows,
-    setGlobalFilter,
-  } = useTable(
-    {
-      columns: productsColumns as any,
-      data: productsData,
-      initialState: {
-        pageSize: 10,
-      },
-    },
-    useColumnOrder,
-    useBlockLayout,
-    useGlobalFilter,
-    usePagination
-  );
-
-  useEffect(() => {
-    pathname === CLIENTS_ROUTE &&
-      setColumnOrder(["fullName", "email", "phone"]);
-    pathname === PRODUCTS_ROUTE && setColumnOrder(["name", "codeFrom1C"]);
-    pathname === ORDERS_ROUTE &&
-      setColumnOrder([
-        "customer",
-        "order_number",
-        "delivery_type",
-        "date",
-        "total",
-        "isPayed",
-      ]);
-  }, []);
+  let { getTableBodyProps, headerGroups, rows, prepareRow, page } =
+    tableInstance;
 
   const selectItem = (row: Row): void => {
-    let modifiedItems = [];
+    let modifiedItems: Row[] = [];
     row.values.checked = !row.values.checked;
     if (!row.values.checked) {
-      const filteredItems = selectedItems.filter(
-        (item: Row) => item.values.checked
-      );
-      modifiedItems = filteredItems;
-      setSelectedItems(modifiedItems);
+      const filteredItems =
+        selectedItems &&
+        selectedItems.filter((item: Row) => item.values.checked);
+      if (filteredItems) {
+        modifiedItems = filteredItems;
+      }
+      setSelectedItems && setSelectedItems(modifiedItems);
     } else {
-      modifiedItems = [...selectedItems, row];
-      setSelectedItems(modifiedItems);
+      if (selectedItems) {
+        modifiedItems = selectedItems && [...selectedItems, row];
+      }
+      setSelectedItems && setSelectedItems(modifiedItems);
     }
-    modifiedItems.length ? setAlertVisible(true) : setAlertVisible(false);
+    modifiedItems.length
+      ? setSelectVisible && setSelectVisible(true)
+      : setSelectVisible && setSelectVisible(false);
   };
   const selectAll = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const filteredItems = page.map((row) => {
+    const filteredItems = page.map((row: Row) => {
       row.values.checked = e.target.checked;
       return row;
     });
     if (e.target.checked) {
-      setSelectedItems(filteredItems);
-      setAlertVisible(true);
+      setSelectedItems && setSelectedItems(filteredItems);
+      setSelectVisible && setSelectVisible(true);
     } else {
-      setSelectedItems([]);
-      setAlertVisible(false);
+      setSelectedItems && setSelectedItems([]);
+      setSelectVisible && setSelectVisible(false);
     }
   };
 
-  const handleClick = (row: Row): void => {
-    if (pathname !== CLIENTS_ROUTE) {
-      setActiveElement(row.original);
-      setModalVisible(true);
-    }
-  };
+  if (!page) {
+    page = rows;
+  }
 
   return (
     <div className={styles.wrapper}>
-      <GlobalFilter
-        preGlobalFilteredRows={preGlobalFilteredRows}
-        globalFilter={state.globalFilter}
-        setGlobalFilter={setGlobalFilter}
-      />
-      <Paginator
-        gotoPage={gotoPage}
-        canPreviousPage={canPreviousPage}
-        canNextPage={canNextPage}
-        pageCount={pageCount}
-        nextPage={nextPage}
-        previousPage={previousPage}
-        setPageSize={setPageSize}
-        pageIndex={state.pageIndex}
-        pageSize={state.pageSize}
-      />
-      {page.length ? (
+      {page?.length || rows.length ? (
         <table className={classNames(styles.table)}>
           <thead className={styles.tableHead}>
-            {headerGroups.map((headerGroup, index) => (
+            {headerGroups.map((headerGroup: HeaderGroup) => (
               // eslint-disable-next-line react/jsx-key
               <tr {...headerGroup.getHeaderGroupProps()}>
-                {pathname === PRODUCTS_ROUTE && (
+                {checkBox && (
                   <th>
                     <input
                       className={styles.chkBox}
                       type="checkbox"
                       onChange={selectAll}
-                      checked={selectedItems.length === page.length}
+                      checked={
+                        selectedItems && selectedItems.length === page.length
+                      }
                     />
                   </th>
                 )}
-                {headerGroup.headers.map((column) => (
+                {headerGroup.headers.map((column: HeaderGroup) => (
                   // eslint-disable-next-line react/jsx-key
                   <th
                     {...column.getHeaderProps({
@@ -160,27 +95,39 @@ function Table({
                     {column.render("Header")}
                   </th>
                 ))}
+                {renderActions &&
+                  renderActions().map((item: any, index: number) => (
+                    <th key={index} style={{ width: item.width }}></th>
+                  ))}
               </tr>
             ))}
           </thead>
           <tbody className={styles.tableBody} {...getTableBodyProps()}>
-            {page.map((row) => {
+            {page.map((row: Row) => {
               prepareRow(row);
               return (
                 // eslint-disable-next-line react/jsx-key
-                <tr {...row.getRowProps()} onClick={() => handleClick(row)}>
-                  {pathname === PRODUCTS_ROUTE && (
+                <tr
+                  {...row.getRowProps()}
+                  onClick={() => (handleClickRow ? handleClickRow(row) : null)}
+                  className={classNames({
+                    [styles.brandsTableRow]: BRANDS_ROUTE === pathname,
+                    [styles.clickableRow]: handleClickRow,
+                  })}
+                >
+                  {checkBox && (
                     <th onClick={(e) => e.stopPropagation()}>
                       <input
                         type="checkbox"
                         className={styles.chkBox}
-                        checked={row.values.checked}
+                        checked={
+                          row.values.checked ? row.values.checked : false
+                        }
                         onChange={() => selectItem(row)}
                       />
                     </th>
                   )}
-                  {/* {...renderActions} */}
-                  {row.cells.map((cell) => {
+                  {row.cells.map((cell: Cell) => {
                     return (
                       // eslint-disable-next-line react/jsx-key
                       <td
@@ -194,6 +141,19 @@ function Table({
                       </td>
                     );
                   })}
+                  {renderActions &&
+                    renderActions().map((item: any, index: number) => (
+                      <td
+                        key={index}
+                        style={{ width: item.width }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          item.action(row.original);
+                        }}
+                      >
+                        {item.component}
+                      </td>
+                    ))}
                 </tr>
               );
             })}

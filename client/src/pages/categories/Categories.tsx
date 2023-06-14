@@ -40,8 +40,8 @@ function Categories(): JSX.Element {
 
   const handleCreate = (marker: null | string): void => {
     const newCategory = {
-      id: Date.now(),
-      position: (categories?.count as any) + 1,
+      id: Date.now().toString(),
+      position: (categories?.count as number) + 1,
     };
     if (!marker) {
       if (!newCategoryName.trim().length) {
@@ -66,7 +66,7 @@ function Categories(): JSX.Element {
     e: React.KeyboardEvent<HTMLElement>,
     marker: null | string
   ): void => {
-    if (e.keyCode === 13) {
+    if (e.key === "Enter") {
       return handleCreate(marker);
     }
   };

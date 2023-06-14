@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import AppRouter from "./components/AppRouter";
 import Loader from "./components/UI/loader/Loader";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
-import { checkAC } from "./store/reducers/ActionCreators";
-import { authSlice } from "./store/reducers/AuthSlice";
+import { checkAC } from "./store/rtkStore/reducers/ActionCreators";
+import { authSlice } from "./store/rtkStore/reducers/AuthSlice";
 
 import styles from "./App.module.css";
 

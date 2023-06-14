@@ -24,7 +24,7 @@ function Characteristics({
       onChange([...value, { id: Date.now(), value: "", code: "" }]);
     }
   };
-  const removeCharacteristics = (id: number): void => {
+  const removeCharacteristics = (id: number | string): void => {
     if (name === "characteristics") {
       value.filter((el: any) => el.id !== id);
     }

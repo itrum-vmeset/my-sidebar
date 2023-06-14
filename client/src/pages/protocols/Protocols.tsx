@@ -6,7 +6,7 @@ import { withLayout } from "../../components/layout/Layout";
 import { NoRows } from "../../components/table/noRows/NoRows";
 import { Button } from "../../components/UI/button/Button";
 import DeleteModal from "../../components/UI/deleteModal/DeleteModal";
-import CustomForm from "../../components/UI/form/CustomForm";
+import Form from "../../components/UI/form/Form";
 import { Input } from "../../components/UI/input/Input";
 import { List } from "../../components/UI/list/List";
 import MyModal from "../../components/UI/modal/MyModal";
@@ -24,7 +24,7 @@ function Protocols(): JSX.Element {
   const { pathname } = useLocation();
   const [category, setCategory] = useState({ id: "", name: "" });
   const [enrichedFormData, setEnrichedFormData] = useState<IFormData[]>([]);
-  const [activeElement, setActiveElement] = useState<IProtocol | undefined>({
+  const [activeElement, setActiveElement] = useState<IProtocol>({
     id: "",
     name: "",
     description: "",
@@ -57,7 +57,7 @@ function Protocols(): JSX.Element {
   const handleCreate = (): void => {
     const newProtocolCategory = {
       name: newCategoryName,
-      id: Date.now(),
+      id: Date.now().toString(),
     };
     if (!newCategoryName.trim().length) {
       return alert("Сначала выберите категорию");
@@ -134,7 +134,7 @@ function Protocols(): JSX.Element {
         setModalVisible={setFormVisible}
         setActiveElement={setActiveElement}
       >
-        <CustomForm
+        <Form
           modalVisible={formVisible}
           activeElement={activeElement}
           setFormVisible={setFormVisible}

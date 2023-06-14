@@ -22,7 +22,7 @@ export const categoryAPI = createApi({
         };
       },
     }),
-    createCategory: build.mutation<ICategory, any>({
+    createCategory: build.mutation<ICategory, ICategory>({
       query: (category) => ({
         url: `/categories/`,
         method: "POST",

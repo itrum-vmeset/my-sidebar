@@ -7,7 +7,7 @@ import { usePagination } from "react-table";
 import { withLayout } from "../../components/layout/Layout";
 import { GlobalFilter } from "../../components/table/filter/Filter";
 import Paginator from "../../components/table/pagination/Paginator";
-import TableComponent from "../../components/table/TableComponent";
+import Table from "../../components/table/Table";
 import { clientAPI } from "../../service/ClientsService";
 
 import { columns } from "./config";
@@ -64,7 +64,7 @@ function Clients(): JSX.Element {
         pageIndex={state.pageIndex}
         pageSize={state.pageSize}
       />
-      <TableComponent
+      <Table
         tableInstance={tableInstance}
         renderActions={() => {
           return [];

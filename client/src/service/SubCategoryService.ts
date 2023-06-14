@@ -23,7 +23,7 @@ export const subCategoryAPI = createApi({
         };
       },
     }),
-    createSubCategory: build.mutation<ISubCategory, any>({
+    createSubCategory: build.mutation<ISubCategory, ISubCategory>({
       query: (subcategory) => ({
         url: `/subcategories/`,
         method: "POST",

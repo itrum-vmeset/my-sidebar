@@ -1,9 +1,9 @@
 import { Column } from "react-table";
 import * as Yup from "yup";
 
-import CustomFormCategory from "../../components/UI/form/category/CustomFormCategory";
+import FormCategories from "../../components/UI/form/category/FormCategories";
 import CustomFormSelect from "../../components/UI/form/customSelect/CustomFormSelect";
-import CustomFormList from "../../components/UI/form/formList/CustomFormList";
+import CustomFormList from "../../components/UI/form/formList/FormList";
 import { FormInput } from "../../components/UI/input/FormInput";
 import { FormInputPercent } from "../../components/UI/input/percent/FormInputPercent";
 import { IFormData } from "../../models/IFormData";
@@ -44,7 +44,7 @@ export const formData: IFormData[] = [
   {
     id: 4,
     title: "",
-    Component: CustomFormCategory,
+    Component: FormCategories,
     componentProps: {
       name: "catalog_product",
     },

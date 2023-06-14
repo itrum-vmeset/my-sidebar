@@ -1,26 +1,34 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { observer } from "mobx-react-lite";
 import { useTable } from "react-table";
 import { useBlockLayout } from "react-table";
 
 import { ReactComponent as DeleteIcon } from "../../assets/icons/delete.svg";
 import { withLayout } from "../../components/layout/Layout";
-import TableComponent from "../../components/table/TableComponent";
+import Table from "../../components/table/Table";
+import { IRenderAction } from "../../components/table/Table.props";
 import TableForm from "../../components/table/tableForm/TableForm";
 import DeleteModal from "../../components/UI/deleteModal/DeleteModal";
 import { ICity } from "../../models/IResponse";
-import { cityAPI } from "../../service/CityService";
+import CityStore from "../../store/mobxStore/promocodeStore/CityStore";
 
 import { columns } from "./config";
 
+export interface NewCity {
+  name: {
+    value: string;
+    placeholder: string;
+  };
+  address: {
+    value: string;
+    placeholder: string;
+  };
+}
+
 function Cities(): JSX.Element {
   const [modalVisible, setModalVisible] = useState(false);
-  const [activeElement, setActiveElement] = useState<ICity | undefined>({
-    id: "",
-    name: "",
-    address: "",
-  });
 
-  const [newCity, setNewCity] = useState({
+  const [newCity, setNewCity] = useState<NewCity>({
     name: {
       value: "",
       placeholder: "Введите название города",
@@ -30,13 +38,10 @@ function Cities(): JSX.Element {
       placeholder: "Введите адрес",
     },
   });
-  const [deleteCity] = cityAPI.useDeleteCityMutation();
-  const [createCity] = cityAPI.useCreateCityMutation();
-  const { data } = cityAPI.useFetchAllCitiesQuery(null);
 
   const productsData = useMemo(
-    () => (data?.data.length ? [...data.data] : []),
-    [data]
+    () => (CityStore.citiesM.length ? [...CityStore.citiesM] : []),
+    [CityStore.citiesM]
   );
 
   const tableInstance = useTable(
@@ -48,10 +53,10 @@ function Cities(): JSX.Element {
   );
 
   const handleCreate = () => {
-    createCity({
+    CityStore.createCityM({
       id: Date.now().toString(),
       name: newCity.name.value,
-      address: newCity.address.value,
+      address: newCity?.address?.value,
     });
     setNewCity({
       name: {
@@ -65,7 +70,7 @@ function Cities(): JSX.Element {
     });
   };
 
-  const renderActions = () => {
+  const renderActions = (): IRenderAction<ICity>[] => {
     return [
       {
         component: (
@@ -75,34 +80,37 @@ function Cities(): JSX.Element {
         ),
         width: 40,
         action: (item: ICity) => {
-          setActiveElement(item);
+          CityStore.setActiveElementM(item);
           setModalVisible(true);
         },
       },
     ];
   };
 
+  useEffect(() => {
+    CityStore.fetchCitiesM();
+  }, []);
+
   return (
     <div className="container">
-      <DeleteModal
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisible}
-        activeElement={activeElement}
-        deleteItem={deleteCity}
-        text={"город"}
-      />
+      {CityStore.activeElementM && (
+        <DeleteModal
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+          activeElement={CityStore.activeElementM}
+          deleteItem={(city) => CityStore.deleteCityM(city)}
+          text={"город"}
+        />
+      )}
       <TableForm
         addItem={handleCreate}
         item={newCity}
-        setItem={setNewCity}
+        setItem={(val) => setNewCity(val as NewCity)}
         buttonText="Добавить город"
       />
-      <TableComponent
-        tableInstance={tableInstance}
-        renderActions={renderActions}
-      />
+      <Table renderActions={renderActions} tableInstance={tableInstance} />
     </div>
   );
 }
 
-export default withLayout(Cities);
+export default withLayout(observer(Cities));

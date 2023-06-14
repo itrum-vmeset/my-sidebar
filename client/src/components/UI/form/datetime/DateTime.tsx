@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Input } from "../../input/Input";
+import { FormInput } from "../../input/FormInput";
 import { Typography } from "../../typography/Typography";
 
 import { DateTimeProps } from "./DateTime.props";
@@ -17,10 +17,10 @@ function DateTime({ value, changeValue }: DateTimeProps): JSX.Element {
     <div className={styles.categorySection}>
       <div className={styles.categoryBlock}>
         <Typography>Дата*</Typography>
-        <Input
+        <FormInput
           type="date"
           value={value.split(" ")[0].split(".").reverse().join("-")}
-          onChange={(e) => {
+          onChange={(e: any) => {
             setDate(
               e.target.value.replaceAll("-", ".").split(".").reverse().join(".")
             );
@@ -40,10 +40,10 @@ function DateTime({ value, changeValue }: DateTimeProps): JSX.Element {
       </div>
       <div className={styles.categoryBlock}>
         <Typography>Время*</Typography>
-        <Input
+        <FormInput
           type="time"
           value={value.split(" ")[1]}
-          onChange={(e) => {
+          onChange={(e: any) => {
             setTime(e.target.value);
             changeValue(date.concat(" ", e.target.value));
           }}

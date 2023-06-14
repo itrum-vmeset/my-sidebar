@@ -5,6 +5,5 @@ export interface InputProps
     InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   > {
-  ref?: any;
   className?: string;
 }

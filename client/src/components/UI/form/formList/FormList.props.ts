@@ -1,7 +1,9 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 
+import { Product } from "../../../../models/IResponse";
+
 export interface FormListProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  data: any;
-  setData: any;
+  value: Product[];
+  changeValue: (items: Product[]) => void;
 }

@@ -9,7 +9,7 @@ export const protocolAPI = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
   tagTypes: ["Protocol"],
   endpoints: (build) => ({
-    fetchAllProtocols: build.query<IResponse<IProtocol>, any>({
+    fetchAllProtocols: build.query<IResponse<IProtocol>, string>({
       query: (protocol_category) => ({
         url: "/protocols",
         params: { protocol_category },
@@ -23,7 +23,7 @@ export const protocolAPI = createApi({
         };
       },
     }),
-    createProtocol: build.mutation<IProtocol, any>({
+    createProtocol: build.mutation<IProtocol, IProtocol>({
       query: (protocol) => ({
         url: `/protocols/`,
         method: "POST",

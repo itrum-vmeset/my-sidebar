@@ -1,4 +1,4 @@
-import { Column } from "react-table";
+import { Column, Row } from "react-table";
 
 import CustomFormSelect from "../../components/UI/form/customSelect/CustomFormSelect";
 import DateTime from "../../components/UI/form/datetime/DateTime";
@@ -24,7 +24,7 @@ export const future: Column[] = [
     Header: "Дата",
     accessor: "datetime",
     width: 150,
-    Cell: ({ value }: any) => {
+    Cell: ({ value }) => {
       return <span>{value?.split(" ")[0]}</span>;
     },
   },
@@ -45,17 +45,17 @@ export const history: Column[] = [
 
 export const request: Column[] = [
   {
-    Header: "Название семнара",
+    Header: "Название семинара",
     accessor: "seminar",
     width: 500,
-    Cell: ({ value }: any) => {
+    Cell: ({ value }) => {
       return <span>{value?.name}</span>;
     },
   },
   {
     Header: "Пользователь",
     accessor: "user",
-    Cell: (row: any) => (
+    Cell: (row) => (
       <Typography>
         {row.cell.value?.lastName} {row.cell.value?.name}{" "}
         {row.cell.value?.secondName}
@@ -67,7 +67,7 @@ export const request: Column[] = [
   {
     Header: "Номер телефона",
     accessor: "user",
-    Cell: ({ value }: any) => {
+    Cell: ({ value }) => {
       return <span>{value?.phone}</span>;
     },
     width: 150,

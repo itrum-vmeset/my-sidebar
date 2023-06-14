@@ -6,6 +6,6 @@ export interface FormImageProps
     HTMLInputElement
   > {
   className?: string;
-  value: any;
-  onChange: any;
+  value: string;
+  changeValue: () => void;
 }

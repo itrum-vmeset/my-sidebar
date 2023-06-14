@@ -9,6 +9,18 @@ import { brandAPI } from "../../service/BrandService";
 
 import styles from "./Brands.module.css";
 
+export interface NewBrand {
+  name: {
+    value: string;
+    placeholder: string;
+  };
+  icon: {
+    value: string;
+    placeholder: string;
+    attach: JSX.Element;
+  };
+}
+
 function Brands(): JSX.Element {
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
 
@@ -18,7 +30,7 @@ function Brands(): JSX.Element {
     name: "",
     icon: "",
   });
-  const [newBrand, setNewBrand] = useState({
+  const [newBrand, setNewBrand] = useState<NewBrand>({
     name: {
       value: "",
       placeholder: "Введите название бренда",
@@ -38,7 +50,7 @@ function Brands(): JSX.Element {
     createBrand({
       id: Date.now().toString(),
       name: newBrand.name.value,
-      icon: newBrand.icon.value.split(`\\`).reverse()[0],
+      icon: newBrand?.icon?.value?.split(`\\`).reverse()[0],
     });
     setNewBrand({
       name: {
@@ -64,7 +76,7 @@ function Brands(): JSX.Element {
       <TableForm
         addItem={handleCreate}
         item={newBrand}
-        setItem={setNewBrand}
+        setItem={(val) => setNewBrand(val as NewBrand)}
         buttonText="Добавить бренд"
       />
       <div className={styles.list}>

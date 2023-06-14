@@ -2,12 +2,9 @@ import { ReactComponent as DelIcon } from "../../../../assets/icons/del.svg";
 import { ReactComponent as ImgIcon } from "../../../../assets/icons/img.svg";
 import { Typography } from "../../typography/Typography";
 
-import styles from "./ImgLinkRow.module.css";
+import { ImgLinkRowProps } from "./ImgLinkRowProps.props";
 
-interface ImgLinkRowProps {
-  removeLink: any;
-  link: any;
-}
+import styles from "./ImgLinkRow.module.css";
 
 function ImgLinkRow({ link, removeLink }: ImgLinkRowProps): JSX.Element {
   return (
