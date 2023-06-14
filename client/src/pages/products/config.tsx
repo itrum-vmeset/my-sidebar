@@ -1,7 +1,7 @@
 import { Column } from "react-table";
 import * as Yup from "yup";
 
-import CustomFormCategory from "../../components/UI/form/category/CustomFormCategory";
+import FormCategories from "../../components/UI/form/category/FormCategories";
 import Characteristics from "../../components/UI/form/characteristics/Characteristics";
 import CustomFormSelect from "../../components/UI/form/customSelect/CustomFormSelect";
 import FormImages from "../../components/UI/form/images/FormImages";
@@ -87,7 +87,7 @@ export const formData: IFormData[] = [
   {
     id: 9,
     title: "",
-    Component: CustomFormCategory,
+    Component: FormCategories,
     componentProps: {
       name: "catalog_product",
     },

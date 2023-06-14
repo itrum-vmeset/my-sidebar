@@ -1,6 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
-import { IResponse, ISeminar } from "../models/IResponse";
+import {
+  IFutureSeminar,
+  IHistorySeminar,
+  IResponse,
+} from "../models/IResponse";
 
 const baseUrl = "http://localhost:5005";
 
@@ -9,12 +13,14 @@ export const seminarAPI = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
   tagTypes: ["Seminar"],
   endpoints: (build) => ({
-    fetchAllSeminars: build.query<IResponse<ISeminar>, string>({
+    fetchAllSeminars: build.query<IResponse<IFutureSeminar>, string>({
       query: (query) => ({
         url: `/${query}`,
       }),
       providesTags: () => ["Seminar"],
-      transformResponse: (data: ISeminar[]): IResponse<ISeminar> => {
+      transformResponse: (
+        data: IFutureSeminar[]
+      ): IResponse<IFutureSeminar> => {
         const count = data.length;
         return {
           data,
@@ -23,8 +29,8 @@ export const seminarAPI = createApi({
       },
     }),
     createSeminar: build.mutation<
-      ISeminar,
-      { seminar: any; activeRoute: string }
+      IFutureSeminar,
+      { seminar: IFutureSeminar | IHistorySeminar; activeRoute: string }
     >({
       query: ({ seminar, activeRoute }) => ({
         url: `/${activeRoute}/`,
@@ -34,8 +40,8 @@ export const seminarAPI = createApi({
       invalidatesTags: ["Seminar"],
     }),
     updateSeminar: build.mutation<
-      ISeminar,
-      { seminar: any; activeRoute: string }
+      IFutureSeminar,
+      { seminar: IFutureSeminar | IHistorySeminar; activeRoute: string }
     >({
       query: ({ seminar, activeRoute }) => ({
         url: `/${activeRoute}/${seminar.id}`,
@@ -45,8 +51,8 @@ export const seminarAPI = createApi({
       invalidatesTags: ["Seminar"],
     }),
     deleteSeminar: build.mutation<
-      ISeminar,
-      { seminar: any; activeRoute: string }
+      IFutureSeminar,
+      { seminar: IFutureSeminar | IHistorySeminar; activeRoute: string }
     >({
       query: ({ seminar, activeRoute }) => ({
         url: `/${activeRoute}/${seminar.id}`,

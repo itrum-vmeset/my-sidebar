@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 import CustomFormSelect from "../../components/UI/form/customSelect/CustomFormSelect";
-import CustomFormList from "../../components/UI/form/formList/CustomFormList";
+import CustomFormList from "../../components/UI/form/formList/FormList";
 import { FormInput } from "../../components/UI/input/FormInput";
 import { Textarea } from "../../components/UI/textarea/Textarea";
 import { IFormData } from "../../models/IFormData";

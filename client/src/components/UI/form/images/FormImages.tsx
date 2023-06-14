@@ -9,19 +9,19 @@ import { FormImagesProps } from "./FormImages.props";
 
 import styles from "./FormImages.module.css";
 
-function FormImages({ value, onChange }: FormImagesProps): JSX.Element {
+function FormImages({ value, changeValue }: FormImagesProps): JSX.Element {
   const [newLink, setNewLink] = useState("");
   const addLink = (): void => {
     if (value.length > 4) {
       return alert("Не больше пяти изображений");
     }
     if (newLink !== "") {
-      onChange([...value, newLink]);
+      changeValue([...value, newLink]);
       setNewLink("");
     }
   };
   const removeLink = (link: string): void => {
-    onChange(
+    changeValue(
       value.filter((el: string) => {
         return el !== link;
       })

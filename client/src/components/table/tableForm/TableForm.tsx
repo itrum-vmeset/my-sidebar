@@ -30,7 +30,6 @@ function TableForm({
                 ...item,
                 [key]: {
                   value: e.target.value,
-                  placeholder: value.placeholder,
                 },
               })
             }

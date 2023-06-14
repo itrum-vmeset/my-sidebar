@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 import FormImage from "../../components/UI/form/formImage/FormImage";
-import FormItemList from "../../components/UI/form/formList/FormItemList";
+import CustomFormList from "../../components/UI/form/formList/FormList";
 import { FormInput } from "../../components/UI/input/FormInput";
 import { FormInputPercent } from "../../components/UI/input/percent/FormInputPercent";
 import { IFormData } from "../../models/IFormData";
@@ -50,7 +50,7 @@ export const formData: IFormData[] = [
   {
     id: 5,
     title: "Товары",
-    Component: FormItemList,
+    Component: CustomFormList,
     componentProps: {
       name: "products",
     },
@@ -66,7 +66,7 @@ export const BannerSchema = Yup.object().shape({
   description: Yup.string()
     .typeError("Введите текст")
     .min(2, "Минимум 2 буквы")
-    .max(50, "Максимум 50 букв")
+    .max(250, "Максимум 250 букв")
     .required("Обязательное поле"),
   percent: Yup.number()
     .typeError("Введите число")

@@ -1,4 +1,3 @@
-import React from "react";
 import { useLocation } from "react-router-dom";
 
 import { ReactComponent as AttachIcon } from "../../../../assets/icons/attach.svg";
@@ -11,20 +10,20 @@ import { FormImageProps } from "./FormImage.props";
 
 import styles from "./FormImage.module.css";
 
-function FormImage({ value, onChange, ...props }: FormImageProps): JSX.Element {
+function FormImage({ value, changeValue }: FormImageProps): JSX.Element {
   const { pathname } = useLocation();
   return (
     <div>
       {value ? (
-        <ImgLinkRow link={value} removeLink={onChange} />
+        <ImgLinkRow link={value} removeLink={changeValue} />
       ) : (
         <>
           <Input
             placeholder="Вставте ссылку на Google Drive"
             value={value}
-            onChange={onChange}
+            onChange={changeValue}
           />
-          <AttachIcon className={styles.inputFile} onClick={onChange} />
+          <AttachIcon className={styles.inputFile} onClick={changeValue} />
         </>
       )}
       <Typography sizer="s">

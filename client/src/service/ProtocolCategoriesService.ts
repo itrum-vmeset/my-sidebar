@@ -24,7 +24,10 @@ export const protocolCategoriesAPI = createApi({
         },
       }
     ),
-    createProtocolCategory: build.mutation<IProtocolCategory, any>({
+    createProtocolCategory: build.mutation<
+      IProtocolCategory,
+      IProtocolCategory
+    >({
       query: (protocol) => ({
         url: `/protocolcategories/`,
         method: "POST",

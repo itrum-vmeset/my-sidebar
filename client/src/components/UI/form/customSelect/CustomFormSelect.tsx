@@ -11,7 +11,7 @@ import styles from "./CustomSelect.module.css";
 
 function CustomFormSelect({
   value,
-  onChange,
+  changeValue,
   customModalVisible,
   setCustomModalVisible,
   setCategoryModalVisible,
@@ -42,7 +42,7 @@ function CustomFormSelect({
         selectModalVisible={customModalVisible[name]}
         setSelectModalVisible={setCustomModalVisible}
         active={value}
-        setData={onChange}
+        setData={changeValue}
         options={options}
       />
       <SelectIcon

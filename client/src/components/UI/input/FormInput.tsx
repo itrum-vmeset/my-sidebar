@@ -9,8 +9,9 @@ export const FormInput = ({
   onChange,
   className,
   disabled,
+  type,
 }: FormInputProps): JSX.Element => {
-  const fullName = () => {
+  const fullName = (): string => {
     let user = "";
     if (value.name) {
       user = user.concat(value.name);
@@ -29,9 +30,10 @@ export const FormInput = ({
   return (
     <input
       className={classNames(styles.input, className)}
-      value={typeof value === "object" ? fullName() : value}
+      value={typeof value === "object" ? fullName() : value ? value : ""}
       onChange={onChange}
       disabled={disabled}
+      type={type ? type : "text"}
     />
   );
 };

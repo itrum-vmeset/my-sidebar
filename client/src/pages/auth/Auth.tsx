@@ -11,7 +11,10 @@ import {
   REGISTER_ROUTE,
 } from "../../helpers/consts";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import { loginAC, registerAC } from "../../store/reducers/ActionCreators";
+import {
+  loginAC,
+  registerAC,
+} from "../../store/rtkStore/reducers/ActionCreators";
 
 import styles from "./Auth.module.css";
 

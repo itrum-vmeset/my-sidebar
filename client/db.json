@@ -8986,7 +8986,7 @@
         "role": "SPECIALIST"
       },
       "order_number": "2087645096-1",
-      "date": "16.03.23",
+      "date": "17.03.23",
       "delivery_type": "DELIVERY",
       "id": "bde2110f-9b40-45cf-8f07-9a609c1adc2e",
       "order_type": "COURIER_CASH",
@@ -9040,25 +9040,25 @@
       "date": "16.03.23"
     },
     {
-      "id": "4e849bb8-94f5-41a7-8eff-5028614ebfb0",
-      "order_type": "OFFICE_CASH",
-      "total": 5793.2,
-      "isViewedByAdmin": true,
-      "order_number": "9547732992-0",
-      "delivery_type": "PICKUP",
-      "isPayed": true,
       "user": {
         "id": "d173461b-267d-44c9-a28f-126aa2d19d5c",
-        "name": "Анна",
-        "lastName": "Болтик",
+        "name": "Анна Болтик",
+        "lastName": "",
         "secondName": "",
         "firmName": "",
         "role": "SPECIALIST"
       },
+      "order_number": "9547732992-0",
+      "date": "16.03.23",
+      "delivery_type": "PICKUP",
+      "id": "4e849bb8-94f5-41a7-8eff-5028614ebfb0",
+      "order_type": "OFFICE_CASH",
+      "total": 5793.2,
+      "isViewedByAdmin": true,
+      "isPayed": true,
       "warehouse": {
         "city": "Ростов-на-Дону"
-      },
-      "date": "16.03.23"
+      }
     },
     {
       "id": "30ebdb01-35b6-46b7-8338-51bae4aab6da",
@@ -11623,7 +11623,7 @@
         "name": "Волгоград",
         "address": "ул. Академическая 22, офис 313"
       },
-      "datetime": "25.03.2023 13:37",
+      "datetime": "21.03.2023 14:17",
       "image": "https://drive.google.com/uc?export=view&id=1RmFZwMZ3UVj5_Qo2GVPVc7LXMcahGmo-",
       "mobileImage": "https://api.filara-cosmo.ru/images/1RmFZwMZ3UVj5_Qo2GVPVc7LXMcahGmo-"
     },
@@ -11639,7 +11639,7 @@
         "address": "ул. Академическая 22, офис 313"
       },
       "datetime": "15.03.2023 10:30",
-      "image": "https://drive.google.com/uc?export=view&id=1RmFZwMZ3UVj5_Qo2GVPVc7LXMcahGmo-",
+      "image": "https://www.npmjs.com/package/zustand",
       "mobileImage": "https://api.filara-cosmo.ru/images/1RmFZwMZ3UVj5_Qo2GVPVc7LXMcahGmo-"
     },
     {
@@ -11890,25 +11890,24 @@
             "name": "Vec"
           },
           "images": []
-        },
-        {
-          "id": "5d6bc26f-c1a1-468e-8b50-79b61982bd6e",
-          "name": "Трихологический пептидный комплекс Tricholax, 2 мл",
-          "isRetailAllowed": false,
-          "brand": {
-            "id": "b9a8c4ab-3570-47a4-a75f-940f784211bd",
-            "name": "Vec"
-          },
-          "images": []
         }
       ]
     },
     {
-      "id": "1684920996608",
-      "name": "another banner",
+      "image": "https://www.npmjs.com/package/mobx",
+      "percent": 77,
       "description": "textText",
-      "percent": "77",
-      "image": "",
+      "name": "another banner",
+      "id": "1684920996608",
+      "availableFor": "",
+      "products": []
+    },
+    {
+      "image": "https://stackoverflow.com/questions/51069552/axios-delete-request-with-request-body-and-headers",
+      "percent": 22,
+      "description": "ssd",
+      "name": "zzz",
+      "id": "1686751237947",
       "availableFor": "",
       "products": []
     }
@@ -11926,9 +11925,9 @@
         "__v": 0
       },
       "sub_catalog_product": {
-        "id": "6a98af2a-e190-4af2-a8c9-7514f5cd4c72",
-        "name": "Скрабы",
-        "position": 1,
+        "id": "e71f03f8-7aef-4910-a0b6-efbe51ab5aa7",
+        "name": "Тонизация",
+        "position": 2,
         "catalog_product": "644a5d931b666a27fd169ed6",
         "__v": 0
       },
@@ -12069,13 +12068,27 @@
       ]
     },
     {
-      "id": "1684923093649",
+      "percent": 33,
+      "promocode": "promoKOKOD",
       "name": "new promocode",
+      "id": "1684923093649",
       "description": "description",
-      "percent": "33",
       "image": "http://kinked",
       "availableFor": "",
-      "products": []
+      "products": [],
+      "catalog_product": {
+        "id": "644a5d931b666a27fd169ed6",
+        "name": "Эстетический уход",
+        "position": 1,
+        "__v": 0
+      },
+      "sub_catalog_product": {
+        "id": "0e325ef5-b8fd-483d-b136-78895788e5a0",
+        "name": "Сыворотки-концентраты",
+        "position": 4,
+        "catalog_product": "644a5d931b666a27fd169ed6",
+        "__v": 0
+      }
     }
   ]
 }

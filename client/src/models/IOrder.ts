@@ -1,10 +1,12 @@
+import { IDelivery } from "../helpers/helpers";
+
 export interface IOrder {
   id: string;
   order_type: string;
   total: number;
   isViewedByAdmin: boolean;
   order_number: string;
-  delivery_type: string;
+  delivery_type: string | IDelivery;
   isPayed: boolean;
   user: User;
   warehouse: Warehouse;
@@ -14,9 +16,9 @@ export interface IOrder {
 export interface User {
   id: string;
   name: string;
-  lastName: any;
-  secondName: any;
-  firmName: any;
+  lastName: string;
+  secondName: string;
+  firmName: string;
   role?: string;
 }
 

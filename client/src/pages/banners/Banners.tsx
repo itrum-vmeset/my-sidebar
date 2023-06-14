@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { observer } from "mobx-react-lite";
 
 import { withLayout } from "../../components/layout/Layout";
 import { Button } from "../../components/UI/button/Button";
 import DeleteModal from "../../components/UI/deleteModal/DeleteModal";
-import CustomForm from "../../components/UI/form/CustomForm";
-import { List } from "../../components/UI/list/List";
+import Form from "../../components/UI/form/Form";
+import { ListM } from "../../components/UI/list/ListM";
 import MyModal from "../../components/UI/modal/MyModal";
 import { IBanner } from "../../models/IResponse";
-import { bannerAPI } from "../../service/BannerService";
+import BannerStore from "../../store/mobxStore/promocodeStore/BannerStore";
 
 import { BannerSchema, formData } from "./config";
 
@@ -17,54 +18,53 @@ function Banners(): JSX.Element {
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
   const [selected, setSelected] = useState(null);
-  const [activeElement, setActiveElement] = useState<IBanner | undefined>({
-    id: Date.now().toString(),
-    name: "",
-    description: "",
-    percent: 0,
-    image: "",
-    availableFor: "",
-    products: [],
-  });
-  const [deleteBanner] = bannerAPI.useDeleteBannerMutation();
-  const [updateBanner] = bannerAPI.useUpdateBannerMutation();
-  const [createBanner] = bannerAPI.useCreateBannerMutation();
-  const { data } = bannerAPI.useFetchAllBannersQuery(null);
+
+  useEffect(() => {
+    BannerStore.fetchBannersM();
+  }, []);
 
   return (
     <div className="container">
-      <DeleteModal
-        modalVisible={deleteModalVisible}
-        setModalVisible={setDeleteModalVisible}
-        activeElement={activeElement}
-        deleteItem={deleteBanner}
-        text={"баннер"}
-      />
-      <MyModal
-        modalVisible={formVisible}
-        setModalVisible={setFormVisible}
-        setActiveElement={setActiveElement}
-      >
-        <CustomForm
-          modalVisible={formVisible}
-          activeElement={activeElement}
-          setFormVisible={setFormVisible}
-          formData={formData}
-          validationSchema={BannerSchema}
-          updateItem={
-            activeElement?.name
-              ? (banner: IBanner) => updateBanner(banner)
-              : (banner: IBanner) => createBanner(banner)
-          }
-          removeItem={(banner: IBanner) => deleteBanner(banner)}
+      {BannerStore.activeElementM && (
+        <DeleteModal
+          modalVisible={deleteModalVisible}
+          setModalVisible={setDeleteModalVisible}
+          activeElement={BannerStore.activeElementM}
+          deleteItem={(banner) => BannerStore.deleteBannerM(banner)}
+          text={"промокод"}
         />
-      </MyModal>
+      )}
+      {formVisible && (
+        <MyModal
+          modalVisible={formVisible}
+          setModalVisible={setFormVisible}
+          setActiveElement={() => BannerStore.setActiveElementM(null)}
+        >
+          {BannerStore.activeElementM && (
+            <Form
+              modalVisible={formVisible}
+              activeElement={BannerStore.activeElementM}
+              setFormVisible={setFormVisible}
+              formData={formData}
+              validationSchema={BannerSchema}
+              updateItem={
+                BannerStore.activeElementM?.name
+                  ? (banner: IBanner) => BannerStore.updateBannerM(banner)
+                  : (banner: IBanner) => BannerStore.createBannerM(banner)
+              }
+              removeItem={(banner: IBanner) =>
+                BannerStore.deleteBannerM(banner)
+              }
+            />
+          )}
+        </MyModal>
+      )}
       <Button
         appearance="filled"
         arrow="none"
         className={styles.btnFullWidth}
         onClick={() => {
-          setActiveElement({
+          BannerStore.setActiveElementM({
             id: Date.now().toString(),
             name: "",
             description: "",
@@ -82,13 +82,19 @@ function Banners(): JSX.Element {
         <div className={styles.headers}>
           <div>Заголовок</div>
         </div>
-        <List
-          data={data}
-          updateCategory={updateBanner}
-          deleteCategory={deleteBanner}
+        <ListM
+          data={BannerStore.bannersM}
+          updateCategory={(banner: IBanner) =>
+            BannerStore.updateBannerM(banner)
+          }
+          deleteCategory={(banner: IBanner) =>
+            BannerStore.deleteBannerM(banner)
+          }
           selected={selected}
           setSelected={setSelected}
-          setActiveElement={setActiveElement}
+          setActiveElement={(banner: IBanner) =>
+            BannerStore.setActiveElementM(banner)
+          }
           setModalVisible={setDeleteModalVisible}
           setFormVisible={setFormVisible}
         />
@@ -97,4 +103,4 @@ function Banners(): JSX.Element {
   );
 }
 
-export default withLayout(Banners);
+export default withLayout(observer(Banners));

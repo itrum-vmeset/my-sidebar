@@ -135,7 +135,7 @@ export interface Product {
   name: string;
   isRetailAllowed: boolean;
   brand: Brand;
-  images: any[];
+  images: string[];
 }
 
 export interface SubCatalogProduct {
@@ -146,7 +146,7 @@ export interface SubCatalogProduct {
   __v?: number;
 }
 
-export interface ISeminar {
+export interface IFutureSeminar {
   id: string;
   name: string;
   description: string;
@@ -156,4 +156,34 @@ export interface ISeminar {
   datetime: string;
   image: string;
   mobileImage: string;
+}
+
+export interface IHistorySeminar {
+  id: string;
+  name: string;
+  description: string;
+  date: string;
+  image: string;
+  mobileImage: string;
+}
+
+export interface IRequestSeminar {
+  id: string;
+  date: string;
+  seminar: RequestSeminarName;
+  user: RequestSeminarUser;
+}
+
+export interface RequestSeminarName {
+  id: string;
+  name: string;
+}
+
+export interface RequestSeminarUser {
+  id: string;
+  phone: string;
+  name: string;
+  lastName: string;
+  secondName: string;
+  firmName: string;
 }

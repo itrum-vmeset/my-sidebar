@@ -5,8 +5,8 @@ import { usePagination } from "react-table";
 import { withLayout } from "../../components/layout/Layout";
 import { GlobalFilter } from "../../components/table/filter/Filter";
 import Paginator from "../../components/table/pagination/Paginator";
-import TableComponent from "../../components/table/TableComponent";
-import CustomForm from "../../components/UI/form/CustomForm";
+import Table from "../../components/table/Table";
+import Form from "../../components/UI/form/Form";
 import MyModal from "../../components/UI/modal/MyModal";
 import {
   deliveryOptions,
@@ -16,41 +16,42 @@ import {
 import { IFormData } from "../../models/IFormData";
 import { IOrder } from "../../models/IOrder";
 import { orderAPI } from "../../service/OrderService";
+import OrderStore from "../../store/mobxStore/promocodeStore/OrderStore";
 
 import { columns, formData } from "./config";
 
 function Orders(): JSX.Element {
   const [formVisible, setFormVisible] = useState(false);
   const [enrichedFormData, setEnrichedFormData] = useState<IFormData[]>([]);
-  const [activeElement, setActiveElement] = useState<IOrder | undefined>({
-    id: "",
-    order_type: "",
-    total: 0,
-    isViewedByAdmin: false,
-    order_number: "",
-    delivery_type: "",
-    isPayed: false,
-    user: {
-      id: "",
-      name: "",
-      lastName: "",
-      secondName: "",
-      firmName: "",
-      role: "",
-    },
-    warehouse: {
-      city: "",
-    },
-    date: "",
-  });
-  const [updateOrder] = orderAPI.useUpdateOrderMutation();
-  const [deleteOrder] = orderAPI.useDeleteOrderMutation();
+  // const [activeElement, setActiveElement] = useState<IOrder>({
+  //   id: "",
+  //   order_type: "",
+  //   total: 0,
+  //   isViewedByAdmin: false,
+  //   order_number: "",
+  //   delivery_type: "",
+  //   isPayed: false,
+  //   user: {
+  //     id: "",
+  //     name: "",
+  //     lastName: "",
+  //     secondName: "",
+  //     firmName: "",
+  //     role: "",
+  //   },
+  //   warehouse: {
+  //     city: "",
+  //   },
+  //   date: "",
+  // });
+  // const [updateOrder] = orderAPI.useUpdateOrderMutation();
+  // const [deleteOrder] = orderAPI.useDeleteOrderMutation();
 
   const { data } = orderAPI.useFetchAllOrdersQuery(null);
 
   const productsData = useMemo(
-    () => (data?.data.length ? [...data.data] : []),
-    [data]
+    () => (OrderStore.ordersM.length ? [...OrderStore.ordersM] : []),
+    [OrderStore.ordersM]
   );
 
   const tableInstance = useTable(
@@ -83,7 +84,7 @@ function Orders(): JSX.Element {
     const [day, month, year] = row.original.date.split(".");
     const myDate = day.concat(".").concat(month).concat(".").concat("20", year);
     const order = { ...row.original, date: myDate };
-    setActiveElement({
+    OrderStore.setActiveElementM({
       user: row.original.user,
       order_number: row.original.order_number,
       date: myDate,
@@ -96,23 +97,24 @@ function Orders(): JSX.Element {
   const handleUpdateOrder = (order: IOrder): void => {
     const [day, month, year] = order.date.split(".");
     if (typeof order.user === "string") {
-      updateOrder({
-        ...order,
-        user: {
-          ...activeElement!.user,
-          name: order.user as unknown as string,
-          lastName: null,
-          secondName: null,
-          firmName: null,
-        },
-        date: day.concat(".", month, ".", year.slice(2)),
-        delivery_type: (order.delivery_type as unknown as IDelivery).value,
-      });
+      OrderStore.activeElementM &&
+        OrderStore.updateOrderM({
+          ...order,
+          user: {
+            ...OrderStore.activeElementM.user,
+            name: order.user as string,
+            lastName: "",
+            secondName: "",
+            firmName: "",
+          },
+          date: day.concat(".", month, ".", year.slice(2)),
+          delivery_type: (order.delivery_type as IDelivery).value,
+        });
     } else {
-      updateOrder({
+      OrderStore.updateOrderM({
         ...order,
         date: day.concat(".", month, ".", year.slice(2)),
-        delivery_type: (order.delivery_type as unknown as IDelivery).value,
+        delivery_type: (order.delivery_type as IDelivery).value,
       });
     }
   };
@@ -142,22 +144,30 @@ function Orders(): JSX.Element {
     setEnrichedFormData(enriched);
   }, []);
 
+  useEffect(() => {
+    OrderStore.fetchOrdersM();
+  }, []);
+
   return (
     <div className="container">
-      <MyModal
-        modalVisible={formVisible}
-        setModalVisible={setFormVisible}
-        setActiveElement={setActiveElement}
-      >
-        <CustomForm
+      {formVisible && (
+        <MyModal
           modalVisible={formVisible}
-          activeElement={activeElement}
-          setFormVisible={setFormVisible}
-          formData={enrichedFormData}
-          updateItem={handleUpdateOrder}
-          removeItem={(order: IOrder) => deleteOrder(order)}
-        />
-      </MyModal>
+          setModalVisible={setFormVisible}
+          setActiveElement={() => OrderStore.setActiveElementM(null)}
+        >
+          {OrderStore.activeElementM && (
+            <Form
+              modalVisible={formVisible}
+              activeElement={OrderStore.activeElementM}
+              setFormVisible={setFormVisible}
+              formData={enrichedFormData}
+              updateItem={handleUpdateOrder}
+              removeItem={(order: IOrder) => OrderStore.deleteOrderM(order)}
+            />
+          )}
+        </MyModal>
+      )}
       <GlobalFilter
         preGlobalFilteredRows={preGlobalFilteredRows}
         globalFilter={state.globalFilter}
@@ -174,7 +184,7 @@ function Orders(): JSX.Element {
         pageIndex={state.pageIndex}
         pageSize={state.pageSize}
       />
-      <TableComponent
+      <Table
         tableInstance={tableInstance}
         renderActions={() => {
           return [];

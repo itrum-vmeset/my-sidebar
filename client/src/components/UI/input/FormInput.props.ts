@@ -7,5 +7,6 @@ export interface FormInputProps
   > {
   className?: string;
   value: any;
-  onChange: () => void;
+  onChange: any;
+  type?: string;
 }

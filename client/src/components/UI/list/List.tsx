@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { observer } from "mobx-react-lite";
 import { useLocation } from "react-router-dom";
 
 import { NoRows } from "../../table/noRows/NoRows";

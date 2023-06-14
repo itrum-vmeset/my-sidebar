@@ -8,6 +8,6 @@ export interface DeleteModalProps<T>
   modalVisible: boolean;
   setModalVisible: (action: boolean) => void;
   deleteItem: (item: T) => void;
-  activeElement: T | undefined;
+  activeElement: T;
   text: string;
 }

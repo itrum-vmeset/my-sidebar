@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { LOGIN_ROUTE } from "../../../helpers/consts";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
-import { logoutAC } from "../../../store/reducers/ActionCreators";
+import { logoutAC } from "../../../store/rtkStore/reducers/ActionCreators";
 import { Button } from "../../UI/button/Button";
 import { Typography } from "../../UI/typography/Typography";
 

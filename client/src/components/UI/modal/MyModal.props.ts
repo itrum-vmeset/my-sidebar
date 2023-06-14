@@ -5,7 +5,5 @@ export interface MyModalProps<T>
   modalVisible: boolean;
   setModalVisible: (e: boolean) => void;
   children: ReactNode;
-  // setActiveElement: (e: any) => void;
-  setActiveElement: (element: T | undefined) => void;
-  // setActiveElement: (element: T | object) => void;
+  setActiveElement: (element: T) => void;
 }

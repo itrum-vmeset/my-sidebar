@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
+import { Row } from "react-table";
 
 export interface MyAlertProps
   extends DetailedHTMLProps<
@@ -7,8 +8,6 @@ export interface MyAlertProps
   > {
   alertVisible: boolean;
   setAlertVisible: (e: boolean) => void;
-  deleteItems: () => any;
-  selectedItems: any;
-  setSelectedItems: any;
-  refetch: any;
+  deleteItems: () => void;
+  selectedItems: Row[];
 }

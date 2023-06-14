@@ -9,7 +9,7 @@ export const cityAPI = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
   tagTypes: ["City"],
   endpoints: (build) => ({
-    fetchAllCities: build.query<IResponse<ICity>, any>({
+    fetchAllCities: build.query<IResponse<ICity>, null>({
       query: () => ({
         url: "/cities",
       }),
@@ -22,7 +22,7 @@ export const cityAPI = createApi({
         };
       },
     }),
-    createCity: build.mutation<ICity, any>({
+    createCity: build.mutation<ICity, ICity>({
       query: (city) => ({
         url: `/cities/`,
         method: "POST",
