@@ -44,7 +44,7 @@ export const protocolAPI = createApi({
         url: `/protocols/${protocol.id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Protocol"],
+      // invalidatesTags: ["Protocol"],
     }),
   }),
 });

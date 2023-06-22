@@ -8,6 +8,6 @@ export interface CustomFormSelectProps
   setCustomModalVisible: (action: Record<string, boolean>) => void;
   setCategoryModalVisible: (action: boolean) => void;
   setSubCategoryModalVisible: (action: boolean) => void;
-  options: Record<string, string | number>[];
+  options: Record<string, string>[];
   name: string;
 }

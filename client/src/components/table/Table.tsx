@@ -19,6 +19,7 @@ function Table<T>({
   renderActions,
   checkBox,
   handleClickRow,
+  className,
 }: TableProps<T>): JSX.Element {
   const { pathname } = useLocation();
 
@@ -65,7 +66,7 @@ function Table<T>({
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div data-testid="tempid" className={classNames(styles.wrapper, className)}>
       {page?.length || rows.length ? (
         <table className={classNames(styles.table)}>
           <thead className={styles.tableHead}>
@@ -110,6 +111,7 @@ function Table<T>({
                 <tr
                   {...row.getRowProps()}
                   onClick={() => (handleClickRow ? handleClickRow(row) : null)}
+                  data-testid="tableRow"
                   className={classNames({
                     [styles.brandsTableRow]: BRANDS_ROUTE === pathname,
                     [styles.clickableRow]: handleClickRow,

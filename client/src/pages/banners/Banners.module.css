@@ -1,5 +1,6 @@
 .list {
   width: 100%;
+  cursor: pointer;
 }
 
 .list ul li p {

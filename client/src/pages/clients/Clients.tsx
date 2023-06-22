@@ -4,11 +4,10 @@ import { useBlockLayout } from "react-table";
 import { useGlobalFilter } from "react-table";
 import { usePagination } from "react-table";
 
-import { withLayout } from "../../components/layout/Layout";
 import { GlobalFilter } from "../../components/table/filter/Filter";
 import Paginator from "../../components/table/pagination/Paginator";
 import Table from "../../components/table/Table";
-import { clientAPI } from "../../service/ClientsService";
+import { clientAPI } from "../../services/ClientsService";
 
 import { columns } from "./config";
 
@@ -47,7 +46,7 @@ function Clients(): JSX.Element {
   } = tableInstance;
 
   return (
-    <div className="container">
+    <div className="container" data-testid="clients-page">
       <GlobalFilter
         preGlobalFilteredRows={preGlobalFilteredRows}
         globalFilter={state.globalFilter}
@@ -74,4 +73,4 @@ function Clients(): JSX.Element {
   );
 }
 
-export default withLayout(Clients);
+export default Clients;

@@ -5,7 +5,6 @@ import { useGlobalFilter } from "react-table";
 
 import { ReactComponent as DeleteIcon } from "../../assets/icons/delete.svg";
 import { ReactComponent as ShapeIcon } from "../../assets/icons/shape.svg";
-import { withLayout } from "../../components/layout/Layout";
 import { GlobalFilter } from "../../components/table/filter/Filter";
 import Paginator from "../../components/table/pagination/Paginator";
 import Table from "../../components/table/Table";
@@ -16,8 +15,8 @@ import Form from "../../components/UI/form/Form";
 import MyModal from "../../components/UI/modal/MyModal";
 import { IFormData } from "../../models/IFormData";
 import { IFutureSeminar, IHistorySeminar } from "../../models/IResponse";
-import { cityAPI } from "../../service/CityService";
-import { seminarAPI } from "../../service/SeminarService";
+import { cityAPI } from "../../services/CityService";
+import { seminarAPI } from "../../services/SeminarService";
 
 import Navigator from "./Navigator/Navigator";
 import {
@@ -192,7 +191,7 @@ function Seminars(): JSX.Element {
           </div>
         ),
         width: 40,
-        action: (item: IFutureSeminar ) => {
+        action: (item: IFutureSeminar) => {
           setActiveElement(item);
           setModalVisible(true);
         },
@@ -201,7 +200,7 @@ function Seminars(): JSX.Element {
   };
 
   return (
-    <div className="container">
+    <div className="container" data-testid="seminars-page">
       <DeleteModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
@@ -290,4 +289,4 @@ function Seminars(): JSX.Element {
   );
 }
 
-export default withLayout(Seminars);
+export default Seminars;

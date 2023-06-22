@@ -5,7 +5,7 @@ import {
   deleteOrder,
   fetchOrders,
   updateOrder,
-} from "../../../service/OrderServiceM";
+} from "../../../services/OrderServiceM";
 
 class OrderStore {
   orders: IOrder[] = [];
@@ -42,7 +42,7 @@ class OrderStore {
       this.setOrdersM(this.orders.filter((item) => item.id !== order.id));
       await deleteOrder(order);
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 

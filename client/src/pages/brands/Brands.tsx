@@ -1,11 +1,10 @@
 import { useState } from "react";
 
 import { ReactComponent as ClipIcon } from "../../assets/icons/clip.svg";
-import { withLayout } from "../../components/layout/Layout";
 import TableForm from "../../components/table/tableForm/TableForm";
 import DeleteModal from "../../components/UI/deleteModal/DeleteModal";
 import { List } from "../../components/UI/list/List";
-import { brandAPI } from "../../service/BrandService";
+import { brandAPI } from "../../services/BrandService";
 
 import styles from "./Brands.module.css";
 
@@ -65,7 +64,7 @@ function Brands(): JSX.Element {
     });
   };
   return (
-    <div className="container">
+    <div className="container" data-testid="brands-page">
       <DeleteModal
         modalVisible={deleteModalVisible}
         setModalVisible={setDeleteModalVisible}
@@ -85,7 +84,7 @@ function Brands(): JSX.Element {
           <div>Название бренда</div>
         </div>
         <List
-          data={data}
+          data={data?.data?.length ? data : null}
           updateCategory={updateBrand}
           deleteCategory={deleteBrand}
           selected={selected}
@@ -98,4 +97,4 @@ function Brands(): JSX.Element {
   );
 }
 
-export default withLayout(Brands);
+export default Brands;

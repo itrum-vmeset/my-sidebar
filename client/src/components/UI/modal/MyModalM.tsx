@@ -31,6 +31,7 @@ const MyModalM = ({
         setModalVisible(false);
         setActiveElement(null);
       }}
+      data-testid="addForm"
     >
       <div
         className={styles.myModalContent}

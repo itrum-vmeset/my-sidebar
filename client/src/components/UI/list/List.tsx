@@ -1,5 +1,4 @@
 import classNames from "classnames";
-import { observer } from "mobx-react-lite";
 import { useLocation } from "react-router-dom";
 
 import { NoRows } from "../../table/noRows/NoRows";
@@ -9,7 +8,7 @@ import { ListProps } from "./List.props";
 
 import styles from "./List.module.css";
 
-export const List = ({
+export const List = <T,>({
   className,
   data,
   category,
@@ -22,7 +21,7 @@ export const List = ({
   setModalVisible,
   setFormVisible,
   ...props
-}: ListProps): JSX.Element => {
+}: ListProps<T>): JSX.Element => {
   const { pathname } = useLocation();
   if (!data?.data?.length) {
     return <NoRows pathname={pathname} />;

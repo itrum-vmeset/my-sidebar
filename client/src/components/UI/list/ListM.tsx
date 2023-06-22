@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { NoRows } from "../../table/noRows/NoRows";
 
 import { ListItem } from "./listItem/ListItem";
-import { ListProps } from "./List.props";
+import { ListMProps } from "./ListM.props";
 
 import styles from "./List.module.css";
 
@@ -21,7 +21,7 @@ export const ListM = ({
   setModalVisible,
   setFormVisible,
   ...props
-}: ListProps): JSX.Element => {
+}: ListMProps): JSX.Element => {
   const { pathname } = useLocation();
   if (!data?.length) {
     return <NoRows pathname={pathname} />;

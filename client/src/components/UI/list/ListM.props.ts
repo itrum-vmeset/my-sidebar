@@ -1,22 +1,17 @@
 import { DetailedHTMLProps, HTMLAttributes, ReactNode } from "react";
 
-import { ICategory, IProtocol } from "../../../models/IResponse";
-
-export interface ListProps<T>
+export interface ListMProps
   extends DetailedHTMLProps<
     HTMLAttributes<HTMLUListElement>,
     HTMLUListElement
   > {
   children?: ReactNode;
-  data: {
-    data: T[];
-    count: number;
-  } | null;
-  category?: ICategory | IProtocol;
+  data: any;
+  category?: any;
   setCategory?: any;
   updateCategory: (category: any) => void;
   deleteCategory: (id: any) => void;
-  selected: T[] | null;
+  selected: any;
   setSelected: any;
   setActiveElement: (action: any) => void;
   setModalVisible: (action: boolean) => void;

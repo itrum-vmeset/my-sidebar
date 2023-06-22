@@ -44,7 +44,7 @@ export const subCategoryAPI = createApi({
         url: `/subcategories/${subCategory.id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["SubCategory"],
+      // invalidatesTags: ["SubCategory"],
     }),
   }),
 });

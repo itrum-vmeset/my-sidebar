@@ -5,6 +5,7 @@
 .itemName {
   width: 330px;
   padding: 9px 0;
+  height: max-content;
 }
 
 .brandItemName {

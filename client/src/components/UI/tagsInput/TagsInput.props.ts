@@ -1,7 +1,9 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 
+import { Tag } from "../../../models/IProductMockData";
+
 export interface TagsInputProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  value: any;
-  onChange: (element: any) => void;
+  value: Tag[];
+  changeValue: (tags: Tag[]) => void;
 }

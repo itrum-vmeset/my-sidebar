@@ -1,7 +1,6 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 import {
   FieldValues,
-  UseFormGetValues,
   UseFormSetValue,
 } from "react-hook-form";
 

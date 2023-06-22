@@ -3,7 +3,6 @@ import { Row, useBlockLayout, useTable } from "react-table";
 import { useGlobalFilter } from "react-table";
 import { usePagination } from "react-table";
 
-import { withLayout } from "../../components/layout/Layout";
 import { GlobalFilter } from "../../components/table/filter/Filter";
 import Paginator from "../../components/table/pagination/Paginator";
 import Table from "../../components/table/Table";
@@ -12,8 +11,8 @@ import Form from "../../components/UI/form/Form";
 import MyModal from "../../components/UI/modal/MyModal";
 import { IFormData } from "../../models/IFormData";
 import { IProductMock } from "../../models/IProductMockData";
-import { brandAPI } from "../../service/BrandService";
-import { productAPI } from "../../service/ProductService";
+import { brandAPI } from "../../services/BrandService";
+import { productAPI } from "../../services/ProductService";
 
 import { columns, formData, ProductSchema } from "./config";
 
@@ -67,7 +66,7 @@ function Products(): JSX.Element {
     setFormVisible(true);
   };
 
-  const deleteItems = async () => {
+  const deleteItems = async (): Promise<void> => {
     for (const item of selectedItems) {
       await deleteProduct(item.original as IProductMock);
     }
@@ -94,7 +93,7 @@ function Products(): JSX.Element {
   }, [brands]);
 
   return (
-    <div className="container">
+    <div className="container" data-testid="products-page">
       {formVisible && (
         <MyModal
           modalVisible={formVisible}
@@ -149,4 +148,4 @@ function Products(): JSX.Element {
   );
 }
 
-export default withLayout(Products);
+export default Products;

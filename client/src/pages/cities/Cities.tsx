@@ -4,7 +4,6 @@ import { useTable } from "react-table";
 import { useBlockLayout } from "react-table";
 
 import { ReactComponent as DeleteIcon } from "../../assets/icons/delete.svg";
-import { withLayout } from "../../components/layout/Layout";
 import Table from "../../components/table/Table";
 import { IRenderAction } from "../../components/table/Table.props";
 import TableForm from "../../components/table/tableForm/TableForm";
@@ -52,7 +51,7 @@ function Cities(): JSX.Element {
     useBlockLayout
   );
 
-  const handleCreate = () => {
+  const handleCreate = (): void => {
     CityStore.createCityM({
       id: Date.now().toString(),
       name: newCity.name.value,
@@ -92,7 +91,7 @@ function Cities(): JSX.Element {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container" data-testid="cities-page">
       {CityStore.activeElementM && (
         <DeleteModal
           modalVisible={modalVisible}
@@ -113,4 +112,4 @@ function Cities(): JSX.Element {
   );
 }
 
-export default withLayout(observer(Cities));
+export default observer(Cities);

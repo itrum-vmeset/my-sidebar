@@ -1,4 +1,4 @@
-import AuthService from "../../../service/AuthService";
+import AuthService from "../../../services/AuthService";
 import { AppDispatch } from "../store";
 
 import { authSlice } from "./AuthSlice";

@@ -17,13 +17,13 @@ export interface IProductMock {
   catalog_product: CatalogProduct;
   characteristics: Characteristic[];
   tags: Tag[];
-  productRatings: any[];
+  productRatings: string[];
   estimationCount: number;
   images: string[];
   variations: Variations[];
-  similars: any[];
-  protocols: any[];
-  protocol_categories: any[];
+  similars: string[];
+  protocols: string[];
+  protocol_categories: string[];
   discount: number;
 }
 
@@ -67,6 +67,6 @@ export interface Variations {
 }
 
 export interface Tag {
-  id: string | number;
+  id: string;
   name: string;
 }

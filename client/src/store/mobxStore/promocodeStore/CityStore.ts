@@ -5,7 +5,7 @@ import {
   createCity,
   deleteCity,
   fetchCities,
-} from "../../../service/CityServiceM";
+} from "../../../services/CityServiceM";
 
 class CityStore {
   cities: ICity[] = [];

@@ -28,6 +28,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  cursor: pointer;
 }
 
 .delIcon {
@@ -44,6 +45,7 @@
   border-top: 1px solid #ebecef;
   border-bottom: 1px solid #ebecef;
   align-items: center;
+  cursor: auto;
 }
 
 .title {

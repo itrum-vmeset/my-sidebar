@@ -2,7 +2,6 @@ import classNames from "classnames";
 
 import { ReactComponent as SelectIcon } from "../../../../assets/icons/select.svg";
 import { translator } from "../../../../helpers/translator";
-import { FormInput } from "../../input/FormInput";
 import { Input } from "../../input/Input";
 import SelectModal from "../../selectModal/SelectModal";
 
