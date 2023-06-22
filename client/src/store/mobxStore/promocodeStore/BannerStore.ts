@@ -6,7 +6,7 @@ import {
   deleteBanner,
   fetchBanners,
   updateBanner,
-} from "../../../service/BannerServiceM";
+} from "../../../services/BannerServiceM";
 
 class BannerStore {
   banners: IBanner[] = [];

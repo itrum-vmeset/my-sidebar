@@ -31,8 +31,8 @@ function Header({ className, ...props }: HeaderProps): JSX.Element {
             LOGOUT
           </Button>
           <Typography className={styles.username}>
-            {user.email}{" "}
-            {user.isActivated ? <></> : <span>(не активирован)</span>}
+            {user?.email}{" "}
+            {user?.isActivated ? <></> : <span>(не активирован)</span>}
           </Typography>
         </>
       ) : (

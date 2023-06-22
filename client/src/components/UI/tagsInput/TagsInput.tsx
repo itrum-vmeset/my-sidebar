@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { Tag } from "../../../models/IProductMockData";
 import { Input } from "../input/Input";
 import { Typography } from "../typography/Typography";
 
@@ -7,27 +8,22 @@ import { TagsInputProps } from "./TagsInput.props";
 
 import styles from "./TagsInput.module.css";
 
-interface ITag {
-  id: string;
-  name: string;
-}
-
-const TagsInput = ({ value, onChange }: TagsInputProps): JSX.Element => {
+const TagsInput = ({ value, changeValue }: TagsInputProps): JSX.Element => {
   const [newTag, setNewTag] = useState("");
 
   const removeTag = (id: string): void => {
-    onChange(value.filter((tag: ITag) => tag.id !== id));
+    changeValue(value.filter((tag: Tag) => tag.id !== id));
   };
   const addTag = (tag: string): void => {
     if (value?.length > 120) {
       return alert("Максимум 120 тегов");
     }
     if (tag !== "" && value.length < 121) {
-      onChange([...value, { id: Date.now().toString(), name: tag }]);
+      changeValue([...value, { id: Date.now().toString(), name: tag }]);
     }
   };
 
-  const keyHandler = () => {
+  const keyHandler = (): void => {
     addTag(newTag);
     setNewTag("");
   };
@@ -37,7 +33,7 @@ const TagsInput = ({ value, onChange }: TagsInputProps): JSX.Element => {
       <div className={styles.tagsInput}>
         <ul className={styles.tags}>
           {value &&
-            value?.map((tag: ITag) => (
+            value?.map((tag: Tag) => (
               <li key={tag.id} className={styles.tag}>
                 <span className={styles.tagTitle}>{tag.name}</span>
                 <span

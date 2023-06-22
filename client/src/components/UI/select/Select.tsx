@@ -22,7 +22,7 @@ export const Select = ({
           {defaultValue}
         </option>
       )}
-      {options.map((option: any, index: any) => (
+      {options.map((option: Record<string, string>, index: number) => (
         <option key={index} value={option.value}>
           {option.name}
         </option>

@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
-import { useBlockLayout, useGlobalFilter, useTable } from "react-table";
+import { observer } from "mobx-react-lite";
+import { Row, useBlockLayout, useGlobalFilter, useTable } from "react-table";
 import { usePagination } from "react-table";
 
-import { withLayout } from "../../components/layout/Layout";
 import { GlobalFilter } from "../../components/table/filter/Filter";
 import Paginator from "../../components/table/pagination/Paginator";
 import Table from "../../components/table/Table";
@@ -15,7 +15,6 @@ import {
 } from "../../helpers/helpers";
 import { IFormData } from "../../models/IFormData";
 import { IOrder } from "../../models/IOrder";
-import { orderAPI } from "../../service/OrderService";
 import OrderStore from "../../store/mobxStore/promocodeStore/OrderStore";
 
 import { columns, formData } from "./config";
@@ -23,31 +22,6 @@ import { columns, formData } from "./config";
 function Orders(): JSX.Element {
   const [formVisible, setFormVisible] = useState(false);
   const [enrichedFormData, setEnrichedFormData] = useState<IFormData[]>([]);
-  // const [activeElement, setActiveElement] = useState<IOrder>({
-  //   id: "",
-  //   order_type: "",
-  //   total: 0,
-  //   isViewedByAdmin: false,
-  //   order_number: "",
-  //   delivery_type: "",
-  //   isPayed: false,
-  //   user: {
-  //     id: "",
-  //     name: "",
-  //     lastName: "",
-  //     secondName: "",
-  //     firmName: "",
-  //     role: "",
-  //   },
-  //   warehouse: {
-  //     city: "",
-  //   },
-  //   date: "",
-  // });
-  // const [updateOrder] = orderAPI.useUpdateOrderMutation();
-  // const [deleteOrder] = orderAPI.useDeleteOrderMutation();
-
-  const { data } = orderAPI.useFetchAllOrdersQuery(null);
 
   const productsData = useMemo(
     () => (OrderStore.ordersM.length ? [...OrderStore.ordersM] : []),
@@ -80,17 +54,17 @@ function Orders(): JSX.Element {
     setGlobalFilter,
   } = tableInstance;
 
-  const handleClickRow = (row: any): void => {
-    const [day, month, year] = row.original.date.split(".");
+  const handleClickRow = (row: Row): void => {
+    const [day, month, year] = (row.original as IOrder).date.split(".");
     const myDate = day.concat(".").concat(month).concat(".").concat("20", year);
     const order = { ...row.original, date: myDate };
     OrderStore.setActiveElementM({
-      user: row.original.user,
-      order_number: row.original.order_number,
-      date: myDate,
-      delivery_type: row.original.delivery_type,
+      user: (row.original as IOrder).user,
+      order_number: (row.original as IOrder).order_number,
+      delivery_type: (row.original as IOrder).delivery_type,
       ...order,
-    });
+      date: myDate,
+    } as IOrder);
     setFormVisible(true);
   };
 
@@ -108,13 +82,17 @@ function Orders(): JSX.Element {
             firmName: "",
           },
           date: day.concat(".", month, ".", year.slice(2)),
-          delivery_type: (order.delivery_type as IDelivery).value,
+          delivery_type: (order.delivery_type as IDelivery).value
+            ? (order.delivery_type as IDelivery).value
+            : order.delivery_type,
         });
     } else {
       OrderStore.updateOrderM({
         ...order,
         date: day.concat(".", month, ".", year.slice(2)),
-        delivery_type: (order.delivery_type as IDelivery).value,
+        delivery_type: (order.delivery_type as IDelivery).value
+          ? (order.delivery_type as IDelivery).value
+          : order.delivery_type,
       });
     }
   };
@@ -149,7 +127,7 @@ function Orders(): JSX.Element {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container" data-testid="orders-page">
       {formVisible && (
         <MyModal
           modalVisible={formVisible}
@@ -195,4 +173,4 @@ function Orders(): JSX.Element {
   );
 }
 
-export default withLayout(Orders);
+export default observer(Orders);

@@ -16,7 +16,7 @@ import { ListItemProps } from "./ListItem.props";
 
 import styles from "./ListItem.module.css";
 
-export const ListItem = ({
+export const ListItem = <T,>({
   className,
   item,
   category,
@@ -29,7 +29,7 @@ export const ListItem = ({
   setModalVisible,
   setFormVisible,
   ...props
-}: ListItemProps): JSX.Element => {
+}: ListItemProps<T>): JSX.Element => {
   const [editMode, setEditMode] = useState(false);
   const [active, setActive] = useState(item.name);
   const { pathname } = useLocation();
@@ -61,6 +61,11 @@ export const ListItem = ({
         [styles.brandItem]: pathname === BRANDS_ROUTE,
       })}
       {...props}
+      onClick={() => {
+        setCategory && setCategory(item);
+        setActiveElement(item);
+        setFormVisible && setFormVisible(true);
+      }}
     >
       {pathname === BRANDS_ROUTE && (
         <div className={styles.imgIcon}>
@@ -72,11 +77,6 @@ export const ListItem = ({
           [styles.listItemActive]: item.id == category,
           [styles.brandItemName]: pathname === BRANDS_ROUTE,
         })}
-        onClick={() => {
-          setCategory && setCategory && setCategory(item);
-          setActiveElement(item);
-          setFormVisible && setFormVisible(true);
-        }}
       >
         {editMode ? (
           <Input
@@ -100,7 +100,7 @@ export const ListItem = ({
             onClick={(e) => {
               e.stopPropagation();
               setSelected(selected === item.id ? null : item.id);
-              setCategory && setCategory(item.id);
+              setCategory && setCategory(item);
               updateCategory({ ...item, name: active });
               setEditMode(false);
             }}
@@ -109,7 +109,8 @@ export const ListItem = ({
           </div>
           <div
             className="actionIconWrapper"
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               setEditMode(false);
               setSelected(selected === item.id ? null : item.id);
             }}
@@ -124,7 +125,7 @@ export const ListItem = ({
             onClick={(e) => {
               e.stopPropagation();
               setSelected(selected === item.id ? null : item.id);
-              setCategory && setCategory(item.id);
+              setCategory && setCategory(item);
               setEditMode(!editMode);
             }}
           >

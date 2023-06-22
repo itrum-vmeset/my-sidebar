@@ -6,7 +6,7 @@ import {
   deletePromocode,
   fetchPromocodes,
   updatePromocode,
-} from "../../../service/PromocodeServiceM";
+} from "../../../services/PromocodeServiceM";
 
 class PromocodeStore {
   promocodes: IPromocode[] = [];

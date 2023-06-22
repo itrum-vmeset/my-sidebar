@@ -7,23 +7,24 @@ import { FormInput } from "../../components/UI/input/FormInput";
 import { priceRu } from "../../helpers/priceRu";
 import { translator } from "../../helpers/translator";
 import { IFormData } from "../../models/IFormData";
+import { IOrder } from "../../models/IOrder";
 
 export const columns: Column[] = [
   {
     Header: "Заказчик",
-    accessor: (row: any) => {
+    accessor: (row) => {
       let user = "";
-      if (row.user.name) {
-        user = user.concat(row.user.name);
+      if ((row as IOrder).user.name) {
+        user = user.concat((row as IOrder).user.name);
       }
-      if (row.user.lastName) {
-        user = user.concat(" ", row.user.lastName);
+      if ((row as IOrder).user.lastName) {
+        user = user.concat(" ", (row as IOrder).user.lastName);
       }
-      if (row.user.secondName) {
-        user = user.concat(" ", row.user.secondName);
+      if ((row as IOrder).user.secondName) {
+        user = user.concat(" ", (row as IOrder).user.secondName);
       }
-      if (row.user.firmName) {
-        user = user.concat(" ", row.user.firmName);
+      if ((row as IOrder).user.firmName) {
+        user = user.concat(" ", (row as IOrder).user.firmName);
       }
       return user;
     },
@@ -36,7 +37,8 @@ export const columns: Column[] = [
   },
   {
     Header: "Способ получения",
-    accessor: (row: any) => translator(row.delivery_type, "orders"),
+    accessor: (row) =>
+      translator((row as IOrder).delivery_type as string, "orders"),
     width: 150,
   },
   {
@@ -46,12 +48,12 @@ export const columns: Column[] = [
   },
   {
     Header: "Сумма заказа",
-    accessor: (row: any) => priceRu(row.total),
+    accessor: (row) => priceRu((row as IOrder).total),
     width: 150,
   },
   {
     Header: "Оплачено",
-    accessor: (row: any) => (row.isPayed ? "Да" : "Нет"),
+    accessor: (row) => ((row as IOrder).isPayed ? "Да" : "Нет"),
     width: 100,
   },
 ];

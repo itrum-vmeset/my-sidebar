@@ -4,7 +4,6 @@ import { Row, useTable } from "react-table";
 import { useBlockLayout } from "react-table";
 
 import { ReactComponent as DeleteIcon } from "../../assets/icons/delete.svg";
-import { withLayout } from "../../components/layout/Layout";
 import Table from "../../components/table/Table";
 import { IRenderAction } from "../../components/table/Table.props";
 import { Button } from "../../components/UI/button/Button";
@@ -13,7 +12,7 @@ import Form from "../../components/UI/form/Form";
 import MyModalM from "../../components/UI/modal/MyModalM";
 import { IFormData } from "../../models/IFormData";
 import { IPromocode } from "../../models/IResponse";
-import { brandAPI } from "../../service/BrandService";
+import { brandAPI } from "../../services/BrandService";
 import PromocodeStore from "../../store/mobxStore/promocodeStore/PromocodeStore";
 
 import { columns, formData, PromocodeSchema } from "./config";
@@ -49,7 +48,7 @@ function Promocodes(): JSX.Element {
     return [
       {
         component: (
-          <div className="actionIconWrapper">
+          <div className="actionIconWrapper" data-testid="delIcon">
             <DeleteIcon key={33} className={styles.actionIcon} />
           </div>
         ),
@@ -84,9 +83,10 @@ function Promocodes(): JSX.Element {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container" data-testid="promocodes-page">
       {PromocodeStore.activeElementM && (
         <DeleteModal
+          data-testid="deleteModal"
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
           activeElement={PromocodeStore.activeElementM}
@@ -122,6 +122,7 @@ function Promocodes(): JSX.Element {
         </MyModalM>
       )}
       <Button
+        data-testid="addBtn"
         appearance="filled"
         arrow="none"
         className={styles.btnFullWidth}
@@ -151,13 +152,15 @@ function Promocodes(): JSX.Element {
       >
         Добавить промокод
       </Button>
-      <Table
-        tableInstance={tableInstance}
-        renderActions={renderActions}
-        handleClickRow={handleClickRow}
-      />
+      {tableInstance && (
+        <Table
+          tableInstance={tableInstance}
+          renderActions={renderActions}
+          handleClickRow={handleClickRow}
+        />
+      )}
     </div>
   );
 }
 
-export default observer(withLayout(Promocodes));
+export default observer(Promocodes);

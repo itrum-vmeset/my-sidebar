@@ -1,6 +1,8 @@
 import { Column } from "react-table";
 
-function formatPhoneNumber(phoneNumberString: string) {
+import { IClient } from "../../models/IResponse";
+
+function formatPhoneNumber(phoneNumberString: string): string | null {
   const cleaned = ("" + phoneNumberString).replace(/\D/g, "");
   const match = cleaned.match(/^(7|)?(\d{3})(\d{3})(\d{4})$/);
   let intlCode;
@@ -15,7 +17,7 @@ function formatPhoneNumber(phoneNumberString: string) {
 export const columns: Column[] = [
   {
     Header: "ФИ",
-    accessor: (row: any) => `${row.name} ${row.lastName}`,
+    accessor: (row) => `${(row as IClient).name} ${(row as IClient).lastName}`,
     width: 350,
   },
   {
@@ -25,7 +27,7 @@ export const columns: Column[] = [
   },
   {
     Header: "Телефон",
-    accessor: (row: any) => formatPhoneNumber(row.phone),
+    accessor: (row) => formatPhoneNumber((row as IClient).phone),
     width: 300,
   },
 ];

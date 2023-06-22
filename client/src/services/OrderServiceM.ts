@@ -12,7 +12,7 @@ export const fetchOrders = async (): Promise<AxiosResponse<IOrder[]>> => {
 };
 
 export const deleteOrder = async (order: IOrder): Promise<void> => {
-  const data = await $host.delete("/orders/" + order.id);
+  await $host.delete("/orders/" + order.id);
 };
 
 export const updateOrder = async (

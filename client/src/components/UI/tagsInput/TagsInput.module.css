@@ -18,6 +18,7 @@
 
 .input:focus {
   outline: transparent;
+  max-width: max-content;
 }
 
 .tags {

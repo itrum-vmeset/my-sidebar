@@ -9,6 +9,7 @@ import Products from "../pages/products/Products";
 import Promocodes from "../pages/promocodes/Promocodes";
 import Protocols from "../pages/protocols/Protocols";
 import Seminars from "../pages/seminars/Seminars";
+import TestPage from "../pages/test/TestPage";
 
 import {
   BANNERS_ROUTE,
@@ -77,4 +78,8 @@ export const authRoutes = [
     Component: Promocodes,
     path: PROMOCODE_ROUTE,
   },
+  // {
+  //   Component: TestPage,
+  //   path: PROMOCODE_ROUTE,
+  // },
 ];

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import classNames from "classnames";
 
 import { SelectModalProps } from "./SelectModal.props";
@@ -31,7 +31,7 @@ const SelectModal = ({
       <div className={styles.selectModalContent}>
         <ul>
           {options?.length
-            ? options?.map((el: any) => (
+            ? options?.map((el: Record<string, string | number>) => (
                 <li
                   key={el.value ? el.value : el.name}
                   value={el.value ? el.value : el.name}

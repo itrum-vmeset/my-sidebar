@@ -1,17 +1,17 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
-import { bannerAPI } from "../../service/BannerService";
-import { brandAPI } from "../../service/BrandService";
-import { categoryAPI } from "../../service/CategoryService";
-import { cityAPI } from "../../service/CityService";
-import { clientAPI } from "../../service/ClientsService";
-import { orderAPI } from "../../service/OrderService";
-import { productAPI } from "../../service/ProductService";
-import { promocodeAPI } from "../../service/PromocodeService";
-import { protocolCategoriesAPI } from "../../service/ProtocolCategoriesService";
-import { protocolAPI } from "../../service/ProtocolsService";
-import { seminarAPI } from "../../service/SeminarService";
-import { subCategoryAPI } from "../../service/SubCategoryService";
+import { bannerAPI } from "../../services/BannerService";
+import { brandAPI } from "../../services/BrandService";
+import { categoryAPI } from "../../services/CategoryService";
+import { cityAPI } from "../../services/CityService";
+import { clientAPI } from "../../services/ClientsService";
+import { orderAPI } from "../../services/OrderService";
+import { productAPI } from "../../services/ProductService";
+import { promocodeAPI } from "../../services/PromocodeService";
+import { protocolCategoriesAPI } from "../../services/ProtocolCategoriesService";
+import { protocolAPI } from "../../services/ProtocolsService";
+import { seminarAPI } from "../../services/SeminarService";
+import { subCategoryAPI } from "../../services/SubCategoryService";
 
 import authReducer from "./reducers/AuthSlice";
 
@@ -31,9 +31,10 @@ const rootReducer = combineReducers({
   authReducer,
 });
 
-export const setupStore = () => {
+export const setupStore = (initialState = {}) => {
   return configureStore({
     reducer: rootReducer,
+    preloadedState: { authReducer: initialState as any },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware()
         .concat(productAPI.middleware)

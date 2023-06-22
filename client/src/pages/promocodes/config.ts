@@ -7,6 +7,7 @@ import CustomFormList from "../../components/UI/form/formList/FormList";
 import { FormInput } from "../../components/UI/input/FormInput";
 import { FormInputPercent } from "../../components/UI/input/percent/FormInputPercent";
 import { IFormData } from "../../models/IFormData";
+import Categories from "../categories/Categories";
 
 export const columns: Column[] = [
   {
@@ -81,6 +82,7 @@ export const PromocodeSchema = Yup.object().shape({
     .required("Обязательное поле"),
   percent: Yup.number()
     .typeError("Введите число")
-    .positive("Не может быть отрицательной")
+    .min(1, "Минимум 1%")
+    .max(100, "Максимум 100%")
     .required("Обязательное поле"),
 });

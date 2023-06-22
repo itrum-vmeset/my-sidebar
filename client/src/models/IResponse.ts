@@ -60,13 +60,13 @@ export interface AuthResponse {
   user: IUser;
 }
 
-export interface IClientFromJSONServer {
-  email: string | null;
-  phone: string | null;
-  name: string | null;
-  lastName: string | null;
-  firmName: string | null;
-  role: string | null;
+export interface IClient {
+  email: string;
+  phone: string;
+  name: string;
+  lastName: string;
+  firmName: string;
+  role: string;
 }
 
 export interface IProtocolCategory {

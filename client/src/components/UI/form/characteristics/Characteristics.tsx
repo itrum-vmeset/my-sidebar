@@ -10,27 +10,31 @@ import styles from "./Characteristics.module.css";
 
 function Characteristics({
   value,
-  onChange,
+  changeValue,
   name,
 }: CharacteristicsProps): JSX.Element {
   const addCharacteristics = (): void => {
     if (name === "characteristics") {
       if (value.length < 16) {
-        onChange([...value, { id: Date.now(), key: "", value: "" }]);
+        changeValue([
+          ...value,
+          { id: Date.now().toString(), key: "", value: "" },
+        ]);
       } else {
         alert("Максимум 15 харакеристик");
       }
     } else {
-      onChange([...value, { id: Date.now(), value: "", code: "" }]);
+      changeValue([
+        ...value,
+        { id: Date.now().toString(), value: "", code: "" },
+      ]);
     }
   };
-  const removeCharacteristics = (id: number | string): void => {
-    if (name === "characteristics") {
-      value.filter((el: any) => el.id !== id);
-    }
+  const removeCharacteristics = (id: string): void => {
+    changeValue(value.filter((el: any) => el.id !== id));
   };
-  const changeCharacteristics = (newValue: any) => {
-    onChange(
+  const changeCharacteristics = (newValue: Record<string, string>): void => {
+    changeValue(
       value.map((el: any) => {
         if (el.id === newValue.id) {
           return newValue;
@@ -43,11 +47,14 @@ function Characteristics({
   useEffect(() => {
     if (value?.length === 0) {
       name === "characteristics"
-        ? onChange([
+        ? changeValue([
             ...value,
             { id: Date.now().toString(), key: "", value: "" },
           ])
-        : onChange([...value, { id: Date.now(), value: "", code: "" }]);
+        : changeValue([
+            ...value,
+            { id: Date.now().toString(), value: "", code: "" },
+          ]);
     }
   }, []);
 
@@ -56,8 +63,8 @@ function Characteristics({
       <Typography>
         {name === "characteristics" ? "Характеристики" : "Объем*"}
       </Typography>
-      {value?.length &&
-        value?.map((item: any) => {
+      {value?.length ? (
+        value?.map((item: Record<string, string>) => {
           return (
             <FormRow
               key={item.id}
@@ -66,7 +73,10 @@ function Characteristics({
               removeRow={removeCharacteristics}
             />
           );
-        })}
+        })
+      ) : (
+        <></>
+      )}
       {name === "characteristics" ? (
         <Typography sizer="s">Максимум 15 харакеристик</Typography>
       ) : null}

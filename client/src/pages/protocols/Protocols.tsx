@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import { ReactComponent as ArrowsIcon } from "../../assets/icons/Arrows.svg";
-import { withLayout } from "../../components/layout/Layout";
 import { NoRows } from "../../components/table/noRows/NoRows";
 import { Button } from "../../components/UI/button/Button";
 import DeleteModal from "../../components/UI/deleteModal/DeleteModal";
@@ -11,10 +10,10 @@ import { Input } from "../../components/UI/input/Input";
 import { List } from "../../components/UI/list/List";
 import MyModal from "../../components/UI/modal/MyModal";
 import { IFormData } from "../../models/IFormData";
-import { IProtocol } from "../../models/IResponse";
-import { brandAPI } from "../../service/BrandService";
-import { protocolCategoriesAPI } from "../../service/ProtocolCategoriesService";
-import { protocolAPI } from "../../service/ProtocolsService";
+import { IProtocol, IProtocolCategory } from "../../models/IResponse";
+import { brandAPI } from "../../services/BrandService";
+import { protocolCategoriesAPI } from "../../services/ProtocolCategoriesService";
+import { protocolAPI } from "../../services/ProtocolsService";
 
 import { formData, ProtocolSchema } from "./config";
 
@@ -22,7 +21,7 @@ import styles from "./Protocols.module.css";
 
 function Protocols(): JSX.Element {
   const { pathname } = useLocation();
-  const [category, setCategory] = useState({ id: "", name: "" });
+  const [category, setCategory] = useState<IProtocol>({} as IProtocol);
   const [enrichedFormData, setEnrichedFormData] = useState<IFormData[]>([]);
   const [activeElement, setActiveElement] = useState<IProtocol>({
     id: "",
@@ -50,7 +49,7 @@ function Protocols(): JSX.Element {
   const { data: protocols } = protocolAPI.useFetchAllProtocolsQuery(
     category?.id || ""
   );
-  const { data: protocolCategories } =
+  const { data: protocolCategories, refetch } =
     protocolCategoriesAPI.useFetchAllProtocolCategoriesQuery(null);
   const { data: brands } = brandAPI.useFetchAllBrandsQuery(null);
 
@@ -101,6 +100,19 @@ function Protocols(): JSX.Element {
     });
   };
 
+  const handleDeleteProtocolAndCategories = async (
+    element: IProtocolCategory
+  ): Promise<void> => {
+    await deleteCategory(element);
+    if (protocols?.data?.length) {
+      for (const item of protocols.data) {
+        await deleteProtocol(item);
+      }
+      refetch();
+    }
+    setCategory({ id: "", name: "" } as IProtocol);
+  };
+
   useEffect(() => {
     const enriched = formData.map((item) => {
       if (item.componentProps.options === "brands") {
@@ -119,13 +131,15 @@ function Protocols(): JSX.Element {
   }, [brands]);
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-testid="protocols-page">
       <DeleteModal
         modalVisible={deleteModalVisible}
         setModalVisible={setDeleteModalVisible}
         activeElement={activeElement}
         deleteItem={
-          activeElement?.protocol_category ? deleteProtocol : deleteCategory
+          activeElement?.protocol_category
+            ? deleteProtocol
+            : handleDeleteProtocolAndCategories
         }
         text={"протокол"}
       />
@@ -162,7 +176,7 @@ function Protocols(): JSX.Element {
           <div>Название категории</div>
         </div>
         <List
-          data={protocolCategories}
+          data={protocolCategories?.data?.length ? protocolCategories : null}
           category={category}
           setCategory={setCategory}
           updateCategory={updateCategory}
@@ -200,7 +214,7 @@ function Protocols(): JSX.Element {
                   <div>Название протокола</div>
                 </div>
                 <List
-                  data={protocols}
+                  data={protocols?.data?.length ? protocols : null}
                   setCategory={() => null}
                   updateCategory={updateProtocol}
                   deleteCategory={deleteProtocol}
@@ -225,4 +239,4 @@ function Protocols(): JSX.Element {
   );
 }
 
-export default withLayout(Protocols);
+export default Protocols;

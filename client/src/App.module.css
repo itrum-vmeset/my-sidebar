@@ -26,3 +26,25 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #7c7c7c;
 }
+
+.layout {
+  display: grid;
+  grid-template-columns: auto 230px minmax(320px, 1200px) auto;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    ". sidebar header ."
+    ". sidebar body .";
+  gap: 12px 24px;
+}
+
+.header {
+  grid-area: header;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.body {
+  grid-area: body;
+}

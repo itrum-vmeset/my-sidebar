@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 
 import { IPromocode } from "../models/IResponse";
 
-const $host = axios.create({
+export const $host = axios.create({
   baseURL: "http://localhost:5005",
 });
 

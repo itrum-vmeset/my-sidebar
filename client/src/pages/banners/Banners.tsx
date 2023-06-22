@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 
-import { withLayout } from "../../components/layout/Layout";
 import { Button } from "../../components/UI/button/Button";
 import DeleteModal from "../../components/UI/deleteModal/DeleteModal";
 import Form from "../../components/UI/form/Form";
@@ -24,7 +23,7 @@ function Banners(): JSX.Element {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container" data-testid="banners-page">
       {BannerStore.activeElementM && (
         <DeleteModal
           modalVisible={deleteModalVisible}
@@ -103,4 +102,4 @@ function Banners(): JSX.Element {
   );
 }
 
-export default withLayout(observer(Banners));
+export default observer(Banners);

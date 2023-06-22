@@ -78,7 +78,7 @@ function Form<
         setModalVisible={setFormVisible}
         deleteItem={onRemove}
       />
-      <form onSubmit={(e) => e.preventDefault()}>
+      <div>
         <div className={classNames(styles.formInpts, styles.noScroll)}>
           {formData.map(
             ({ id, title, Component, componentProps }: IFormData) => (
@@ -128,7 +128,7 @@ function Form<
             )
           )}
         </div>
-      </form>
+      </div>
     </div>
   );
 }

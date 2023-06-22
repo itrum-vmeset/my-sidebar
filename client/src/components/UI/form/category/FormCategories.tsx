@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 import { IProductMock } from "../../../../models/IProductMockData";
 import { IPromocode } from "../../../../models/IResponse";
-import { categoryAPI } from "../../../../service/CategoryService";
-import { subCategoryAPI } from "../../../../service/SubCategoryService";
+import { categoryAPI } from "../../../../services/CategoryService";
+import { subCategoryAPI } from "../../../../services/SubCategoryService";
 import { Typography } from "../../typography/Typography";
 import CategoriesSelect from "../customSelect/CategoriesSelect";
 
@@ -28,14 +28,12 @@ function FormCategories({
   const { data: catalog_products } =
     categoryAPI.useFetchAllCategoriesQuery(null);
   const { data: subCategories } = subCategoryAPI.useFetchAllSubCategoriesQuery(
-    (value?.id) || ""
+    value?.id || ""
   );
 
   useEffect(() => {
     if (value?.name) {
-      setSubCategoryValue(
-      getall?.sub_catalog_product?.name
-      );
+      setSubCategoryValue(getall?.sub_catalog_product?.name);
     } else {
       setSubCategoryValue("Выберите подкатегорию");
     }
@@ -44,7 +42,7 @@ function FormCategories({
   return (
     <div className={styles.categorySection}>
       <div className={styles.categoryBlock}>
-        <Typography>Категория*</Typography>
+        <Typography>Категория</Typography>
         {catalog_products?.data.length && (
           <CategoriesSelect
             options={catalog_products?.data}
@@ -69,7 +67,7 @@ function FormCategories({
         )}
       </div>
       <div className={styles.categoryBlock}>
-        <Typography>Подкатегория*</Typography>
+        <Typography>Подкатегория</Typography>
         <CategoriesSelect
           options={value?.id && subCategories?.data ? subCategories?.data : []}
           setData={(e) => {
