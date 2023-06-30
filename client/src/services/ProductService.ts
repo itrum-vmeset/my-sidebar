@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
-import { IProductMock } from "../models/IProductMockData";
+import { IProductMock } from "../models/IProductMock";
 import { IResponse } from "../models/IResponse";
 
-const baseUrl = "http://localhost:5005";
+export const baseUrl = "http://localhost:5005";
 
 export const productAPI = createApi({
   reducerPath: "productAPI",
@@ -39,3 +39,5 @@ export const productAPI = createApi({
     }),
   }),
 });
+
+export const { useFetchAllProductsQuery } = productAPI;

@@ -13,7 +13,7 @@ import MyModalM from "../../components/UI/modal/MyModalM";
 import { IFormData } from "../../models/IFormData";
 import { IPromocode } from "../../models/IResponse";
 import { brandAPI } from "../../services/BrandService";
-import PromocodeStore from "../../store/mobxStore/promocodeStore/PromocodeStore";
+import PromocodeStore from "../../store/mobX/stores/PromocodeStore";
 
 import { columns, formData, PromocodeSchema } from "./config";
 
@@ -157,6 +157,7 @@ function Promocodes(): JSX.Element {
           tableInstance={tableInstance}
           renderActions={renderActions}
           handleClickRow={handleClickRow}
+          data-testid={"test"}
         />
       )}
     </div>

@@ -24,14 +24,14 @@
 
 .showPassword {
   position: absolute;
-  top: 215px;
+  top: 207px;
   right: 40px;
   cursor: pointer;
 }
 
 .showPasswordCheck {
   position: absolute;
-  top: 285px;
+  top: 275px;
   right: 40px;
   cursor: pointer;
 }

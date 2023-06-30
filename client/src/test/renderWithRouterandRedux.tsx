@@ -4,12 +4,14 @@ import { MemoryRouter } from "react-router-dom";
 import { render, RenderResult } from "@testing-library/react";
 
 import AppRouter from "../components/router/AppRouter";
-import { ORDERS_ROUTE, PRODUCTS_ROUTE } from "../helpers/consts";
 import { setupStore } from "../store/rtkStore/store";
 
-export const renderWithRouterAndRedux = (
-  component: JSX.Element,
-  options: any
+export const renderWithRouterAndRedux = <T,>(
+  component: JSX.Element | null,
+  options: {
+    initialRoute: string;
+    initialState?: any;
+  }
 ): RenderResult => {
   const store = setupStore(options?.initialState);
 

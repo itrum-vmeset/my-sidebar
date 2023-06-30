@@ -34,9 +34,11 @@ const rootReducer = combineReducers({
 export const setupStore = (initialState = {}) => {
   return configureStore({
     reducer: rootReducer,
-    preloadedState: { authReducer: initialState as any },
+    preloadedState: initialState,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware()
+      getDefaultMiddleware({
+        immutableCheck: false,
+      })
         .concat(productAPI.middleware)
         .concat(orderAPI.middleware)
         .concat(brandAPI.middleware)

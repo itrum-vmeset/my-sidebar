@@ -10,9 +10,12 @@ import MyAlert from "../../components/UI/alert/MyAlert";
 import Form from "../../components/UI/form/Form";
 import MyModal from "../../components/UI/modal/MyModal";
 import { IFormData } from "../../models/IFormData";
-import { IProductMock } from "../../models/IProductMockData";
+import { IProductMock } from "../../models/IProductMock";
 import { brandAPI } from "../../services/BrandService";
-import { productAPI } from "../../services/ProductService";
+import {
+  productAPI,
+  useFetchAllProductsQuery,
+} from "../../services/ProductService";
 
 import { columns, formData, ProductSchema } from "./config";
 
@@ -27,7 +30,7 @@ function Products(): JSX.Element {
 
   const [updateProduct] = productAPI.useUpdateProductMutation();
   const [deleteProduct] = productAPI.useDeleteProductMutation();
-  const { data, refetch } = productAPI.useFetchAllProductsQuery(null);
+  const { data, refetch } = useFetchAllProductsQuery(null);
   const { data: brands } = brandAPI.useFetchAllBrandsQuery(null);
 
   const productsData = useMemo(
@@ -138,12 +141,14 @@ function Products(): JSX.Element {
         setSelectedItems={setSelectedItems}
         handleClickRow={handleClickRow}
       />
-      <MyAlert
-        alertVisible={selectVisible}
-        setAlertVisible={setSelectVisible}
-        deleteItems={deleteItems}
-        selectedItems={selectedItems}
-      />
+      {selectVisible && (
+        <MyAlert
+          alertVisible={selectVisible}
+          setAlertVisible={setSelectVisible}
+          deleteItems={deleteItems}
+          selectedItems={selectedItems}
+        />
+      )}
     </div>
   );
 }

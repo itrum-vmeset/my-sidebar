@@ -34,7 +34,7 @@ class PromocodeStore {
       const { data } = await fetchPromocodes();
       this.setPromocodesM(data);
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
   }
 

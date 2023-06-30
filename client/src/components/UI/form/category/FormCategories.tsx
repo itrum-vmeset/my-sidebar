@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { IProductMock } from "../../../../models/IProductMockData";
+import { IProductMock } from "../../../../models/IProductMock";
 import { IPromocode } from "../../../../models/IResponse";
 import { categoryAPI } from "../../../../services/CategoryService";
 import { subCategoryAPI } from "../../../../services/SubCategoryService";

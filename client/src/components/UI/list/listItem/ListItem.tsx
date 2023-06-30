@@ -55,6 +55,7 @@ export const ListItem = <T,>({
 
   return (
     <li
+      data-testid="listItem"
       key={item.id}
       className={classNames(styles.listItem, className, {
         [styles.listItemActive]: item.id == category,
@@ -90,7 +91,7 @@ export const ListItem = <T,>({
             onKeyDown={handleKeyDown}
           />
         ) : (
-          <span>{item.name}</span>
+          <span data-testid="rowTitle">{item.name}</span>
         )}
       </Typography>
       {editMode ? (
@@ -105,7 +106,7 @@ export const ListItem = <T,>({
               setEditMode(false);
             }}
           >
-            <OkIcon className={styles.editIcon} />
+            <OkIcon className={styles.editIcon} data-testid="confirmIcon" />
           </div>
           <div
             className="actionIconWrapper"
@@ -115,7 +116,7 @@ export const ListItem = <T,>({
               setSelected(selected === item.id ? null : item.id);
             }}
           >
-            <CloseIcon className={styles.deleteIcon} />
+            <CloseIcon className={styles.deleteIcon} data-testid="closeIcon" />
           </div>
         </>
       ) : (
@@ -129,7 +130,7 @@ export const ListItem = <T,>({
               setEditMode(!editMode);
             }}
           >
-            <EditIcon className={styles.editIcon} />
+            <EditIcon className={styles.editIcon} data-testid="editIcon" />
           </div>
 
           <div
@@ -140,7 +141,7 @@ export const ListItem = <T,>({
               setModalVisible(true);
             }}
           >
-            <DeleteIcon className={styles.deleteIcon} />
+            <DeleteIcon className={styles.deleteIcon} data-testid="delIcon" />
           </div>
         </>
       )}

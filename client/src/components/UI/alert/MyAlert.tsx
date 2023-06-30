@@ -16,6 +16,7 @@ const MyAlert = ({
 }: MyAlertProps): JSX.Element => {
   return (
     <div
+      data-testid="checkBoxAlert"
       className={classNames(styles.myAlert, {
         [styles.active]: alertVisible === true,
       })}

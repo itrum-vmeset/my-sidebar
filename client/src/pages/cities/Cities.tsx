@@ -9,7 +9,7 @@ import { IRenderAction } from "../../components/table/Table.props";
 import TableForm from "../../components/table/tableForm/TableForm";
 import DeleteModal from "../../components/UI/deleteModal/DeleteModal";
 import { ICity } from "../../models/IResponse";
-import CityStore from "../../store/mobxStore/promocodeStore/CityStore";
+import CityStore from "../../store/mobX/stores/CityStore";
 
 import { columns } from "./config";
 
@@ -74,7 +74,7 @@ function Cities(): JSX.Element {
       {
         component: (
           <div className="actionIconWrapper">
-            <DeleteIcon key={33} />
+            <DeleteIcon key={33} data-testid="delIcon" />
           </div>
         ),
         width: 40,

@@ -35,6 +35,7 @@ const DeleteModal = <T extends { name: string }>({
       }}
     >
       <div
+        data-testid="deleteModal"
         className={styles.deleteModalContent}
         onClick={(e) => e.stopPropagation()}
       >

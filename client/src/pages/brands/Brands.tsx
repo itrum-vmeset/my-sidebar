@@ -22,7 +22,6 @@ export interface NewBrand {
 
 function Brands(): JSX.Element {
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
-
   const [selected, setSelected] = useState(null);
   const [activeElement, setActiveElement] = useState({
     id: "",
@@ -46,6 +45,9 @@ function Brands(): JSX.Element {
   const { data } = brandAPI.useFetchAllBrandsQuery(null);
 
   const handleCreate = () => {
+    if (!newBrand.name.value || !newBrand.icon.value) {
+      return alert("Название и логотип не могут быть пустыми полями");
+    }
     createBrand({
       id: Date.now().toString(),
       name: newBrand.name.value,
@@ -77,6 +79,7 @@ function Brands(): JSX.Element {
         item={newBrand}
         setItem={(val) => setNewBrand(val as NewBrand)}
         buttonText="Добавить бренд"
+        data-testid="addNewBrandBtn"
       />
       <div className={styles.list}>
         <div className={styles.headers}>

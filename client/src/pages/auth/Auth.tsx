@@ -24,7 +24,7 @@ function Auth(): JSX.Element {
   const [checkPassword, setCheckPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAppDispatch();
-  const { error, isAuth } = useAppSelector((state) => state.authReducer);
+  const { error } = useAppSelector((state) => state.authReducer);
 
   const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ function Auth(): JSX.Element {
 
   const handleClickShowPassword = (): void => setShowPassword(!showPassword);
 
-  const handleClickAuth = async () => {
+  const handleClickAuth = async (): Promise<void> => {
     if (isLogin) {
       dispatch(loginAC(email, password));
       navigate(PRODUCTS_ROUTE);
@@ -83,7 +83,7 @@ function Auth(): JSX.Element {
             <span>Запомнить меня</span>
           </div>
         ) : (
-          <div>
+          <div data-testid="confirmPwd">
             <Typography>Повторите пароль</Typography>
             <Input
               value={checkPassword}
@@ -105,7 +105,7 @@ function Auth(): JSX.Element {
         >
           {isLogin ? <span>Войти</span> : <span>Регистрация</span>}
         </Button>
-        <Typography className={styles.links}>
+        <Typography className={styles.links} data-testid="toggleRoute">
           {isLogin ? (
             <NavLink to={REGISTER_ROUTE}>{"У меня еще нет аккаунта"}</NavLink>
           ) : (

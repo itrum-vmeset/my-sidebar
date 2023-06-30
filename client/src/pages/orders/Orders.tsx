@@ -15,7 +15,7 @@ import {
 } from "../../helpers/helpers";
 import { IFormData } from "../../models/IFormData";
 import { IOrder } from "../../models/IOrder";
-import OrderStore from "../../store/mobxStore/promocodeStore/OrderStore";
+import OrderStore from "../../store/mobX/stores/OrderStore";
 
 import { columns, formData } from "./config";
 
