@@ -34,7 +34,7 @@ class BannerStore {
       const { data } = await fetchBanners();
       this.setBannersM(data);
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
   }
 

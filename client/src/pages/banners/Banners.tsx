@@ -7,7 +7,7 @@ import Form from "../../components/UI/form/Form";
 import { ListM } from "../../components/UI/list/ListM";
 import MyModal from "../../components/UI/modal/MyModal";
 import { IBanner } from "../../models/IResponse";
-import BannerStore from "../../store/mobxStore/promocodeStore/BannerStore";
+import BannerStore from "../../store/mobX/stores/BannerStore";
 
 import { BannerSchema, formData } from "./config";
 
@@ -59,6 +59,7 @@ function Banners(): JSX.Element {
         </MyModal>
       )}
       <Button
+        data-testid="addBtn"
         appearance="filled"
         arrow="none"
         className={styles.btnFullWidth}

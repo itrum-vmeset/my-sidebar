@@ -151,7 +151,7 @@ function Seminars(): JSX.Element {
     }
   }, [activeRoute]);
 
-  const renderActions = <T,>() => {
+  const renderActions = () => {
     if (activeRoute === "request") {
       return [];
     }
@@ -160,7 +160,7 @@ function Seminars(): JSX.Element {
         {
           component: (
             <div className={styles.shapeIconWrapper}>
-              <ShapeIcon key={55} />
+              <ShapeIcon key={55} data-testid="shapeIcon" />
               23
             </div>
           ),
@@ -172,7 +172,7 @@ function Seminars(): JSX.Element {
         {
           component: (
             <div className="actionIconWrapper">
-              <DeleteIcon key={33} />
+              <DeleteIcon key={33} data-testid="delIcon" />
             </div>
           ),
           width: 40,
@@ -187,7 +187,7 @@ function Seminars(): JSX.Element {
       {
         component: (
           <div className="actionIconWrapper">
-            <DeleteIcon key={33} />
+            <DeleteIcon key={33} data-testid="delIcon" />
           </div>
         ),
         width: 40,
@@ -279,12 +279,14 @@ function Seminars(): JSX.Element {
         setSelectedItems={setSelectedItems}
         handleClickRow={handleClickRow}
       />
-      <MyAlert
-        alertVisible={selectVisible}
-        setAlertVisible={setSelectVisible}
-        deleteItems={deleteItems}
-        selectedItems={selectedItems}
-      />
+      {selectVisible && (
+        <MyAlert
+          alertVisible={selectVisible}
+          setAlertVisible={setSelectVisible}
+          deleteItems={deleteItems}
+          selectedItems={selectedItems}
+        />
+      )}
     </div>
   );
 }

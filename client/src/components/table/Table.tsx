@@ -66,7 +66,7 @@ function Table<T>({
   }
 
   return (
-    <div data-testid="tempid" className={classNames(styles.wrapper, className)}>
+    <div className={classNames(styles.wrapper, className)}>
       {page?.length || rows.length ? (
         <table className={classNames(styles.table)}>
           <thead className={styles.tableHead}>
@@ -76,6 +76,7 @@ function Table<T>({
                 {checkBox && (
                   <th>
                     <input
+                      data-testid={"checkAll"}
                       className={styles.chkBox}
                       type="checkbox"
                       onChange={selectAll}
@@ -120,6 +121,7 @@ function Table<T>({
                   {checkBox && (
                     <th onClick={(e) => e.stopPropagation()}>
                       <input
+                        data-testid="checkbox"
                         type="checkbox"
                         className={styles.chkBox}
                         checked={
@@ -133,6 +135,7 @@ function Table<T>({
                     return (
                       // eslint-disable-next-line react/jsx-key
                       <td
+                        data-testid="rowTitle"
                         {...cell.getCellProps({
                           style: {
                             width: cell.column.width,

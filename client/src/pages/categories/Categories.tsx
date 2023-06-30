@@ -101,11 +101,16 @@ function Categories(): JSX.Element {
           value={newCategoryName}
           onChange={(e) => setNewCategoryName(e.target.value)}
           onKeyDown={(e) => handleKeyDown(e, null)}
+          data-testid="inputNewCategory"
         />
-        <Button appearance="filled" onClick={() => handleCreate(null)}>
+        <Button
+          appearance="filled"
+          onClick={() => handleCreate(null)}
+          data-testid="addCategoryBtn"
+        >
           Добавить категорию
         </Button>
-        <div className={styles.list}>
+        <div className={styles.list} data-testid="categoriesBlock">
           <div className={styles.headers}>
             <div className={styles.title}>Название категории</div>
           </div>
@@ -131,15 +136,17 @@ function Categories(): JSX.Element {
               value={newSubCategoryName}
               onChange={(e) => setNewSubCategoryName(e.target.value)}
               onKeyDown={(e) => handleKeyDown(e, category.id)}
+              data-testid="inputNewSubCategory"
             />
             <Button
               appearance="filled"
               onClick={() => handleCreate(category.id)}
+              data-testid="addSubCategoryBtn"
             >
               Добавить подкатегорию
             </Button>
             {category ? (
-              <div className={styles.list}>
+              <div className={styles.list} data-testid="subCategoriesBlock">
                 <div className={styles.headers}>
                   <div className={styles.title}>Название подкатегории</div>
                 </div>

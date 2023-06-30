@@ -19,6 +19,7 @@ function TableForm({
       {Object.entries(item).map(([key, value]) => (
         <React.Fragment key={key}>
           <Input
+            data-testid="inputNewBrand"
             className={classNames(styles.input, {
               [styles.inputFile]: value.attach !== undefined,
             })}
@@ -37,7 +38,12 @@ function TableForm({
           {value.attach}
         </React.Fragment>
       ))}
-      <Button className={styles.btn} appearance="filled" onClick={addItem}>
+      <Button
+        className={styles.btn}
+        appearance="filled"
+        onClick={addItem}
+        data-testid="addNewBrandBtn"
+      >
         {buttonText}
       </Button>
     </div>

@@ -25,6 +25,7 @@ const MyModal = <T,>({
 
   return (
     <div
+      data-testid="addForm"
       className={classNames(styles.myModal, {
         [styles.active]: modalVisible === true,
       })}

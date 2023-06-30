@@ -1,10 +1,7 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react";
-import {
-  FieldValues,
-  UseFormSetValue,
-} from "react-hook-form";
+import { FieldValues, UseFormSetValue } from "react-hook-form";
 
-import { IProductMock } from "../../../../models/IProductMockData";
+import { IProductMock } from "../../../../models/IProductMock";
 import { ICategory, IPromocode } from "../../../../models/IResponse";
 
 export interface FormCategoriesProps

@@ -12,19 +12,19 @@ export const GlobalFilter = ({
   setGlobalFilter,
 }: any): JSX.Element => {
   const [value, setValue] = useState(globalFilter as string);
-  // const onChange = useAsyncDebounce((val) => {
-  //   setGlobalFilter?.(value || null);
-  // }, 250);
+  const onChange = useAsyncDebounce((val) => {
+    setGlobalFilter?.(value || null);
+  }, 250);
 
   return (
     <div className={styles.search}>
       <SearchIcon className={styles.searchIcon} />
       <div
         className={styles.closeIconWrapper}
-        // onClick={() => {
-        //   setValue("");
-        //   onChange("");
-        // }}
+        onClick={() => {
+          setValue("");
+          onChange("");
+        }}
       >
         <CloseIcon className={styles.closeIcon} />
       </div>
@@ -35,7 +35,7 @@ export const GlobalFilter = ({
         value={value || ""}
         onChange={(e) => {
           setValue(e.target.value);
-          // onChange(e.target.value);
+          onChange(e.target.value);
         }}
       />
     </div>

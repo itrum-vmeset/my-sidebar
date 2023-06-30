@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Tag } from "../../../models/IProductMockData";
+import { Tag } from "../../../models/IProductMock";
 import { Input } from "../input/Input";
 import { Typography } from "../typography/Typography";
 

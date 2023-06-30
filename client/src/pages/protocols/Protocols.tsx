@@ -162,14 +162,19 @@ function Protocols(): JSX.Element {
           removeItem={(protocol: IProtocol) => deleteProtocol(protocol)}
         />
       </MyModal>
-      <div className={styles.list}>
+      <div className={styles.list} data-testid="protocolCategoriesBlock">
         <Input
           placeholder="Введите название категории протокола"
           value={newCategoryName}
           onChange={(e) => setNewCategoryName(e.target.value)}
           onKeyDown={(e) => handleKeyDown(e, null)}
+          data-testid="inputProtocolCategory"
         />
-        <Button appearance="filled" onClick={() => handleCreate()}>
+        <Button
+          appearance="filled"
+          onClick={() => handleCreate()}
+          data-testid="addProtocolCategoryBtn"
+        >
           Добавить категорию протокола
         </Button>
         <div className={styles.headers}>
@@ -193,6 +198,7 @@ function Protocols(): JSX.Element {
           <>
             <Button
               appearance="filled"
+              data-testid="addProtocolBtn"
               onClick={() =>
                 setNewProtocol({
                   name: "",
@@ -209,7 +215,7 @@ function Protocols(): JSX.Element {
               Добавить протокол
             </Button>
             {category ? (
-              <>
+              <div data-testid="protocolsBlock">
                 <div className={styles.headers}>
                   <div>Название протокола</div>
                 </div>
@@ -224,7 +230,7 @@ function Protocols(): JSX.Element {
                   setModalVisible={setDeleteModalVisible}
                   setFormVisible={setFormVisible}
                 />
-              </>
+              </div>
             ) : (
               <NoRows pathname={pathname} className={styles.noSubCategories} />
             )}

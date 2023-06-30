@@ -45,7 +45,7 @@ export interface SubCatalogProduct {
   id: string;
   name: string;
   position: number;
-  catalog_product: "";
+  catalog_product: string;
 }
 
 export interface CatalogProduct {

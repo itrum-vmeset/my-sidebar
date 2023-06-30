@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 
-import { Tag } from "../../../models/IProductMockData";
+import { Tag } from "../../../models/IProductMock";
 
 export interface TagsInputProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
